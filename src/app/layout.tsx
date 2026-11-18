@@ -23,44 +23,11 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-const localBusinessJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  name: BUSINESS_NAME,
-  description: "Premium car rental and luxury vehicles in Sri Lanka",
-  url: siteUrl(),
-  image: `${siteUrl()}/og-image.jpg`,
-  telephone: "+94XXXXXXXXX",
-  address: {
-    "@type": "PostalAddress",
-    addressCountry: "LK",
-    addressLocality: "Colombo",
-  },
-  openingHoursSpecification: {
-    "@type": "OpeningHoursSpecification",
-    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-    opens: "07:00",
-    closes: "22:00",
-  },
-  priceRange: "LKR",
-  currenciesAccepted: "LKR",
-};
-
-export default async function RootLayout({ children }: LayoutProps<"/">) {
-  const settings = await getSettings();
+export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className="h-full">
-      <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
-        />
-      </head>
       <body className="min-h-full flex flex-col bg-charcoal text-cream antialiased">
-        <Navbar settings={settings} />
-        <main className="flex-1">{children}</main>
-        <Footer settings={settings} />
-        <WhatsAppFab number={settings.whatsappNumber} />
+        {children}
       </body>
     </html>
   );

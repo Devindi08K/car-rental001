@@ -11,7 +11,7 @@ export function HeroSection({ settings }: { settings: SiteSettings }) {
   const [location, setLocation] = useState("Colombo, Sri Lanka");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [rentalType, setRentalType] = useState("SELF_DRIVE");
+  const [rentalType, setRentalType] = useState("BOTH");
   const [searchError, setSearchError] = useState("");
   const bookingMessage = [
     "Hello! I'd like to inquire about a vehicle rental.",

@@ -23,8 +23,8 @@ async function verifyTurnstile(token: string, ip: string) {
 export async function POST(req: Request) {
   try {
     const ip = clientIpFromHeaders(req.headers);
-    const limited = await consumeRateLimit(ip, "enquiry", 5, 3600);
-    if (limited) {
+    const allowed = await consumeRateLimit("enquiry", ip, 5, 60 * 60 * 1000);
+     if (!allowed) {
       return NextResponse.json({ error: "Too many requests. Please try again later." }, { status: 429 });
     }
 

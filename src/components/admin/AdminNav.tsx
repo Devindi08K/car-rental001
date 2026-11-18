@@ -40,6 +40,8 @@ function NavLinks({ onClick }: { onClick?: () => void }) {
 
 export function AdminNav() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  if (pathname === "/admin/login") return null;
 
   return (
     <>

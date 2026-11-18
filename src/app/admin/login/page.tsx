@@ -9,7 +9,7 @@ export default function AdminLoginPage() {
   const [state, formAction, pending] = useActionState<State, FormData>(loginAction, {});
 
   return (
-    <div className="min-h-screen bg-charcoal flex items-center justify-center px-4">
+    <div className="min-h-[80vh] flex items-center justify-center px-4">
       <div className="w-full max-w-sm bg-charcoal-800 border border-charcoal-700 rounded-2xl p-8">
         <div className="text-center mb-8">
           <span className="font-display text-2xl font-bold text-gold block">Mahawaththa</span>

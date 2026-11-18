@@ -51,12 +51,8 @@ async function readVehicles(filters: VehicleFilters) {
 
   const where: Prisma.VehicleWhereInput = {};
   if (filters.category) where.category = filters.category;
-  if (filters.rentalType) {
     if (filters.rentalType === "SELF_DRIVE" || filters.rentalType === "WITH_DRIVER") {
-      where.rentalType = { in: [filters.rentalType, "BOTH"] };
-    } else {
-      where.rentalType = "BOTH";
-    }
+    where.rentalType = { in: [filters.rentalType, "BOTH"] };
   }
   if (filters.transmission) where.transmission = filters.transmission;
   if (filters.seats) {

@@ -16,23 +16,55 @@ export function EnquiryForm({ vehicleId, vehicleName }: Props) {
   const [state, setState] = useState<FormState>({ status: "idle", message: "" });
   const [turnstileToken, setTurnstileToken] = useState("");
   const formRef = useRef<HTMLFormElement>(null);
+  const widgetRef = useRef<HTMLDivElement>(null);
+  const widgetId = useRef<string | null>(null);
   const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
-  useEffect(() => {
-    if (!siteKey || document.querySelector('script[data-turnstile="true"]')) return;
-    const script = document.createElement("script");
-    script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
-    script.async = true;
-    script.defer = true;
-    script.dataset.turnstile = "true";
-    script.onload = () => {
-      const turnstile = (window as typeof window & { turnstile?: { render: (element: HTMLElement, options: { sitekey: string; callback: (token: string) => void }) => void } }).turnstile;
-      const element = document.querySelector<HTMLElement>("[data-turnstile-widget]");
-      if (turnstile && element) {
-        turnstile.render(element, { sitekey: siteKey, callback: setTurnstileToken });
+  type TurnstileApi = {
+    render: (
+      el: HTMLElement,
+      o: { sitekey: string; callback: (t: string) => void; "expired-callback"?: () => void },
+    ) => string;
+    reset: (id?: string) => void;
+    remove: (id?: string) => void;
+  };
+  const getTurnstile = () =>
+    (window as typeof window & { turnstile?: TurnstileApi }).turnstile;
+
+    useEffect(() => {
+    if (!siteKey) return;
+    let cancelled = false;
+
+    const mount = () => {
+      const ts = getTurnstile();
+      if (cancelled || !ts || !widgetRef.current || widgetId.current) return;
+      widgetId.current = ts.render(widgetRef.current, {
+        sitekey: siteKey,
+        callback: setTurnstileToken,
+        "expired-callback": () => setTurnstileToken(""),
+      });
+    };
+
+    let script = document.querySelector<HTMLScriptElement>('script[data-turnstile="true"]');
+    if (!script) {
+      script = document.createElement("script");
+      script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+      script.async = true;
+      script.defer = true;
+      script.dataset.turnstile = "true";
+      document.head.appendChild(script);
+    }
+    if (getTurnstile()) mount();
+    else script.addEventListener("load", mount);
+
+    return () => {
+      cancelled = true;
+      script?.removeEventListener("load", mount);
+      if (widgetId.current) {
+        getTurnstile()?.remove(widgetId.current);
+        widgetId.current = null;
       }
     };
-    document.head.appendChild(script);
   }, [siteKey]);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -61,8 +93,11 @@ export function EnquiryForm({ vehicleId, vehicleName }: Props) {
       } else {
         setState({ status: "error", message: json.error ?? "Something went wrong. Please try again." });
       }
-    } catch {
+        } catch {
       setState({ status: "error", message: "Network error. Please check your connection." });
+    } finally {
+      setTurnstileToken("");
+      if (widgetId.current) getTurnstile()?.reset(widgetId.current);
     }
   }
 
