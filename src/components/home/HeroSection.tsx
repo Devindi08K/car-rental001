@@ -32,13 +32,13 @@ export function HeroSection({ settings }: { settings: SiteSettings }) {
           className="relative min-h-[460px] overflow-hidden bg-charcoal-700 bg-cover bg-center"
           style={{
             backgroundImage:
-              "linear-gradient(135deg, rgba(8,8,8,0.18), rgba(8,8,8,0.75)), url('/photos/hero-car.jpg')",
+              "linear-gradient(135deg, rgba(8,8,8,0.08), rgba(8,8,8,0.38)), url('/photos/hero/hero-car.jpg')",
           }}
         >
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_65%_35%,rgba(198,255,0,0.2),transparent_35%)]" />
-          <div className="absolute bottom-8 left-6 right-6 border border-white/20 bg-charcoal/80 p-5 backdrop-blur-md sm:bottom-10 sm:left-10 sm:right-10 sm:p-6">
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-gold">Photo slot: hero-car.jpg</p>
-            <p className="mt-2 text-sm text-cream/75">Add your hero vehicle image to public/photos/</p>
+          <div className="absolute bottom-8 left-6 border-l-2 border-gold bg-charcoal/75 px-4 py-3 backdrop-blur-md sm:bottom-10 sm:left-10">
+            <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-gold">Premium fleet</p>
+            <p className="mt-1 text-sm font-semibold text-cream">Luxury · SUV · Sedan</p>
           </div>
         </div>
       </div>
