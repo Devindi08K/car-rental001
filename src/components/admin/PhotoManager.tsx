@@ -12,6 +12,7 @@ interface Props {
 export function PhotoManager({ images, onChange }: Props) {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState("");
+  const [dragging, setDragging] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
 
   async function uploadFiles(files: File[]) {
@@ -95,13 +96,41 @@ export function PhotoManager({ images, onChange }: Props) {
           </div>
         ))}
         {images.length < MAX_VEHICLE_PHOTOS && (
-          <label
-            onDragOver={(event) => event.preventDefault()}
+          <div
+            role="button"
+            tabIndex={0}
+            onDragEnter={(event) => {
+              event.preventDefault();
+              event.stopPropagation();
+              setDragging(true);
+            }}
+            onDragOver={(event) => {
+              event.preventDefault();
+              event.stopPropagation();
+              event.dataTransfer.dropEffect = "copy";
+            }}
+            onDragLeave={(event) => {
+              event.preventDefault();
+              event.stopPropagation();
+              setDragging(false);
+            }}
             onDrop={(event) => {
               event.preventDefault();
-              void uploadFiles(Array.from(event.dataTransfer.files));
+              event.stopPropagation();
+              setDragging(false);
+              const files = Array.from(event.dataTransfer?.files ?? []).filter((file) =>
+                ["image/jpeg", "image/png", "image/webp"].includes(file.type)
+              );
+              void uploadFiles(files);
             }}
-            className="aspect-video border-2 border-dashed border-charcoal-600 rounded-lg flex flex-col items-center justify-center cursor-pointer hover:border-gold/50 transition-colors bg-charcoal-700"
+            onKeyDown={(event) => {
+              if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                fileRef.current?.click();
+              }
+            }}
+            onClick={() => fileRef.current?.click()}
+            className={`aspect-video border-2 border-dashed rounded-lg flex flex-col items-center justify-center cursor-pointer transition-colors ${dragging ? "border-gold bg-gold/10" : "border-charcoal-600 bg-charcoal-700 hover:border-gold/50"}`}
           >
             {uploading ? (
               <span className="text-xs text-muted">Uploading…</span>
@@ -114,7 +143,7 @@ export function PhotoManager({ images, onChange }: Props) {
               </>
             )}
             <input ref={fileRef} type="file" multiple accept="image/jpeg,image/png,image/webp" className="hidden" onChange={handleUpload} disabled={uploading} />
-          </label>
+          </div>
         )}
       </div>
       {error && <p className="text-red-400 text-xs mt-1">{error}</p>}

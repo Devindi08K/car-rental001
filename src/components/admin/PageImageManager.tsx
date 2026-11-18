@@ -16,6 +16,7 @@ export function PageImageManager({ slots }: { slots: PageImageSlot[] }) {
   const [uploading, setUploading] = useState<string>("");
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const [draggingKey, setDraggingKey] = useState("");
   const inputRefs = useRef<Record<string, HTMLInputElement | null>>({});
 
   async function replaceImage(slot: PageImageSlot, file: File) {
@@ -66,14 +67,41 @@ export function PageImageManager({ slots }: { slots: PageImageSlot[] }) {
               <div className="p-4">
                 <h3 className="text-sm font-semibold text-cream">{slot.label}</h3>
                 <p className="mt-1 text-xs leading-relaxed text-muted">{slot.description}</p>
-                <label
-                  onDragOver={(event) => event.preventDefault()}
+                <div
+                  role="button"
+                  tabIndex={0}
+                  onDragEnter={(event) => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    setDraggingKey(slot.key);
+                  }}
+                  onDragOver={(event) => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    event.dataTransfer.dropEffect = "copy";
+                  }}
+                  onDragLeave={(event) => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    setDraggingKey("");
+                  }}
                   onDrop={(event) => {
                     event.preventDefault();
-                    const file = event.dataTransfer.files[0];
+                    event.stopPropagation();
+                    setDraggingKey("");
+                    const file = Array.from(event.dataTransfer?.files ?? []).find((candidate) =>
+                      ["image/jpeg", "image/png", "image/webp"].includes(candidate.type)
+                    );
                     if (file) void replaceImage(slot, file);
                   }}
-                  className="mt-4 flex cursor-pointer items-center justify-between border border-charcoal-600 px-3 py-2.5 text-xs text-gold hover:border-gold/50"
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter" || event.key === " ") {
+                      event.preventDefault();
+                      inputRefs.current[slot.key]?.click();
+                    }
+                  }}
+                  onClick={() => inputRefs.current[slot.key]?.click()}
+                  className={`mt-4 flex cursor-pointer items-center justify-between border px-3 py-2.5 text-xs text-gold transition-colors ${draggingKey === slot.key ? "border-gold bg-gold/10" : "border-charcoal-600 hover:border-gold/50"}`}
                 >
                   <span>{uploading === slot.key ? "Uploading…" : "Choose or drop one image"}</span>
                   <span className="font-bold">Replace</span>
@@ -88,7 +116,7 @@ export function PageImageManager({ slots }: { slots: PageImageSlot[] }) {
                       if (file) void replaceImage(slot, file);
                     }}
                   />
-                </label>
+                </div>
               </div>
             </div>
           );

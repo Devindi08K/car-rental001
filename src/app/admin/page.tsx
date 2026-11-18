@@ -2,6 +2,8 @@ import { requireAdmin } from "@/lib/auth-guard";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 
+export const instant = false;
+
 export default async function AdminDashboard() {
   await requireAdmin();
 

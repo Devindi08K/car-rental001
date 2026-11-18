@@ -5,6 +5,8 @@ import { prisma } from "@/lib/prisma";
 
 type Props = { params: Promise<{ id: string }> };
 
+export const instant = false;
+
 export default async function EditVehiclePage({ params }: Props) {
   await requireAdmin();
   const { id } = await params;

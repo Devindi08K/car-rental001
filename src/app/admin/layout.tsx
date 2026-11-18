@@ -1,11 +1,9 @@
 import { AdminNav } from "@/components/admin/AdminNav";
-import { connection } from "next/server";
 import { Suspense } from "react";
 
 export const instant = false;
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
-  await connection();
   return (
     <div className="min-h-screen bg-charcoal flex flex-col lg:flex-row">
       <AdminNav />

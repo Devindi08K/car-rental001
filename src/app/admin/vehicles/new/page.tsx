@@ -1,6 +1,8 @@
 import { requireAdmin } from "@/lib/auth-guard";
 import { VehicleForm } from "@/components/admin/VehicleForm";
 
+export const instant = false;
+
 export default async function NewVehiclePage() {
   await requireAdmin();
   return (

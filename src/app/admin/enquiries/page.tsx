@@ -5,6 +5,8 @@ import { label } from "@/lib/format";
 import { updateEnquiryStatus, deleteEnquiry } from "@/server/enquiry-actions";
 import { DeleteEnquiryButton } from "@/components/admin/DeleteEnquiryButton";
 
+export const instant = false;
+
 export default async function AdminEnquiriesPage() {
   await requireAdmin();
   const enquiries = await prisma.enquiry.findMany({

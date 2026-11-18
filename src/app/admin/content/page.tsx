@@ -2,6 +2,8 @@ import { requireAdmin } from "@/lib/auth-guard";
 import { getSelfDriveContent } from "@/lib/content";
 import { ContentForm } from "@/components/admin/ContentForm";
 
+export const instant = false;
+
 export default async function AdminContentPage() {
   await requireAdmin();
   const content = await getSelfDriveContent();

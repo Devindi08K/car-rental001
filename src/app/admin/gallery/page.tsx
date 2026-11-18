@@ -2,6 +2,8 @@ import { requireAdmin } from "@/lib/auth-guard";
 import { getGallery } from "@/lib/gallery";
 import { GalleryUploader } from "@/components/admin/GalleryUploader";
 
+export const instant = false;
+
 export default async function AdminGalleryPage() {
   await requireAdmin();
   const images = await getGallery();

@@ -3,6 +3,8 @@ import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { formatLkr, categoryLabel, statusLabel } from "@/lib/format";
 import { toggleVehicleStatus, deleteVehicle, moveVehicle } from "@/server/vehicle-actions";
+
+export const instant = false;
 import { DeleteVehicleButton } from "@/components/admin/DeleteVehicleButton";
 
 export default async function AdminVehiclesPage() {

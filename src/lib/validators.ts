@@ -84,6 +84,24 @@ const optionalHttps = z
     }
   }, "Enter a full https link, or leave the field empty.");
 
+const optionalPageImage = z
+  .string()
+  .trim()
+  .max(1000)
+  .refine((value) => {
+    if (!value) return true;
+    if (value.startsWith("/")) return true;
+    try {
+      const url = new URL(value);
+      return (
+        url.protocol === "https:" &&
+        (url.hostname === "res.cloudinary.com" || url.hostname === "images.unsplash.com")
+      );
+    } catch {
+      return false;
+    }
+  }, "Use an approved uploaded image or leave the field empty.");
+
 const mapEmbedUrl = z
   .string()
   .trim()
@@ -116,6 +134,15 @@ export const settingsSchema = z.object({
   instagramUrl: optionalHttps,
   tiktokUrl: optionalHttps,
   mapEmbedUrl,
+  heroImageUrl: optionalPageImage,
+  airportImageUrl: optionalPageImage,
+  chauffeurImageUrl: optionalPageImage,
+  selfDriveImageUrl: optionalPageImage,
+  islandTourImageUrl: optionalPageImage,
+  weddingHeroImageUrl: optionalPageImage,
+  promotionAirportImageUrl: optionalPageImage,
+  promotionWeddingImageUrl: optionalPageImage,
+  promotionLongTermImageUrl: optionalPageImage,
 });
 
 export const enquirySchema = z.object({

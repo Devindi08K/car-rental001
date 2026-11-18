@@ -8,6 +8,8 @@ import { DeleteEnquiryButton } from "@/components/admin/DeleteEnquiryButton";
 
 type Props = { params: Promise<{ id: string }> };
 
+export const instant = false;
+
 export default async function EnquiryDetailPage({ params }: Props) {
   await requireAdmin();
   const { id } = await params;
