@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { pageMeta } from "@/lib/seo";
 import { getSettings } from "@/lib/settings";
-import { whatsappLink } from "@/lib/format";
+import { whatsappLink, telHref } from "@/lib/format";
 import { BUSINESS_NAME } from "@/lib/constants";
 import { EnquiryForm } from "@/components/contact/EnquiryForm";
 

@@ -76,19 +76,19 @@ export function VehicleForm({ vehicle }: { vehicle?: Vehicle }) {
         <div>
           <label htmlFor="vf-cat" className={lbl}>Category *</label>
           <select id="vf-cat" name="category" required defaultValue={vehicle?.category ?? "SEDAN"} className={inp}>
-            {CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
+            {CATEGORIES.map((c) => <option key={c} value={c}>{label(c)}</option>)}
           </select>
         </div>
         <div>
           <label htmlFor="vf-rental" className={lbl}>Rental type *</label>
           <select id="vf-rental" name="rentalType" required defaultValue={vehicle?.rentalType ?? "WITH_DRIVER"} className={inp}>
-            {RENTALS.map((r) => <option key={r} value={r}>{r}</option>)}
+            {RENTALS.map((r) => <option key={r} value={r}>{label(r)}</option>)}
           </select>
         </div>
         <div>
           <label htmlFor="vf-status" className={lbl}>Status</label>
           <select id="vf-status" name="status" defaultValue={vehicle?.status ?? "AVAILABLE"} className={inp}>
-            {STATUSES.map((s) => <option key={s} value={s}>{s}</option>)}
+            {STATUSES.map((s) => <option key={s} value={s}>{label(s)}</option>)}
           </select>
         </div>
         <div>
@@ -102,13 +102,13 @@ export function VehicleForm({ vehicle }: { vehicle?: Vehicle }) {
         <div>
           <label htmlFor="vf-trans" className={lbl}>Transmission *</label>
           <select id="vf-trans" name="transmission" defaultValue={vehicle?.transmission ?? "AUTOMATIC"} className={inp}>
-            {TRANSMISSIONS.map((t) => <option key={t} value={t}>{t}</option>)}
+            {TRANSMISSIONS.map((t) => <option key={t} value={t}>{label(t)}</option>)}
           </select>
         </div>
         <div>
           <label htmlFor="vf-fuel" className={lbl}>Fuel type *</label>
           <select id="vf-fuel" name="fuelType" defaultValue={vehicle?.fuelType ?? "PETROL"} className={inp}>
-            {FUELS.map((f) => <option key={f} value={f}>{f}</option>)}
+            {FUELS.map((f) => <option key={f} value={f}>{label(f)}</option>)}
           </select>
         </div>
         <div>

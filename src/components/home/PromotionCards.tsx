@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { SiteSettings } from "@/lib/settings";
-import { optimizedImage } from "@/lib/format"; SELECT url('${card.image}')
+import { optimizedImage } from "@/lib/format";
 
 export function PromotionCards({ settings }: { settings: SiteSettings }) {
   const cards = [

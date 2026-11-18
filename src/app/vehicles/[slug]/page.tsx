@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import Link from "next/link";
 import { getVehicleBySlug } from "@/lib/vehicles";
 import { getSettings } from "@/lib/settings";
+import { VehicleGallery } from "@/components/vehicles/VehicleGallery";
 import {
   formatLkr,
   whatsappLink,
@@ -28,8 +28,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const vehicle = await getVehicleBySlug(slug);
   if (!vehicle) return { title: "Vehicle Not Found" };
   return {
-    title: `${vehicle.name} | ${BUSINESS_NAME}`,
-    description: vehicle.description.slice(0, 160),
+        title: vehicle.name,
+        description: vehicle.description.slice(0, 160),
     openGraph: {
       title: vehicle.name,
       description: vehicle.description.slice(0, 160),
@@ -83,51 +83,7 @@ export default async function VehicleDetailPage({ params, searchParams }: Props)
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Gallery */}
-          <div>
-            {vehicle.images.length > 0 ? (
-              <>
-                <div className="relative aspect-video rounded-xl overflow-hidden mb-3 border border-charcoal-700">
-                  <Image
-                    src={vehicle.images[0]}
-                    alt={vehicle.name}
-                    fill
-                    priority
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                  />
-                  {isRented && (
-                    <div className="absolute top-4 left-4">
-                      <span className="bg-red-700 text-white text-sm font-bold px-3 py-1.5 rounded-full">
-                        Currently Rented
-                      </span>
-                    </div>
-                  )}
-                </div>
-                {vehicle.images.length > 1 && (
-                  <div className="grid grid-cols-4 gap-2">
-                    {vehicle.images.slice(1, 5).map((img, i) => (
-                      <div key={i} className="relative aspect-video rounded-lg overflow-hidden border border-charcoal-700">
-                        <Image
-                          src={img}
-                          alt={`${vehicle.name} photo ${i + 2}`}
-                          fill
-                          className="object-cover"
-                          sizes="20vw"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </>
-            ) : (
-              <div className="aspect-video bg-charcoal-700 rounded-xl flex items-center justify-center border border-charcoal-600">
-                <svg className="w-16 h-16 text-charcoal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-              </div>
-            )}
-          </div>
-
+          <VehicleGallery images={vehicle.images} name={vehicle.name} rented={isRented} />
           {/* Details */}
           <div>
             <span className="inline-flex items-center text-xs bg-gold/15 text-gold border border-gold/25 px-2.5 py-1 rounded mb-3">

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { NAV_LINKS, BUSINESS_NAME } from "@/lib/constants";
-import { whatsappLink } from "@/lib/format";
+import { whatsappLink, telHref } from "@/lib/format";
 import type { SiteSettings } from "@/lib/settings";
 
 export function Footer({ settings }: { settings: SiteSettings }) {

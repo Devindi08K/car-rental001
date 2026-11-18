@@ -2,7 +2,7 @@ import { requireAdmin } from "@/lib/auth-guard";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
-import { label } from "@/lib/format";
+import { label, telHref } from "@/lib/format";
 import { updateEnquiryStatus, deleteEnquiry } from "@/server/enquiry-actions";
 import { DeleteEnquiryButton } from "@/components/admin/DeleteEnquiryButton";
 
