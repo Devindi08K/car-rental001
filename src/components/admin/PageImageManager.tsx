@@ -10,6 +10,7 @@ export interface PageImageSlot {
   description: string;
   value: string;
   fallback?: string;
+  variant?: "logo";
 }
 
 export function PageImageManager({ slots }: { slots: PageImageSlot[] }) {
@@ -57,9 +58,15 @@ export function PageImageManager({ slots }: { slots: PageImageSlot[] }) {
           const source = slot.value || slot.fallback;
           return (
             <div key={slot.key} className="overflow-hidden rounded-lg border border-charcoal-600 bg-charcoal-800">
-              <div className="relative aspect-[16/10] bg-charcoal-700">
+              <div className={`relative bg-charcoal-700 ${slot.variant === "logo" ? "aspect-[3/1]" : "aspect-[16/10]"}`}>
                 {source ? (
-                  <Image src={source} alt={slot.label} fill className="object-cover" sizes="(max-width: 1280px) 100vw, 50vw" />
+                  <Image
+                    src={source}
+                    alt={slot.label}
+                    fill
+                    className={slot.variant === "logo" ? "object-contain p-6" : "object-cover"}
+                    sizes="(max-width: 1280px) 100vw, 50vw"
+                  />
                 ) : (
                   <div className="absolute inset-0 flex items-center justify-center text-xs text-muted">No image added</div>
                 )}

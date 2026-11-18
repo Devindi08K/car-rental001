@@ -13,7 +13,11 @@ async function readSettings(): Promise<SiteSettings> {
   const settings: SiteSettings = { ...DEFAULT_SETTINGS };
   for (const row of rows) {
     if (row.key in settings) {
-      settings[row.key as SettingKey] = row.value;
+      const key = row.key as SettingKey;
+      const previousPlaceholder =
+        (key === "phone" && row.value === "+94 XX XXX XXXX") ||
+        (key === "whatsappNumber" && row.value === "94XXXXXXXXX");
+      settings[key] = previousPlaceholder ? DEFAULT_SETTINGS[key] : row.value;
     }
   }
   return settings;

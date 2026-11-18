@@ -19,42 +19,20 @@ const fieldInput = "mt-1 w-full bg-transparent text-sm font-semibold text-cream 
 export function HeroSection({ settings }: { settings: SiteSettings }) {
   const router = useRouter();
   const [location, setLocation] = useState("Colombo, Sri Lanka");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [rentalType, setRentalType] = useState<string>("BOTH");
-  const [searchError, setSearchError] = useState("");
+  const [rentalType, setRentalType] = useState<(typeof RENTAL_TABS)[number]["value"]>("BOTH");
 
   const rentalText = RENTAL_TABS.find((t) => t.value === rentalType)?.label ?? "";
   const bookingMessage = [
     "Hello! I'd like to inquire about a vehicle rental.",
     location ? `Pickup location: ${location}` : "",
-    startDate ? `Start date: ${startDate}` : "",
-    endDate ? `End date: ${endDate}` : "",
     rentalText ? `Rental type: ${rentalText}` : "",
   ].filter(Boolean).join("\n");
   const wa = whatsappLink(settings.whatsappNumber, bookingMessage);
 
   function searchCars(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-
-    if (startDate) {
-      const now = new Date();
-      const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
-      if (startDate < today) {
-        setSearchError("Choose a start date from today onwards.");
-        return;
-      }
-    }
-    if (startDate && endDate && endDate < startDate) {
-      setSearchError("The end date must be on or after the start date.");
-      return;
-    }
-
-    setSearchError("");
     const params = new URLSearchParams();
     if (location.trim()) params.set("location", location.trim());
-    if (startDate) params.set("startDate", startDate);
-    if (endDate) params.set("endDate", endDate);
     if (rentalType) params.set("rentalType", rentalType);
     router.push(`/vehicles?${params.toString()}`);
   }
@@ -98,15 +76,14 @@ export function HeroSection({ settings }: { settings: SiteSettings }) {
           <h2 className="font-display text-xl font-bold text-cream sm:text-2xl">Find your car</h2>
 
           {/* Rental type tabs */}
-          <div className="mt-4 flex flex-wrap gap-2" role="tablist" aria-label="Rental type">
+          <div className="mt-4 grid w-full grid-cols-3 gap-2 md:w-fit" role="group" aria-label="Rental type">
             {RENTAL_TABS.map((tab) => (
               <button
                 key={tab.value}
                 type="button"
-                role="tab"
-                aria-selected={rentalType === tab.value}
+                aria-pressed={rentalType === tab.value}
                 onClick={() => setRentalType(tab.value)}
-                className={`px-4 py-2 text-xs font-bold uppercase tracking-[0.1em] transition-colors ${
+                className={`whitespace-nowrap px-2 py-2 text-[10px] font-bold uppercase tracking-[0.08em] transition-colors sm:px-4 sm:text-xs ${
                   rentalType === tab.value
                     ? "bg-gold text-charcoal"
                     : "border border-charcoal-600 text-cream hover:border-gold hover:text-gold"
@@ -117,7 +94,7 @@ export function HeroSection({ settings }: { settings: SiteSettings }) {
             ))}
           </div>
 
-          <div className="mt-5 grid gap-3 md:grid-cols-[1.4fr_1fr_1fr_auto] md:items-stretch">
+          <div className="mt-5 grid gap-3 md:grid-cols-[minmax(0,1fr)_auto] md:items-stretch">
             <label className={fieldBox}>
               <span className={fieldLabel}>Pick-up location</span>
               <input
@@ -127,28 +104,6 @@ export function HeroSection({ settings }: { settings: SiteSettings }) {
                 placeholder="Colombo, Sri Lanka"
               />
             </label>
-            <label className={fieldBox}>
-              <span className={fieldLabel}>Start date</span>
-              <input
-                type="date"
-                value={startDate}
-                onChange={(e) => {
-                  setStartDate(e.target.value);
-                  if (endDate && e.target.value > endDate) setEndDate("");
-                }}
-                className={fieldInput}
-              />
-            </label>
-            <label className={fieldBox}>
-              <span className={fieldLabel}>End date</span>
-              <input
-                type="date"
-                min={startDate || undefined}
-                value={endDate}
-                onChange={(e) => setEndDate(e.target.value)}
-                className={fieldInput}
-              />
-            </label>
             <button
               type="submit"
               className="bg-gold px-8 py-4 text-sm font-black uppercase tracking-[0.1em] text-charcoal transition-colors hover:bg-gold-light"
@@ -156,8 +111,6 @@ export function HeroSection({ settings }: { settings: SiteSettings }) {
               Search cars
             </button>
           </div>
-
-          {searchError && <p className="mt-3 text-xs font-semibold text-red-400">{searchError}</p>}
 
           {wa && (
             <a
@@ -174,4 +127,3 @@ export function HeroSection({ settings }: { settings: SiteSettings }) {
     </section>
   );
 }
-

@@ -134,6 +134,7 @@ export const settingsSchema = z.object({
   instagramUrl: optionalHttps,
   tiktokUrl: optionalHttps,
   mapEmbedUrl,
+  logoUrl: optionalPageImage,
   heroImageUrl: optionalPageImage,
   airportImageUrl: optionalPageImage,
   chauffeurImageUrl: optionalPageImage,

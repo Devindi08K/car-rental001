@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { NAV_LINKS, BUSINESS_NAME } from "@/lib/constants";
 import { whatsappLink, telHref } from "@/lib/format";
 import type { SiteSettings } from "@/lib/settings";
@@ -12,8 +13,20 @@ export function Footer({ settings }: { settings: SiteSettings }) {
           {/* Brand */}
           <div>
             <Link href="/" className="inline-block mb-4">
-              <span className="font-display text-3xl font-black uppercase tracking-tight text-cream block">Mahawaththa</span>
-              <span className="text-[10px] text-gold tracking-[0.2em] uppercase">Rent a Car &amp; Luxury Vehicles</span>
+              {settings.logoUrl ? (
+                <Image
+                  src={settings.logoUrl}
+                  alt={BUSINESS_NAME}
+                  width={200}
+                  height={64}
+                  className="mb-2 h-14 w-48 object-contain object-left"
+                />
+              ) : (
+                <>
+                  <span className="font-display text-3xl font-black uppercase tracking-tight text-cream block">Mahawaththa</span>
+                  <span className="text-[10px] text-gold tracking-[0.2em] uppercase">Rent a Car &amp; Luxury Vehicles</span>
+                </>
+              )}
             </Link>
             <p className="text-muted text-sm leading-relaxed">{settings.address}</p>
             <p className="text-muted text-sm mt-1">{settings.openingHours}</p>
@@ -37,7 +50,7 @@ export function Footer({ settings }: { settings: SiteSettings }) {
             <ul className="space-y-2 text-sm text-muted">
               <li>
                 <a href={telHref(settings.phone)} className="hover:text-gold transition-colors">
-                  {settings.phone}
+                  Call {settings.phone}
                 </a>
               </li>
               <li>
@@ -48,7 +61,7 @@ export function Footer({ settings }: { settings: SiteSettings }) {
               {wa && (
                 <li>
                   <a href={wa} target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors">
-                    WhatsApp
+                    WhatsApp {settings.whatsappNumber}
                   </a>
                 </li>
               )}

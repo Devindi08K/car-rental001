@@ -13,8 +13,8 @@ export const NAV_LINKS = [
 ] as const;
 
 export const DEFAULT_SETTINGS = {
-  phone: "+94 XX XXX XXXX",
-  whatsappNumber: "94XXXXXXXXX",
+  phone: "070 646 5477",
+  whatsappNumber: "0770341970",
   email: "enquiries@example.com",
   address: "Colombo, Sri Lanka",
   openingHours: "Open daily, 7:00 AM – 10:00 PM",
@@ -23,6 +23,7 @@ export const DEFAULT_SETTINGS = {
   tiktokUrl: "",
   mapEmbedUrl:
     "https://maps.google.com/maps?q=Colombo%20Sri%20Lanka&z=12&output=embed",
+  logoUrl: "",
   heroImageUrl: "/photos/hero/hero-car.jpg",
   airportImageUrl: "",
   chauffeurImageUrl: "",

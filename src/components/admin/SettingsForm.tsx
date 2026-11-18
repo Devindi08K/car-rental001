@@ -8,8 +8,8 @@ import { PageImageManager } from "@/components/admin/PageImageManager";
 type State = { ok: boolean; error?: string } | null;
 
 const fields: { key: keyof SiteSettings; label: string; type?: string; placeholder?: string }[] = [
-  { key: "phone", label: "Phone number", placeholder: "+94 7X XXX XXXX" },
-  { key: "whatsappNumber", label: "WhatsApp number (digits only)", placeholder: "94712345678" },
+  { key: "phone", label: "Call number", placeholder: "070 646 5477" },
+  { key: "whatsappNumber", label: "WhatsApp number", placeholder: "0770341970" },
   { key: "email", label: "Email address", type: "email" },
   { key: "address", label: "Address" },
   { key: "openingHours", label: "Opening hours" },
@@ -48,6 +48,7 @@ export function SettingsForm({ settings }: { settings: SiteSettings }) {
         <p className="mb-5 text-sm text-muted">Vehicle photos are managed from each vehicle’s add/edit page. These images belong to the website sections.</p>
         <PageImageManager
           slots={[
+            { key: "logoUrl", label: "Business logo", description: "Transparent PNG or WebP works best. The logo is shown in the navigation and footer.", value: settings.logoUrl, variant: "logo" },
             { key: "heroImageUrl", label: "Homepage hero", description: "Large spotlighted vehicle image. Recommended 2400 × 1600 px.", value: settings.heroImageUrl, fallback: "/photos/hero/hero-car.jpg" },
             { key: "airportImageUrl", label: "Airport transfer", description: "Airport or pickup promotion card. Recommended 1800 × 1100 px.", value: settings.airportImageUrl },
             { key: "chauffeurImageUrl", label: "Chauffeur service", description: "Professional chauffeur feature image. Recommended 1800 × 1100 px.", value: settings.chauffeurImageUrl },

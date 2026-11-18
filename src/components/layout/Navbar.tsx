@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { NAV_LINKS, BUSINESS_NAME } from "@/lib/constants";
-import { whatsappLink } from "@/lib/format";
+import { telHref, whatsappLink } from "@/lib/format";
 import type { SiteSettings } from "@/lib/settings";
 
 export function Navbar({ settings }: { settings: SiteSettings }) {
@@ -15,11 +16,13 @@ export function Navbar({ settings }: { settings: SiteSettings }) {
   return (
     <header className="sticky top-0 z-50">
       {/* Top strip */}
-      <div className="bg-gold px-4 py-2 text-center text-[11px] font-bold uppercase tracking-[0.18em] text-charcoal">
-        <span className="mr-4">{settings.phone}</span>
+      <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1 bg-gold px-4 py-2 text-[10px] font-bold uppercase tracking-[0.12em] text-charcoal sm:text-[11px] sm:tracking-[0.18em]">
+        <a href={telHref(settings.phone)} className="transition-colors hover:text-charcoal-700">
+          Call {settings.phone}
+        </a>
         {wa && (
-          <a href={wa} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-charcoal-700 transition-colors">
-            WhatsApp Us
+          <a href={wa} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 transition-colors hover:text-charcoal-700">
+            WhatsApp {settings.whatsappNumber}
           </a>
         )}
       </div>
@@ -28,9 +31,27 @@ export function Navbar({ settings }: { settings: SiteSettings }) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <Link href="/" className="flex flex-col leading-tight">
-              <span className="font-display text-xl font-black uppercase tracking-tight text-cream">{BUSINESS_NAME.split(" ")[0]}</span>
-              <span className="text-[10px] text-gold tracking-[0.2em] uppercase">Rent a Car</span>
+            <Link href="/" aria-label={BUSINESS_NAME} className="flex min-w-0 items-center gap-3">
+              {settings.logoUrl ? (
+                <Image
+                  src={settings.logoUrl}
+                  alt={BUSINESS_NAME}
+                  width={180}
+                  height={56}
+                  className="h-11 w-36 object-contain object-left"
+                  priority
+                />
+              ) : (
+                <>
+                  <span className="flex size-10 shrink-0 items-center justify-center border border-gold/60 font-display text-lg font-bold text-gold">
+                    M
+                  </span>
+                  <span className="flex min-w-0 flex-col leading-tight">
+                    <span className="truncate font-display text-lg font-black uppercase tracking-tight text-cream sm:text-xl">{BUSINESS_NAME.split(" ")[0]}</span>
+                    <span className="text-[10px] uppercase tracking-[0.2em] text-gold">Rent a Car</span>
+                  </span>
+                </>
+              )}
             </Link>
             {/* Desktop links */}
             <ul className="hidden lg:flex items-center gap-7">

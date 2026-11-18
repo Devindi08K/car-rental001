@@ -13,7 +13,6 @@ import {
   rentalLabel,
   statusLabel,
 } from "@/lib/format";
-import { BUSINESS_NAME } from "@/lib/constants";
 import { siteUrl } from "@/lib/seo";
 
 type Props = {
@@ -89,11 +88,15 @@ export default async function VehicleDetailPage({ params, searchParams }: Props)
             <span className="inline-flex items-center text-xs bg-gold/15 text-gold border border-gold/25 px-2.5 py-1 rounded mb-3">
               {categoryLabel(vehicle.category)}
             </span>
-            {isRented && (
-              <span className="inline-flex items-center text-xs bg-red-900/40 text-red-400 border border-red-700/40 px-2.5 py-1 rounded mb-3 ml-2">
-                Currently Rented
-              </span>
-            )}
+            <span
+              className={`inline-flex items-center text-xs border px-2.5 py-1 rounded mb-3 ml-2 ${
+                isRented
+                  ? "bg-charcoal-800 text-muted border-charcoal-600"
+                  : "bg-gold/10 text-gold border-gold/40"
+              }`}
+            >
+              {statusLabel(vehicle.status)}
+            </span>
             <h1 className="font-display text-3xl md:text-4xl font-bold text-cream mb-4">{vehicle.name}</h1>
             <div className="flex items-baseline gap-2 mb-8">
               <span className="font-display text-3xl font-bold text-gold">{formatLkr(vehicle.pricePerDay)}</span>
@@ -124,7 +127,14 @@ export default async function VehicleDetailPage({ params, searchParams }: Props)
             </div>
 
             {/* CTA */}
-            {waLink && !isRented ? (
+            {isRented ? (
+              <Link
+                href="/contact"
+                className="w-full flex items-center justify-center bg-charcoal-700 text-cream font-semibold py-4 transition-colors text-base uppercase tracking-[0.08em] hover:bg-charcoal-600"
+              >
+                Ask about availability
+              </Link>
+            ) : waLink ? (
               <a
                 href={waLink}
                 target="_blank"
@@ -137,9 +147,12 @@ export default async function VehicleDetailPage({ params, searchParams }: Props)
                 Book this vehicle on WhatsApp
               </a>
             ) : (
-              <div className="w-full flex items-center justify-center bg-charcoal-700 text-muted font-semibold py-4 rounded-xl cursor-not-allowed text-base">
-                Vehicle Currently Rented — Enquire for Availability
-              </div>
+              <Link
+                href="/contact"
+                className="w-full flex items-center justify-center bg-gold text-charcoal font-bold py-4 transition-colors text-base uppercase tracking-[0.08em] hover:bg-gold-light"
+              >
+                Contact us to book
+              </Link>
             )}
           </div>
         </div>
