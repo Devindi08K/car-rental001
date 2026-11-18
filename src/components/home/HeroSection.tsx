@@ -32,7 +32,7 @@ export function HeroSection({ settings }: { settings: SiteSettings }) {
           className="relative min-h-[460px] overflow-hidden bg-charcoal-700 bg-cover bg-center"
           style={{
             backgroundImage:
-              "linear-gradient(135deg, rgba(8,8,8,0.08), rgba(8,8,8,0.38)), url('/photos/hero/hero-car.jpg')",
+              `linear-gradient(135deg, rgba(8,8,8,0.08), rgba(8,8,8,0.38)), url('${settings.heroImageUrl || '/photos/hero/hero-car.jpg'}')`,
           }}
         >
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_65%_35%,rgba(191,220,88,0.12),transparent_35%)]" />

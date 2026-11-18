@@ -3,6 +3,7 @@
 import { useActionState } from "react";
 import { saveSettings } from "@/server/settings-actions";
 import type { SiteSettings } from "@/lib/settings";
+import { PageImageManager } from "@/components/admin/PageImageManager";
 
 type State = { ok: boolean; error?: string } | null;
 
@@ -42,6 +43,24 @@ export function SettingsForm({ settings }: { settings: SiteSettings }) {
           />
         </div>
       ))}
+      <section className="border-t border-charcoal-700 pt-8">
+        <h2 className="mb-2 font-display text-xl font-bold text-cream">Page Images</h2>
+        <p className="mb-5 text-sm text-muted">Vehicle photos are managed from each vehicle’s add/edit page. These images belong to the website sections.</p>
+        <PageImageManager
+          slots={[
+            { key: "heroImageUrl", label: "Homepage hero", description: "Large spotlighted vehicle image. Recommended 2400 × 1600 px.", value: settings.heroImageUrl, fallback: "/photos/hero/hero-car.jpg" },
+            { key: "airportImageUrl", label: "Airport transfer", description: "Airport or pickup promotion card. Recommended 1800 × 1100 px.", value: settings.airportImageUrl },
+            { key: "chauffeurImageUrl", label: "Chauffeur service", description: "Professional chauffeur feature image. Recommended 1800 × 1100 px.", value: settings.chauffeurImageUrl },
+            { key: "selfDriveImageUrl", label: "Self-drive", description: "Traveler and vehicle road image. Recommended 1800 × 1100 px.", value: settings.selfDriveImageUrl },
+            { key: "islandTourImageUrl", label: "Island tours", description: "Scenic tour or long-distance travel image. Recommended 1800 × 1100 px.", value: settings.islandTourImageUrl },
+            { key: "weddingHeroImageUrl", label: "Wedding page hero", description: "Large wedding vehicle feature image. Recommended 2200 × 1400 px.", value: settings.weddingHeroImageUrl },
+            { key: "promotionAirportImageUrl", label: "Airport promotion card", description: "Large homepage airport promotion. Recommended 1800 × 1200 px.", value: settings.promotionAirportImageUrl },
+            { key: "promotionWeddingImageUrl", label: "Wedding promotion card", description: "Large homepage wedding promotion. Recommended 1800 × 1200 px.", value: settings.promotionWeddingImageUrl },
+            { key: "promotionLongTermImageUrl", label: "Long-term rental card", description: "Corporate or monthly rental feature. Recommended 1800 × 1200 px.", value: settings.promotionLongTermImageUrl },
+          ]}
+        />
+      </section>
+
       <button
         type="submit"
         disabled={pending}

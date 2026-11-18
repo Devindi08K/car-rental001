@@ -10,6 +10,7 @@ import { ServicesSection } from "@/components/home/ServicesSection";
 import { WeddingHighlight } from "@/components/home/WeddingHighlight";
 import { WhyUsSection } from "@/components/home/WhyUsSection";
 import { ContactStrip } from "@/components/home/ContactStrip";
+import { PromotionCards } from "@/components/home/PromotionCards";
 
 export const metadata: Metadata = pageMeta({
   title: `${BUSINESS_NAME} | Premium Car Rental Sri Lanka`,
@@ -31,6 +32,7 @@ export default async function HomePage() {
       <FeaturedVehicles vehicles={featured} whatsappNumber={settings.whatsappNumber} />
       <ServicesSection />
       <WeddingHighlight images={weddingGallery.slice(0, 4)} settings={settings} />
+      <PromotionCards settings={settings} />
       <WhyUsSection />
       <ContactStrip settings={settings} />
     </>

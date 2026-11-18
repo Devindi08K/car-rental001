@@ -95,6 +95,26 @@ export default async function ServicesPage() {
           ))}
         </div>
 
+        <div className="mt-16 grid grid-cols-1 gap-5 md:grid-cols-2">
+          {[
+            { title: "Airport transfers", image: settings.airportImageUrl },
+            { title: "Chauffeur service", image: settings.chauffeurImageUrl },
+            { title: "Self-drive", image: settings.selfDriveImageUrl },
+            { title: "Island tours", image: settings.islandTourImageUrl },
+          ].filter((card) => card.image).map((card) => (
+            <div
+              key={card.title}
+              className="relative min-h-72 overflow-hidden border border-charcoal-700 bg-charcoal-800 bg-cover bg-center"
+              style={{ backgroundImage: `linear-gradient(90deg, rgba(8,8,8,0.82), rgba(8,8,8,0.12)), url('${card.image}')` }}
+            >
+              <div className="absolute bottom-0 left-0 p-7">
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-gold">Mahawaththa</p>
+                <h2 className="mt-2 text-2xl font-black text-cream">{card.title}</h2>
+              </div>
+            </div>
+          ))}
+        </div>
+
         {/* Contact CTA */}
         <div className="mt-16 text-center bg-gold p-10 text-charcoal">
           <h2 className="font-display text-3xl font-bold mb-3">Need a custom service?</h2>

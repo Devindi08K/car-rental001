@@ -23,6 +23,15 @@ export const DEFAULT_SETTINGS = {
   tiktokUrl: "",
   mapEmbedUrl:
     "https://maps.google.com/maps?q=Colombo%20Sri%20Lanka&z=12&output=embed",
+  heroImageUrl: "/photos/hero/hero-car.jpg",
+  airportImageUrl: "",
+  chauffeurImageUrl: "",
+  selfDriveImageUrl: "",
+  islandTourImageUrl: "",
+  weddingHeroImageUrl: "",
+  promotionAirportImageUrl: "",
+  promotionWeddingImageUrl: "",
+  promotionLongTermImageUrl: "",
 } as const;
 
 export type SettingKey = keyof typeof DEFAULT_SETTINGS;

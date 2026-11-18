@@ -20,7 +20,10 @@ export default async function WeddingsPage() {
   return (
     <div className="bg-charcoal min-h-screen">
       {/* Header */}
-      <div className="bg-gold border-b border-gold-dark py-20 text-charcoal">
+      <div
+        className="bg-gold border-b border-gold-dark py-20 text-charcoal bg-cover bg-center"
+        style={{ backgroundImage: settings.weddingHeroImageUrl ? `linear-gradient(rgba(221,235,161,0.88), rgba(221,235,161,0.88)), url('${settings.weddingHeroImageUrl}')` : undefined }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-charcoal/70 text-sm font-bold tracking-widest uppercase mb-3">Special Occasions</p>
           <h1 className="font-display text-4xl md:text-6xl font-black leading-tight">
