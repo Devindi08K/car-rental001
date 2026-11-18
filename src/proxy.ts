@@ -3,7 +3,11 @@ import { NextResponse, type NextRequest } from "next/server";
 
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  if (pathname === "/admin/login") return NextResponse.next();
+  if (pathname === "/admin/login") {
+    const response = NextResponse.next();
+    response.headers.set("Cache-Control", "no-store, private, max-age=0");
+    return response;
+  }
 
   const token = await getToken({
     req: request,

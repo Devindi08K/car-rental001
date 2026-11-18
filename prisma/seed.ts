@@ -7,10 +7,16 @@ async function main() {
   console.log("🌱 Seeding database…");
 
   // ─── Admin user ────────────────────────────────────────────────────────────
-  const email = process.env.ADMIN_EMAIL ?? "admin@mahawaththa.lk";
-  const password = process.env.ADMIN_PASSWORD ?? "changeme123";
-  if (!process.env.ADMIN_PASSWORD) {
-    console.warn("⚠️  ADMIN_PASSWORD not set — using default 'changeme123'. Change it before deploy!");
+  const email = process.env.ADMIN_EMAIL?.trim().toLowerCase();
+  const password = process.env.ADMIN_PASSWORD;
+  if (!email || !password) {
+    throw new Error("Seeding stopped: ADMIN_EMAIL and ADMIN_PASSWORD must both be set.");
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    throw new Error("Seeding stopped: ADMIN_EMAIL is not a valid email address.");
+  }
+  if (password.length < 12) {
+    throw new Error("Seeding stopped: ADMIN_PASSWORD must contain at least 12 characters.");
   }
   const hashed = await bcrypt.hash(password, 12);
   await prisma.adminUser.upsert({

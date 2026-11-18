@@ -13,6 +13,10 @@ async function requireAdmin() {
 
 export async function POST(req: Request) {
   const authError = await requireAdmin();
+  const contentLength = Number(req.headers.get("content-length") ?? "0");
+  if (contentLength > 6 * 1024 * 1024) {
+    return NextResponse.json({ error: "Request too large." }, { status: 413 });
+  }
   if (authError) return authError;
 
   try {
@@ -45,6 +49,10 @@ export async function DELETE(req: Request) {
   if (authError) return authError;
 
   try {
+    const contentLength = Number(req.headers.get("content-length") ?? "0");
+    if (contentLength > 16_384) {
+      return NextResponse.json({ error: "Request too large." }, { status: 413 });
+    }
     const { url } = await req.json();
     if (typeof url !== "string") {
       return NextResponse.json({ error: "Missing url." }, { status: 400 });

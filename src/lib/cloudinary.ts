@@ -52,14 +52,20 @@ function client() {
 export function cloudinaryPublicId(url: string) {
   try {
     const parsed = new URL(url);
-    if (parsed.hostname !== "res.cloudinary.com") return null;
+    const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
+    if (
+      parsed.protocol !== "https:" ||
+      parsed.hostname !== "res.cloudinary.com" ||
+      !cloudName
+    ) return null;
     const parts = parsed.pathname.split("/").filter(Boolean);
+    if (parts[0] !== cloudName) return null;
     const uploadIndex = parts.indexOf("upload");
     if (uploadIndex === -1) return null;
     let rest = parts.slice(uploadIndex + 1);
     if (rest[0] && /^v\d+$/.test(rest[0])) rest = rest.slice(1);
     const publicId = rest.join("/").replace(/\.[a-z0-9]+$/i, "");
-    return publicId || null;
+    return publicId.startsWith("mahawaththa/") ? publicId : null;
   } catch {
     return null;
   }

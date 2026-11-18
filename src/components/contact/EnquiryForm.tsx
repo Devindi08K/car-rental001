@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 interface FormState {
   status: "idle" | "loading" | "success" | "error";
@@ -14,7 +14,26 @@ interface Props {
 
 export function EnquiryForm({ vehicleId, vehicleName }: Props) {
   const [state, setState] = useState<FormState>({ status: "idle", message: "" });
+  const [turnstileToken, setTurnstileToken] = useState("");
   const formRef = useRef<HTMLFormElement>(null);
+  const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+
+  useEffect(() => {
+    if (!siteKey || document.querySelector('script[data-turnstile="true"]')) return;
+    const script = document.createElement("script");
+    script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+    script.async = true;
+    script.defer = true;
+    script.dataset.turnstile = "true";
+    script.onload = () => {
+      const turnstile = (window as typeof window & { turnstile?: { render: (element: HTMLElement, options: { sitekey: string; callback: (token: string) => void }) => void } }).turnstile;
+      const element = document.querySelector<HTMLElement>("[data-turnstile-widget]");
+      if (turnstile && element) {
+        turnstile.render(element, { sitekey: siteKey, callback: setTurnstileToken });
+      }
+    };
+    document.head.appendChild(script);
+  }, [siteKey]);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -27,6 +46,7 @@ export function EnquiryForm({ vehicleId, vehicleName }: Props) {
       message: data.get("message"),
       vehicleId: vehicleId,
       companyWebsite: data.get("companyWebsite"), // honeypot
+      turnstileToken,
     };
     try {
       const res = await fetch("/api/enquiry", {
@@ -98,9 +118,11 @@ export function EnquiryForm({ vehicleId, vehicleName }: Props) {
         </div>
       )}
 
+      {siteKey && <div data-turnstile-widget />}
+
       <button
         type="submit"
-        disabled={state.status === "loading"}
+        disabled={state.status === "loading" || Boolean(siteKey && !turnstileToken)}
         className="w-full bg-gold text-charcoal font-bold py-3.5 hover:bg-gold-light transition-colors disabled:opacity-60 disabled:cursor-not-allowed text-sm uppercase tracking-[0.12em]"
       >
         {state.status === "loading" ? "Sending…" : "Send Enquiry"}

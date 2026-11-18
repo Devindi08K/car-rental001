@@ -4,12 +4,33 @@ import { consumeRateLimit, clientIpFromHeaders } from "@/lib/rate-limit";
 import { prisma } from "@/lib/prisma";
 import { sanitizeText } from "@/lib/sanitize";
 
+async function verifyTurnstile(token: string, ip: string) {
+  const secret = process.env.TURNSTILE_SECRET_KEY;
+  if (!secret) return process.env.NODE_ENV !== "production";
+  if (!token) return false;
+
+  const response = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ secret, response: token, remoteip: ip }),
+    cache: "no-store",
+  });
+  if (!response.ok) return false;
+  const result = await response.json() as { success?: boolean };
+  return result.success === true;
+}
+
 export async function POST(req: Request) {
   try {
     const ip = clientIpFromHeaders(req.headers);
     const limited = await consumeRateLimit(ip, "enquiry", 5, 3600);
     if (limited) {
       return NextResponse.json({ error: "Too many requests. Please try again later." }, { status: 429 });
+    }
+
+    const contentLength = Number(req.headers.get("content-length") ?? "0");
+    if (contentLength > 16_384) {
+      return NextResponse.json({ error: "Request too large." }, { status: 413 });
     }
 
     const body = await req.json();
@@ -25,7 +46,10 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: first?.message ?? "Invalid input." }, { status: 422 });
     }
 
-    const { name, phone, email, message, vehicleId } = result.data;
+    const { name, phone, email, message, vehicleId, turnstileToken } = result.data;
+    if (!(await verifyTurnstile(turnstileToken ?? "", ip))) {
+      return NextResponse.json({ error: "Security verification failed. Please try again." }, { status: 403 });
+    }
 
     await prisma.enquiry.create({
       data: {
