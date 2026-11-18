@@ -21,17 +21,21 @@ export default async function WeddingsPage() {
     <div className="bg-charcoal min-h-screen">
       {/* Header */}
       <div
-        className="bg-gold border-b border-gold-dark py-20 text-charcoal bg-cover bg-center"
-        style={{ backgroundImage: settings.weddingHeroImageUrl ? `linear-gradient(rgba(221,235,161,0.88), rgba(221,235,161,0.88)), url('${settings.weddingHeroImageUrl}')` : undefined }}
+        className="bg-gold border-b border-gold-dark py-20 text-cream bg-cover bg-center"
+        style={{
+          backgroundImage: settings.weddingHeroImageUrl
+            ? `linear-gradient(90deg, rgba(8,8,8,0.72) 0%, rgba(8,8,8,0.48) 58%, rgba(8,8,8,0.24) 100%), url('${settings.weddingHeroImageUrl}')`
+            : undefined,
+        }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-charcoal/70 text-sm font-bold tracking-widest uppercase mb-3">Special Occasions</p>
-          <h1 className="font-display text-4xl md:text-6xl font-black leading-tight">
+          <p className="text-gold-light text-sm font-bold tracking-widest uppercase mb-3">Special Occasions</p>
+          <h1 className="font-display text-4xl md:text-6xl font-black leading-tight text-cream">
             Wedding &amp; Event<br />
-            <span>Vehicle Hire</span>
+            <span className="text-gold-light">Vehicle Hire</span>
           </h1>
-          <span className="block w-12 h-0.5 bg-charcoal mt-5 mb-6" />
-          <p className="text-charcoal/70 text-lg max-w-2xl leading-relaxed">
+          <span className="block w-12 h-0.5 bg-gold mt-5 mb-6" />
+          <p className="text-white/80 text-lg max-w-2xl leading-relaxed">
             Arrive in timeless elegance. We provide professionally decorated luxury vehicles with
             experienced chauffeurs for weddings, engagements, and all special occasions across Sri Lanka.
           </p>
