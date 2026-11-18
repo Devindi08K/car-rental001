@@ -16,7 +16,10 @@ import {
 import { BUSINESS_NAME } from "@/lib/constants";
 import { siteUrl } from "@/lib/seo";
 
-type Props = { params: Promise<{ slug: string }> };
+type Props = {
+  params: Promise<{ slug: string }>;
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
+};
 
 export const instant = false;
 
@@ -36,13 +39,25 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function VehicleDetailPage({ params }: Props) {
+export default async function VehicleDetailPage({ params, searchParams }: Props) {
   const { slug } = await params;
+  const bookingParams = searchParams ? await searchParams : {};
   const [vehicle, settings] = await Promise.all([getVehicleBySlug(slug), getSettings()]);
   if (!vehicle) notFound();
 
   const isRented = vehicle.status === "RENTED";
-  const waMessage = `Hello! I'm interested in renting the *${vehicle.name}*. Please let me know the availability and booking details.`;
+  const oneParam = (value: string | string[] | undefined) => Array.isArray(value) ? value[0] : value;
+  const location = oneParam(bookingParams.location);
+  const startDate = oneParam(bookingParams.startDate);
+  const endDate = oneParam(bookingParams.endDate);
+  const rentalType = oneParam(bookingParams.rentalType);
+  const bookingDetails = [
+    location ? `Pickup location: ${location}` : "",
+    startDate ? `Start date: ${startDate}` : "",
+    endDate ? `End date: ${endDate}` : "",
+    rentalType ? `Rental type: ${rentalType === "WITH_DRIVER" ? "With driver" : rentalType === "BOTH" ? "Both options" : "Self-drive"}` : "",
+  ].filter(Boolean).join("\n");
+  const waMessage = `Hello! I'm interested in renting the *${vehicle.name}*. Please let me know the availability and booking details.${bookingDetails ? `\n${bookingDetails}` : ""}`;
   const waLink = whatsappLink(settings.whatsappNumber, waMessage);
 
   const specs = [

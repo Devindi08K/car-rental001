@@ -6,6 +6,7 @@ import type { Vehicle } from "@prisma/client";
 interface Props {
   vehicle: Vehicle;
   whatsappNumber: string;
+  bookingDetails?: string;
 }
 
 const WA_ICON = (
@@ -14,10 +15,10 @@ const WA_ICON = (
   </svg>
 );
 
-export function VehicleCard({ vehicle, whatsappNumber }: Props) {
+export function VehicleCard({ vehicle, whatsappNumber, bookingDetails }: Props) {
   const isRented = vehicle.status === "RENTED";
   const mainImage = vehicle.images[0];
-  const waMessage = `Hello! I'm interested in renting the ${vehicle.name}. Please let me know the availability.`;
+  const waMessage = `Hello! I'm interested in renting the ${vehicle.name}. Please let me know the availability.${bookingDetails ? `\n${bookingDetails}` : ""}`;
   const waLink = whatsappLink(whatsappNumber, waMessage);
 
   return (

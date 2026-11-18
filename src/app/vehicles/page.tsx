@@ -24,6 +24,28 @@ export default async function VehiclesPage({
   const params = await searchParams;
   const filters = parseVehicleFilters(params);
   const [settings, vehicles] = await Promise.all([getSettings(), getVehicles(filters)]);
+  const oneParam = (value: string | string[] | undefined) => Array.isArray(value) ? value[0] : value;
+  const location = oneParam(params.location);
+  const startDate = oneParam(params.startDate);
+  const endDate = oneParam(params.endDate);
+  const rentalLabel = filters.rentalType === "WITH_DRIVER"
+    ? "With driver"
+    : filters.rentalType === "BOTH"
+      ? "Both options"
+      : filters.rentalType === "SELF_DRIVE"
+        ? "Self-drive"
+        : "";
+  const bookingDetails = [
+    location ? `Pickup: ${location}` : "",
+    startDate ? `From: ${startDate}` : "",
+    endDate ? `To: ${endDate}` : "",
+  ].filter(Boolean).join(" · ");
+  const whatsappDetails = [
+    location ? `Pickup location: ${location}` : "",
+    startDate ? `Start date: ${startDate}` : "",
+    endDate ? `End date: ${endDate}` : "",
+    rentalLabel ? `Rental type: ${rentalLabel}` : "",
+  ].filter(Boolean).join("\n");
 
   return (
     <div className="bg-charcoal min-h-screen">
@@ -35,6 +57,17 @@ export default async function VehiclesPage({
           <span className="block w-12 h-0.5 bg-charcoal mt-4" />
         </div>
       </div>
+
+      {bookingDetails && (
+        <div className="border-b border-charcoal-700 bg-charcoal-800">
+          <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-3 px-4 py-4 text-sm sm:px-6 lg:px-8">
+            <span className="font-bold uppercase tracking-[0.12em] text-gold">Your search</span>
+            <span className="text-cream">{bookingDetails}</span>
+            {rentalLabel && <span className="border border-gold/30 px-2 py-1 text-xs text-gold">{rentalLabel}</span>}
+            <Link href="/vehicles" className="ml-auto text-xs text-muted hover:text-gold">Clear search</Link>
+          </div>
+        </div>
+      )}
 
       {/* Filters */}
       <div className="bg-charcoal-800 border-b border-charcoal-700 py-5 sticky top-[68px] z-30">
@@ -61,7 +94,7 @@ export default async function VehiclesPage({
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {vehicles.map((v) => (
-                <VehicleCard key={v.id} vehicle={v} whatsappNumber={settings.whatsappNumber} />
+                <VehicleCard key={v.id} vehicle={v} whatsappNumber={settings.whatsappNumber} bookingDetails={whatsappDetails} />
               ))}
             </div>
           </>
