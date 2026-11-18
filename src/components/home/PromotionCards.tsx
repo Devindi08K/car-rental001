@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { SiteSettings } from "@/lib/settings";
+import { optimizedImage } from "@/lib/format"; SELECT url('${card.image}')
 
 export function PromotionCards({ settings }: { settings: SiteSettings }) {
   const cards = [
@@ -25,7 +26,7 @@ export function PromotionCards({ settings }: { settings: SiteSettings }) {
               key={card.title}
               href={card.href}
               className="group relative min-h-96 overflow-hidden border border-charcoal-700 bg-charcoal-800 bg-cover bg-center"
-              style={{ backgroundImage: `linear-gradient(180deg, rgba(8,8,8,0.05), rgba(8,8,8,0.82)), url('${card.image}')` }}
+              style={{ backgroundImage: `linear-gradient(180deg, rgba(8,8,8,0.05), rgba(8,8,8,0.82)), url('${optimizedImage(card.image, 1200)}')` }}
             >
               <div className="absolute inset-x-0 bottom-0 p-6 transition-transform duration-300 group-hover:-translate-y-1">
                 <p className="text-xs font-bold uppercase tracking-[0.18em] text-gold">{card.eyebrow}</p>

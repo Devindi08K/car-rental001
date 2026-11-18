@@ -1,9 +1,11 @@
+import { redirect } from "next/navigation";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 
 export async function requireAdmin() {
   const session = await auth();
   const email = session?.user?.email?.toLowerCase();
-  if (!email) return null;
-  return prisma.adminUser.findUnique({ where: { email } });
+  const admin = email ? await prisma.adminUser.findUnique({ where: { email } }) : null;
+  if (!admin) redirect("/admin/login");
+  return admin;
 }

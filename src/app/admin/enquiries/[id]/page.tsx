@@ -35,7 +35,7 @@ export default async function EnquiryDetailPage({ params }: Props) {
           <div>
             <dt className="text-xs text-muted uppercase tracking-wide mb-1">Phone</dt>
             <dd className="text-cream">
-              <a href={`tel:${enquiry.phone}`} className="hover:text-gold">{enquiry.phone}</a>
+              <a href={telHref(enquiry.phone)} className="hover:text-gold">{enquiry.phone}</a>
             </dd>
           </div>
           {enquiry.email && (

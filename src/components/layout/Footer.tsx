@@ -5,7 +5,6 @@ import type { SiteSettings } from "@/lib/settings";
 
 export function Footer({ settings }: { settings: SiteSettings }) {
   const wa = whatsappLink(settings.whatsappNumber);
-  const year = 2026;
   return (
     <footer className="bg-charcoal-800 border-t border-charcoal-700 mt-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
@@ -37,7 +36,7 @@ export function Footer({ settings }: { settings: SiteSettings }) {
             <h3 className="font-display text-cream text-lg mb-4">Contact Us</h3>
             <ul className="space-y-2 text-sm text-muted">
               <li>
-                <a href={`tel:${settings.phone}`} className="hover:text-gold transition-colors">
+                <a href={telHref(settings.phone)} className="hover:text-gold transition-colors">
                   {settings.phone}
                 </a>
               </li>
@@ -81,7 +80,7 @@ export function Footer({ settings }: { settings: SiteSettings }) {
           </div>
         </div>
         <div className="mt-10 pt-6 border-t border-charcoal-700 text-center text-xs text-muted">
-          &copy; {year} {BUSINESS_NAME}. All rights reserved.
+          &copy; {BUSINESS_NAME}. All rights reserved.
         </div>
       </div>
     </footer>

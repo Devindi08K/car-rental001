@@ -54,12 +54,8 @@ export function PhotoManager({ images, onChange }: Props) {
     void uploadFiles(Array.from(e.target.files ?? []));
   }
 
-  async function handleDelete(url: string, index: number) {
-    // Remove from local state first
-    const next = images.filter((_, i) => i !== index);
-    onChange(next);
-    // Fire-and-forget cleanup
-    fetch("/api/upload", { method: "DELETE", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ url }) });
+  function handleDelete(index: number) {
+    onChange(images.filter((_, i) => i !== index));
   }
 
   function moveUp(index: number) {
@@ -90,7 +86,7 @@ export function PhotoManager({ images, onChange }: Props) {
                 className="p-1 bg-charcoal-700 rounded text-cream disabled:opacity-30 hover:bg-charcoal-600 text-xs">◀</button>
               <button type="button" onClick={() => moveDown(i)} title="Move right" disabled={i === images.length - 1}
                 className="p-1 bg-charcoal-700 rounded text-cream disabled:opacity-30 hover:bg-charcoal-600 text-xs">▶</button>
-              <button type="button" onClick={() => handleDelete(url, i)} title="Delete"
+              <button type="button" onClick={() => handleDelete(i)} title="Delete"
                 className="p-1 bg-red-700 rounded text-white hover:bg-red-600 text-xs">✕</button>
             </div>
           </div>

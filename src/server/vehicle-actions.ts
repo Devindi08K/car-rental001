@@ -69,6 +69,9 @@ export async function saveVehicle(_state: FormState, formData: FormData): Promis
       revalidateVehicles([parsed.data.slug]);
     }
   } catch (error) {
+    if (typeof error === "object" && error !== null && "code" in error && error.code === "P2002") {
+      return { error: "That slug is already used by another vehicle. Choose a different one." };
+    }
     console.error("save_vehicle_failed", error);
     return { error: "The vehicle could not be saved." };
   }

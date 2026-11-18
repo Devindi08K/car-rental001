@@ -28,7 +28,7 @@ const services = [
       </svg>
     ),
     title: "Airport Transfers",
-    description: "Reliable, punctual airport pickups and drop-offs. Available 24/7 for all major airports in Sri Lanka.",
+    description: "Reliable, punctual airport pickups and drop-offs. Book ahead on WhatsApp for airport pickups and drop-offs.",
     href: "/services",
   },
   {

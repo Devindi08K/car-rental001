@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { pageMeta } from "@/lib/seo";
 import { getSettings } from "@/lib/settings";
-import { whatsappLink } from "@/lib/format";
+import { whatsappLink, optimizedImage } from "@/lib/format";
 import { BUSINESS_NAME } from "@/lib/constants";
 
 export const metadata: Metadata = pageMeta({
-  title: `Services — ${BUSINESS_NAME}`,
+  title: "Our Services",
   description:
     "Chauffeur service, airport transfers, outstation tours, corporate rentals and more — Mahawaththa Rent a Car serves all of Sri Lanka.",
   path: "/services",
@@ -28,7 +28,7 @@ const services = [
       </svg>
     ),
     title: "Airport Transfers",
-    description: "Punctual pickups and drop-offs at Bandaranaike (CMB) and Mattala (HRI) airports. Available 24/7, all days including public holidays.",
+    description: "Punctual pickups and drop-offs at Bandaranaike Airport (CMB). Book ahead on WhatsApp.",
   },
   {
     icon: (

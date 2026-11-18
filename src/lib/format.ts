@@ -38,8 +38,10 @@ export function formatLkr(amount: number) {
 }
 
 export function whatsappLink(number: string, message?: string) {
-  const digits = number.replace(/\D/g, "");
-  if (digits.length < 8) return null;
+    let digits = number.replace(/\D/g, "");
+      if (digits.startsWith("0")) digits = `94${digits.slice(1)}`;
+      else if (digits.length === 9) digits = `94${digits}`;
+      if (digits.length < 8) return null;
   const base = `https://wa.me/${digits}`;
   if (!message) return base;
   return `${base}?text=${encodeURIComponent(message)}`;
@@ -72,4 +74,12 @@ export function slugify(value: string) {
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "")
     .slice(0, 140);
+}
+export function telHref(phone: string) {
+  return `tel:${phone.replace(/[^\d+]/g, "")}`;
+}
+
+export function optimizedImage(url: string, width = 1600) {
+  if (!url.startsWith("https://res.cloudinary.com/")) return url;
+  return url.replace("/upload/", `/upload/f_auto,q_auto,w_${width}/`);
 }

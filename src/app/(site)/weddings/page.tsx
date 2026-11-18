@@ -3,11 +3,11 @@ import Image from "next/image";
 import { pageMeta } from "@/lib/seo";
 import { getSettings } from "@/lib/settings";
 import { getGallery } from "@/lib/gallery";
-import { whatsappLink } from "@/lib/format";
+import { whatsappLink, optimizedImage } from "@/lib/format";
 import { BUSINESS_NAME } from "@/lib/constants";
 
 export const metadata: Metadata = pageMeta({
-  title: `Wedding Cars Sri Lanka — ${BUSINESS_NAME}`,
+  title: "Wedding Cars Sri Lanka",
   description:
     "Elegant wedding car hire in Sri Lanka. Luxury vehicles professionally decorated, with courteous chauffeurs for your most memorable day.",
   path: "/weddings",
@@ -24,7 +24,7 @@ export default async function WeddingsPage() {
         className="bg-gold border-b border-gold-dark py-20 text-cream bg-cover bg-center"
         style={{
           backgroundImage: settings.weddingHeroImageUrl
-            ? `linear-gradient(90deg, rgba(8,8,8,0.72) 0%, rgba(8,8,8,0.48) 58%, rgba(8,8,8,0.24) 100%), url('${settings.weddingHeroImageUrl}')`
+            ? `linear-gradient(90deg, rgba(8,8,8,0.72) 0%, rgba(8,8,8,0.48) 58%, rgba(8,8,8,0.24) 100%), url('${optimizedImage(settings.weddingHeroImageUrl, 2000)}')`
             : undefined,
         }}
       >

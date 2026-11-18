@@ -16,7 +16,7 @@ export function ContactStrip({ settings }: { settings: SiteSettings }) {
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           <div>
             <h2 className="font-display text-3xl font-bold text-cream mb-1">Ready to book?</h2>
-            <p className="text-muted">Get in touch — we respond within minutes on WhatsApp.</p>
+            <p className="text-muted">Get in touch — we reply as soon as we can on WhatsApp.</p>
           </div>
           <div className="flex flex-wrap gap-4">
             {wa && (

@@ -5,6 +5,7 @@ import { saveVehicle, type FormState } from "@/server/vehicle-actions";
 import { PhotoManager } from "@/components/admin/PhotoManager";
 import { slugify } from "@/lib/format";
 import type { Vehicle } from "@prisma/client";
+import { label } from "@/lib/format";
 
 const CATEGORIES = ["LUXURY", "SEDAN", "SUV", "VAN", "WEDDING", "ECONOMY"] as const;
 const RENTALS     = ["SELF_DRIVE", "WITH_DRIVER", "BOTH"] as const;

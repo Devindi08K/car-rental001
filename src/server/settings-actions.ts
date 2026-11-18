@@ -7,9 +7,8 @@ import { revalidateSettings } from "@/lib/revalidate";
 import { prisma } from "@/lib/prisma";
 
 export async function saveSettings(_prev: unknown, formData: FormData) {
+  await requireAdmin();
   try {
-    const admin = await requireAdmin();
-    if (!admin) return { ok: false, error: "Not authenticated." };
     const existingRows = await prisma.siteSetting.findMany({
       where: { key: { in: SETTING_KEYS } },
     });

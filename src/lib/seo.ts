@@ -3,7 +3,11 @@ import { BUSINESS_NAME } from "@/lib/constants";
 
 export function siteUrl() {
   const fallback = "http://localhost:3000";
-  const configured = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+    const configured =
+    process.env.NEXT_PUBLIC_SITE_URL?.trim() ||
+    (process.env.VERCEL_PROJECT_PRODUCTION_URL
+      ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+      : "");;
   if (!configured) return fallback;
 
   try {

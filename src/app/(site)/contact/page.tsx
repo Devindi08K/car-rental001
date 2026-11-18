@@ -6,10 +6,11 @@ import { BUSINESS_NAME } from "@/lib/constants";
 import { EnquiryForm } from "@/components/contact/EnquiryForm";
 
 export const metadata: Metadata = pageMeta({
-  title: `Contact Us — ${BUSINESS_NAME}`,
-  description: "Get in touch with Mahawaththa Rent a Car. Phone, WhatsApp, email, or enquiry form. We respond within minutes.",
+  title: "Contact Us",
+  description: "Get in touch with Mahawaththa Rent a Car. Phone, WhatsApp, email, or enquiry form. We reply as soon as we can.",
   path: "/contact",
 });
+
 
 export default async function ContactPage() {
   const settings = await getSettings();
@@ -40,7 +41,7 @@ export default async function ContactPage() {
                 </div>
                 <div>
                   <p className="text-xs text-muted uppercase tracking-wide mb-1">Phone</p>
-                  <a href={`tel:${settings.phone}`} className="text-cream hover:text-gold transition-colors font-medium">{settings.phone}</a>
+                  <a href={telHref(settings.phone)} className="text-cream hover:text-gold transition-colors font-medium">{settings.phone}</a>
                 </div>
               </li>
               {wa && (

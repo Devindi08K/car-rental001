@@ -9,7 +9,7 @@ import { DeleteVehicleButton } from "@/components/admin/DeleteVehicleButton";
 
 export default async function AdminVehiclesPage() {
   await requireAdmin();
-  const vehicles = await prisma.vehicle.findMany({ orderBy: { sortOrder: "asc" } });
+  const vehicles = await prisma.vehicle.findMany({ orderBy: [{ sortOrder: "asc" }, { name: "asc" }] });
 
   return (
     <div>

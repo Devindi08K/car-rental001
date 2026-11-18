@@ -3,6 +3,7 @@ import { enquirySchema } from "@/lib/validators";
 import { consumeRateLimit, clientIpFromHeaders } from "@/lib/rate-limit";
 import { prisma } from "@/lib/prisma";
 import { sanitizeText } from "@/lib/sanitize";
+import { notifyNewEnquiry } from "@/lib/notify";
 
 async function verifyTurnstile(token: string, ip: string) {
   const secret = process.env.TURNSTILE_SECRET_KEY;
@@ -57,9 +58,10 @@ export async function POST(req: Request) {
         phone: sanitizeText(phone),
         email: email ?? null,
         message,
-        vehicleId: vehicleId ?? null,
+               vehicleId: vehicleId ?? null,
       },
     });
+    await notifyNewEnquiry({ name, phone, email, message });
 
     return NextResponse.json({ ok: true });
   } catch (err) {

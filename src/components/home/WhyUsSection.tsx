@@ -7,12 +7,12 @@ const reasons = [
   {
     num: "02",
     title: "Transparent Pricing",
-    desc: "All-inclusive daily rates in LKR with no hidden charges. Fuel policy confirmed at booking.",
+    desc: "Clear daily rates in LKR. Fuel, deposit and distance allowance are confirmed before you book.",
   },
   {
     num: "03",
-    title: "24/7 Support",
-    desc: "WhatsApp and phone support around the clock, so you're never stranded wherever you are.",
+    title: "Fast Support",
+    desc: "WhatsApp and phone support during opening hours, with quick replies to every enquiry.",
   },
   {
     num: "04",

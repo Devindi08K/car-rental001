@@ -13,7 +13,7 @@ import { ContactStrip } from "@/components/home/ContactStrip";
 import { PromotionCards } from "@/components/home/PromotionCards";
 
 export const metadata: Metadata = pageMeta({
-  title: `${BUSINESS_NAME} | Premium Car Rental Sri Lanka`,
+  title: "Premium Car Rental Sri Lanka",
   description:
     "Sri Lanka's premier car rental service. Luxury vehicles, self-drive, chauffeur service, airport transfers, and wedding cars. Book on WhatsApp.",
   path: "/",
