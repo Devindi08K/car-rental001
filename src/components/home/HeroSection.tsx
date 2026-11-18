@@ -8,7 +8,7 @@ export function HeroSection({ settings }: { settings: SiteSettings }) {
   return (
     <section aria-label="Hero" className="bg-charcoal">
       <div className="grid min-h-[680px] lg:grid-cols-[0.86fr_1.14fr]">
-        <div className="flex items-center bg-gold px-6 py-20 text-charcoal sm:px-10 lg:px-16 lg:py-28">
+        <div className="flex items-center bg-[#ddeba1] px-6 py-20 text-charcoal sm:px-10 lg:px-16 lg:py-28">
           <div className="max-w-xl">
             <p className="mb-5 text-xs font-bold uppercase tracking-[0.28em]">Mahawaththa · Sri Lanka</p>
             <h1 className="font-display text-5xl font-black leading-[0.92] tracking-[-0.06em] sm:text-7xl">
@@ -35,7 +35,7 @@ export function HeroSection({ settings }: { settings: SiteSettings }) {
               "linear-gradient(135deg, rgba(8,8,8,0.08), rgba(8,8,8,0.38)), url('/photos/hero/hero-car.jpg')",
           }}
         >
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_65%_35%,rgba(198,255,0,0.2),transparent_35%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_65%_35%,rgba(191,220,88,0.12),transparent_35%)]" />
           <div className="absolute bottom-8 left-6 border-l-2 border-gold bg-charcoal/75 px-4 py-3 backdrop-blur-md sm:bottom-10 sm:left-10">
             <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-gold">Premium fleet</p>
             <p className="mt-1 text-sm font-semibold text-cream">Luxury · SUV · Sedan</p>
