@@ -2,7 +2,10 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
+1. Copy `.env.example` to `.env.local`.
+2. Set `DATABASE_URL` and `DIRECT_URL` to your PostgreSQL/Neon connection strings.
+3. Set `AUTH_SECRET`, and add the Cloudinary and optional Turnstile values needed for uploads and forms.
+4. Start the development server:
 
 ```bash
 npm run dev

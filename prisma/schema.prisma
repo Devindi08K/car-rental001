@@ -1,0 +1,141 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum VehicleCategory {
+  LUXURY
+  SEDAN
+  SUV
+  VAN
+  WEDDING
+  ECONOMY
+}
+
+enum RentalType {
+  SELF_DRIVE
+  WITH_DRIVER
+  BOTH
+}
+
+enum VehicleStatus {
+  AVAILABLE
+  RENTED
+}
+
+enum Transmission {
+  AUTOMATIC
+  MANUAL
+}
+
+enum FuelType {
+  PETROL
+  DIESEL
+  HYBRID
+  ELECTRIC
+}
+
+enum EnquiryStatus {
+  NEW
+  CONTACTED
+  CLOSED
+}
+
+enum GallerySection {
+  WEDDING
+  GENERAL
+}
+
+model Vehicle {
+  id           String          @id @default(cuid())
+  name         String
+  slug         String          @unique
+  category     VehicleCategory
+  rentalType   RentalType      @default(BOTH)
+  status       VehicleStatus   @default(AVAILABLE)
+  pricePerDay  Int
+  seats        Int
+  transmission Transmission
+  fuelType     FuelType
+  description  String
+  /// Cloudinary or approved image URLs. Index 0 is the main photo. Maximum 5, enforced in application code.
+  images       String[]
+  isFeatured   Boolean         @default(false)
+  sortOrder    Int             @default(0)
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+  enquiries    Enquiry[]
+
+  @@index([isFeatured, sortOrder])
+  @@index([rentalType])
+  @@index([status, sortOrder])
+}
+
+model Enquiry {
+  id        String        @id @default(cuid())
+  name      String
+  phone     String
+  email     String?
+  message   String
+  vehicleId String?
+  vehicle   Vehicle?      @relation(fields: [vehicleId], references: [id], onDelete: SetNull)
+  status    EnquiryStatus @default(NEW)
+  createdAt DateTime      @default(now())
+
+  @@index([status, createdAt])
+}
+
+model SiteSetting {
+  key   String @id
+  value String
+}
+
+/// Editable marketing copy. Text fields are plain text or a small markdown subset, never HTML.
+model PageContent {
+  key            String   @id
+  title          String
+  intro          String
+  requirements   Json
+  foreignNotes   String   @default("")
+  pricingNotes   String
+  insuranceNotes String
+  pickupInfo     String
+  faq            Json
+  updatedAt      DateTime @updatedAt
+}
+
+model GalleryImage {
+  id        String         @id @default(cuid())
+  url       String
+  alt       String         @default("")
+  section   GallerySection
+  sortOrder Int            @default(0)
+  createdAt DateTime       @default(now())
+
+  @@index([section, sortOrder])
+}
+
+model AdminUser {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+}
+
+model RateLimitBucket {
+  key         String   @id
+  count       Int      @default(0)
+  windowStart DateTime @default(now())
+}
+
+model LoginThrottle {
+  key         String    @id
+  failures    Int       @default(0)
+  lockedUntil DateTime?
+  updatedAt   DateTime  @updatedAt
+}
