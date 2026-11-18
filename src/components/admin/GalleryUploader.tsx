@@ -11,31 +11,34 @@ export function GalleryUploader({ initialImages }: { initialImages: GalleryImage
   const [error, setError] = useState("");
   const fileRef = useRef<HTMLInputElement>(null);
 
-  async function handleUpload(e: React.ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0];
-    if (!file) return;
+  async function uploadFiles(files: File[]) {
+    if (!files.length) return;
     setUploading(true);
     setError("");
-    const form = new FormData();
-    form.append("file", file);
-    try {
-      const res = await fetch("/api/upload", { method: "POST", body: form });
-      const data: { url?: unknown; error?: unknown } = await res.json();
-      if (!res.ok) {
-        throw new Error(typeof data.error === "string" ? data.error : "Upload failed");
-      }
-      if (typeof data.url !== "string" || !data.url) {
-        throw new Error("Upload failed: no image URL returned.");
-      }
+    let successCount = 0;
 
-      const fd = new FormData();
-      fd.set("url", data.url);
-      fd.set("alt", file.name.replace(/\.[^.]+$/, ""));
-      fd.set("section", "WEDDING");
-      fd.set("sortOrder", String(images.length));
-      const result = await addGalleryImage(null, fd);
-      if (!result.ok) throw new Error(result.error);
-      // Refresh page to get new image with id
+    try {
+      for (const [index, file] of files.entries()) {
+        const form = new FormData();
+        form.append("file", file);
+        const res = await fetch("/api/upload", { method: "POST", body: form });
+        const data: { url?: unknown; error?: unknown } = await res.json();
+        if (!res.ok) {
+          throw new Error(typeof data.error === "string" ? data.error : `Could not upload ${file.name}`);
+        }
+        if (typeof data.url !== "string" || !data.url) {
+          throw new Error(`Upload failed: no image URL returned for ${file.name}`);
+        }
+
+        const fd = new FormData();
+        fd.set("url", data.url);
+        fd.set("alt", file.name.replace(/\.[^.]+$/, ""));
+        fd.set("section", "WEDDING");
+        fd.set("sortOrder", String(images.length + successCount + index));
+        const result = await addGalleryImage(null, fd);
+        if (!result.ok) throw new Error(result.error);
+        successCount += 1;
+      }
       window.location.reload();
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Upload failed");
@@ -43,6 +46,10 @@ export function GalleryUploader({ initialImages }: { initialImages: GalleryImage
       setUploading(false);
       if (fileRef.current) fileRef.current.value = "";
     }
+  }
+
+  function handleUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    void uploadFiles(Array.from(e.target.files ?? []));
   }
 
   async function handleDelete(id: string) {
@@ -75,7 +82,14 @@ export function GalleryUploader({ initialImages }: { initialImages: GalleryImage
             </div>
           </div>
         ))}
-        <label className="aspect-video border-2 border-dashed border-charcoal-600 rounded-lg flex flex-col items-center justify-center cursor-pointer hover:border-gold/50 transition-colors bg-charcoal-700">
+        <label
+          onDragOver={(event) => event.preventDefault()}
+          onDrop={(event) => {
+            event.preventDefault();
+            void uploadFiles(Array.from(event.dataTransfer.files));
+          }}
+          className="aspect-video border-2 border-dashed border-charcoal-600 rounded-lg flex flex-col items-center justify-center cursor-pointer hover:border-gold/50 transition-colors bg-charcoal-700"
+        >
           {uploading ? (
             <span className="text-xs text-muted">Uploading…</span>
           ) : (
@@ -83,10 +97,10 @@ export function GalleryUploader({ initialImages }: { initialImages: GalleryImage
               <svg className="w-6 h-6 text-muted mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4v16m8-8H4" />
               </svg>
-              <span className="text-xs text-muted">Upload</span>
+              <span className="text-xs text-muted text-center px-2">Drop photos or click to select</span>
             </>
           )}
-          <input ref={fileRef} type="file" accept="image/jpeg,image/png,image/webp" className="hidden" onChange={handleUpload} disabled={uploading} />
+          <input ref={fileRef} type="file" multiple accept="image/jpeg,image/png,image/webp" className="hidden" onChange={handleUpload} disabled={uploading} />
         </label>
       </div>
     </div>

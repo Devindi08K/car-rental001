@@ -14,28 +14,43 @@ export function PhotoManager({ images, onChange }: Props) {
   const [error, setError] = useState("");
   const fileRef = useRef<HTMLInputElement>(null);
 
-  async function handleUpload(e: React.ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    if (images.length >= MAX_VEHICLE_PHOTOS) {
+  async function uploadFiles(files: File[]) {
+    if (!files.length) return;
+    const available = MAX_VEHICLE_PHOTOS - images.length;
+    if (available <= 0) {
       setError(`Maximum ${MAX_VEHICLE_PHOTOS} photos allowed.`);
       return;
     }
+
+    const selected = files.slice(0, available);
     setUploading(true);
     setError("");
-    const form = new FormData();
-    form.append("file", file);
+    const uploaded: string[] = [];
+
     try {
-      const res = await fetch("/api/upload", { method: "POST", body: form });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error ?? "Upload failed");
-      onChange([...images, data.url]);
+      for (const file of selected) {
+        const form = new FormData();
+        form.append("file", file);
+        const res = await fetch("/api/upload", { method: "POST", body: form });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error ?? `Could not upload ${file.name}`);
+        if (typeof data.url !== "string") throw new Error(`Upload failed for ${file.name}`);
+        uploaded.push(data.url);
+      }
+      onChange([...images, ...uploaded]);
+      if (files.length > available) {
+        setError(`Only ${available} of ${files.length} photos could be added. Maximum is ${MAX_VEHICLE_PHOTOS}.`);
+      }
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Upload failed");
     } finally {
       setUploading(false);
       if (fileRef.current) fileRef.current.value = "";
     }
+  }
+
+  function handleUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    void uploadFiles(Array.from(e.target.files ?? []));
   }
 
   async function handleDelete(url: string, index: number) {
@@ -80,7 +95,14 @@ export function PhotoManager({ images, onChange }: Props) {
           </div>
         ))}
         {images.length < MAX_VEHICLE_PHOTOS && (
-          <label className="aspect-video border-2 border-dashed border-charcoal-600 rounded-lg flex flex-col items-center justify-center cursor-pointer hover:border-gold/50 transition-colors bg-charcoal-700">
+          <label
+            onDragOver={(event) => event.preventDefault()}
+            onDrop={(event) => {
+              event.preventDefault();
+              void uploadFiles(Array.from(event.dataTransfer.files));
+            }}
+            className="aspect-video border-2 border-dashed border-charcoal-600 rounded-lg flex flex-col items-center justify-center cursor-pointer hover:border-gold/50 transition-colors bg-charcoal-700"
+          >
             {uploading ? (
               <span className="text-xs text-muted">Uploading…</span>
             ) : (
@@ -88,10 +110,10 @@ export function PhotoManager({ images, onChange }: Props) {
                 <svg className="w-6 h-6 text-muted mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4v16m8-8H4" />
                 </svg>
-                <span className="text-xs text-muted">Add photo</span>
+                <span className="text-xs text-muted text-center px-2">Drop photos or click</span>
               </>
             )}
-            <input ref={fileRef} type="file" accept="image/jpeg,image/png,image/webp" className="hidden" onChange={handleUpload} disabled={uploading} />
+            <input ref={fileRef} type="file" multiple accept="image/jpeg,image/png,image/webp" className="hidden" onChange={handleUpload} disabled={uploading} />
           </label>
         )}
       </div>

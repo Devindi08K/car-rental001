@@ -116,6 +116,22 @@ Use these exact filenames and dimensions. Export as JPG or WebP. Keep subjects a
 - **Size:** 1600 × 1200 px; 4:3 landscape
 - **Prompt:** Photorealistic premium rental service team assisting a customer beside a luxury vehicle in a modern Sri Lankan showroom, warm professional interaction, clean corporate hospitality atmosphere, natural daylight plus a focused spotlight and rim light on the luxury vehicle, people and showroom remain secondary, no text, no visible brand logos, no number plate, no watermark
 
+## Easy upload workflow
+
+Use the admin panel for photos that need to appear immediately:
+
+1. Open `/admin/gallery` for wedding/general gallery images.
+2. Open `/admin/vehicles/new` or a vehicle edit page for vehicle photos.
+3. Drag and drop several JPG, PNG, or WebP files at once, or click the photo box and select multiple files.
+4. The first vehicle photo becomes the main card image.
+5. Use the left/right controls to change the vehicle photo order.
+
+For the homepage hero only, continue using the fixed local file:
+
+`public/photos/hero/hero-car.jpg`
+
+For large batches, use the same folder structure in this guide, then tell the developer which files should become the fleet, service, wedding, or promotion cards.
+
 ## Submission checklist
 
 - Export as JPG or WebP
