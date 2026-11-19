@@ -18,9 +18,9 @@ export type SelfDriveContent = {
 
 export const SELF_DRIVE_FALLBACK: SelfDriveContent = {
   key: "self-drive",
-  title: "Self-drive car rental in Sri Lanka",
+  title: "Self-drive vehicle rental in Sri Lanka",
   intro:
-    "Take the vehicle yourself. Mahawaththa rents complete cars to local drivers and visitors, with daily rates in Sri Lankan rupees and WhatsApp booking. The figures below are placeholders until the business confirms them.",
+    "Take the vehicle yourself. Royal Route rents cars and other vehicles to local drivers and visitors, with daily rates in Sri Lankan rupees and WhatsApp booking. The figures below are placeholders until the business confirms them.",
   requirements: [
     "A valid driving licence for the rental period.",
     "National identity card or passport.",

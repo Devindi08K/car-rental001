@@ -7,7 +7,7 @@ import { BUSINESS_NAME } from "@/lib/constants";
 export const metadata: Metadata = pageMeta({
   title: "Our Services",
   description:
-    "Chauffeur service, airport transfers, outstation tours, corporate rentals and more — Mahawaththa Rent a Car serves all of Sri Lanka.",
+    "Chauffeur service, airport transfers, outstation tours, corporate rentals and more — Royal Route serves all of Sri Lanka.",
   path: "/services",
 });
 
@@ -108,7 +108,7 @@ export default async function ServicesPage() {
               style={{ backgroundImage: `linear-gradient(90deg, rgba(8,8,8,0.82), rgba(8,8,8,0.12)), url('${card.image}')` }}
             >
               <div className="absolute bottom-0 left-0 p-7">
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-gold">Mahawaththa</p>
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-gold">Royal Route</p>
                 <h2 className="mt-2 text-2xl font-black text-cream">{card.title}</h2>
               </div>
             </div>

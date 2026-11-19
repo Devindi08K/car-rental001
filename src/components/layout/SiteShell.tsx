@@ -11,7 +11,7 @@ export async function SiteShell({ children }: { children: React.ReactNode }) {
     "@context": "https://schema.org",
     "@type": "AutoRental",
     name: BUSINESS_NAME,
-    description: "Premium car rental and luxury vehicles in Sri Lanka",
+    description: "Premium vehicle rentals in Sri Lanka",
     url: siteUrl(),
     telephone: settings.phone,
     address: {

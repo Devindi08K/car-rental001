@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     template: `%s | ${BUSINESS_NAME}`,
   },
   description:
-    "Premium car rental and luxury vehicles in Sri Lanka. Self-drive, chauffeur service, airport transfers, and wedding vehicles. Book on WhatsApp.",
+    "Premium vehicle rentals in Sri Lanka. Cars, vans, self-drive, chauffeur service, airport transfers, and wedding vehicles. Book on WhatsApp.",
   metadataBase: new URL(siteUrl()),
   openGraph: {
     type: "website",

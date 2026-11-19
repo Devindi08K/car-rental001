@@ -70,7 +70,7 @@ export function AdminNav() {
       {/* Desktop sidebar */}
       <aside className="hidden lg:flex flex-col w-56 bg-charcoal-800 border-r border-charcoal-700 min-h-screen px-3 py-6">
         <Link href="/admin" className="mb-8 px-4">
-          <span className="font-display text-cream font-black uppercase tracking-tight text-lg block">Mahawaththa</span>
+          <span className="font-display text-cream font-black uppercase tracking-tight text-lg block">Royal Route</span>
           <span className="text-xs text-muted">Admin Panel</span>
         </Link>
         <nav className="flex-1">

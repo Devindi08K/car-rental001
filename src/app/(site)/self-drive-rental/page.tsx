@@ -7,9 +7,9 @@ import { VehicleCard } from "@/components/vehicles/VehicleCard";
 import { whatsappLink } from "@/lib/format";
 
 export const metadata: Metadata = pageMeta({
-  title: "Self-Drive Car Rental Sri Lanka — Drive Yourself",
+  title: "Self-Drive Vehicle Rental Sri Lanka — Drive Yourself",
   description:
-    "Rent a car and drive yourself around Sri Lanka. Our self-drive fleet includes sedans, SUVs and luxury vehicles. Valid licence required. Book on WhatsApp.",
+    "Rent a vehicle and drive yourself around Sri Lanka. Our self-drive fleet includes cars, vans, SUVs and luxury vehicles. A valid licence is required. Book on WhatsApp.",
   path: "/self-drive-rental",
 });
 

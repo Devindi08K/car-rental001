@@ -8,9 +8,9 @@ import { VehicleCard } from "@/components/vehicles/VehicleCard";
 import { VehicleFilters } from "@/components/vehicles/VehicleFilters";
 
 export const metadata: Metadata = pageMeta({
-  title: "Our Vehicles — Car Rental Fleet Sri Lanka",
+  title: "Our Vehicles — Royal Route Sri Lanka",
   description:
-    "Browse our full fleet of luxury, SUV, sedan and economy vehicles available for self-drive or with a driver in Sri Lanka. Filter by type, seats and price.",
+    "Browse our full fleet of cars, vans, SUVs and luxury vehicles available for self-drive or with a driver in Sri Lanka. Filter by type, seats and price.",
   path: "/vehicles",
 });
 

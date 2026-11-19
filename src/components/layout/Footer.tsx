@@ -23,8 +23,8 @@ export function Footer({ settings }: { settings: SiteSettings }) {
                 />
               ) : (
                 <>
-                  <span className="font-display text-3xl font-black uppercase tracking-tight text-cream block">Mahawaththa</span>
-                  <span className="text-[10px] text-gold tracking-[0.2em] uppercase">Rent a Car &amp; Luxury Vehicles</span>
+                  <span className="font-display text-3xl font-black uppercase tracking-tight text-cream block">Royal Route</span>
+                  <span className="text-[10px] text-gold tracking-[0.2em] uppercase">Vehicle Rentals</span>
                 </>
               )}
             </Link>

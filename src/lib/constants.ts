@@ -1,4 +1,4 @@
-export const BUSINESS_NAME = "Mahawaththa Rent a Car & Luxury Vehicles";
+export const BUSINESS_NAME = "Royal Route";
 
 export const MAX_VEHICLE_PHOTOS = 5;
 export const MAX_UPLOAD_BYTES = 5 * 1024 * 1024;

@@ -44,11 +44,11 @@ export function Navbar({ settings }: { settings: SiteSettings }) {
               ) : (
                 <>
                   <span className="flex size-10 shrink-0 items-center justify-center border border-gold/60 font-display text-lg font-bold text-gold">
-                    M
+                    RR
                   </span>
                   <span className="flex min-w-0 flex-col leading-tight">
                     <span className="truncate font-display text-lg font-black uppercase tracking-tight text-cream sm:text-xl">{BUSINESS_NAME.split(" ")[0]}</span>
-                    <span className="text-[10px] uppercase tracking-[0.2em] text-gold">Rent a Car</span>
+                    <span className="text-[10px] uppercase tracking-[0.2em] text-gold">Vehicle Rentals</span>
                   </span>
                 </>
               )}
@@ -70,7 +70,7 @@ export function Navbar({ settings }: { settings: SiteSettings }) {
             </ul>
             {/* Mobile hamburger */}
             <Link href="/vehicles" className="hidden sm:inline-flex bg-gold px-5 py-3 text-xs font-bold uppercase tracking-[0.12em] text-charcoal hover:bg-gold-light transition-colors">
-              Book a car
+              Book a vehicle
             </Link>
             <button
               onClick={() => setOpen((o) => !o)}

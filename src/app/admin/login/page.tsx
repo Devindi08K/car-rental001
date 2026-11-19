@@ -12,7 +12,7 @@ export default function AdminLoginPage() {
     <div className="min-h-[80vh] flex items-center justify-center px-4">
       <div className="w-full max-w-sm bg-charcoal-800 border border-charcoal-700 rounded-2xl p-8">
         <div className="text-center mb-8">
-          <span className="font-display text-2xl font-bold text-gold block">Mahawaththa</span>
+          <span className="font-display text-2xl font-bold text-gold block">Royal Route</span>
           <span className="text-xs text-muted tracking-widest uppercase">Admin Panel</span>
         </div>
         <form action={formAction} className="space-y-5">

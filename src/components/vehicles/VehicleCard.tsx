@@ -100,7 +100,7 @@ export function VehicleCard({ vehicle, whatsappNumber, bookingDetails }: Props) 
               rel="noopener noreferrer"
               className="group/btn relative flex items-center justify-center gap-3 bg-gold px-6 py-4 text-xs font-black uppercase tracking-[0.15em] text-charcoal overflow-hidden transition-all hover:pr-10"
             >
-              <span className="relative z-10">Select This Car</span>
+              <span className="relative z-10">Select This Vehicle</span>
               <span className="absolute right-4 translate-x-4 opacity-0 transition-all group-hover/btn:translate-x-0 group-hover/btn:opacity-100">
                 →
               </span>

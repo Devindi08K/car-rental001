@@ -7,7 +7,7 @@ import { EnquiryForm } from "@/components/contact/EnquiryForm";
 
 export const metadata: Metadata = pageMeta({
   title: "Contact Us",
-  description: "Get in touch with Mahawaththa Rent a Car. Phone, WhatsApp, email, or enquiry form. We reply as soon as we can.",
+  description: "Get in touch with Royal Route. Phone, WhatsApp, email, or enquiry form. We reply as soon as we can.",
   path: "/contact",
 });
 

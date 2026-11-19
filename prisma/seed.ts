@@ -30,8 +30,8 @@ async function main() {
   const defaultSettings: Record<string, string> = {
     phone: "+94 77 123 4567",
     whatsappNumber: "94771234567",
-    email: "enquiries@mahawaththa.lk",
-    address: "No. 123, Mahawaththa Road, Colombo 05, Sri Lanka",
+    email: "enquiries@royalroute.lk",
+    address: "Colombo, Sri Lanka",
     openingHours: "Open daily, 7:00 AM – 10:00 PM",
     facebookUrl: "",
     instagramUrl: "",
@@ -53,7 +53,7 @@ async function main() {
     update: {},
     create: {
       key: "self-drive",
-      title: "Self-Drive Car Rental in Sri Lanka",
+      title: "Self-Drive Vehicle Rental in Sri Lanka",
       intro: "Take the wheel yourself and explore Sri Lanka at your own pace.\n\nWe offer a range of well-maintained vehicles for self-drive rental, from compact sedans to spacious SUVs. All our self-drive vehicles come with comprehensive insurance and 24/7 roadside support.",
       requirements: JSON.parse(JSON.stringify([
         "A valid driving licence (Sri Lankan or international)",

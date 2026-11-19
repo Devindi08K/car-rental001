@@ -29,7 +29,7 @@ export function HeroSection({ settings }: { settings: SiteSettings }) {
   ].filter(Boolean).join("\n");
   const wa = whatsappLink(settings.whatsappNumber, bookingMessage);
 
-  function searchCars(event: React.FormEvent<HTMLFormElement>) {
+  function searchVehicles(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const params = new URLSearchParams();
     if (location.trim()) params.set("location", location.trim());
@@ -54,7 +54,7 @@ export function HeroSection({ settings }: { settings: SiteSettings }) {
 
         <div className="relative mx-auto max-w-7xl px-4 pb-56 pt-20 sm:px-6 lg:px-8 lg:pt-28">
           <p className="mb-5 text-xs font-bold uppercase tracking-[0.28em] text-gold">
-            Mahawaththa · Sri Lanka
+            Royal Route · Sri Lanka
           </p>
           <h1 className="font-display text-5xl font-black leading-[0.95] tracking-[-0.05em] text-cream sm:text-7xl lg:text-8xl">
             Drive
@@ -62,7 +62,7 @@ export function HeroSection({ settings }: { settings: SiteSettings }) {
             <span className="text-gold">premium.</span>
           </h1>
           <p className="mt-7 max-w-md text-base leading-relaxed text-cream/80 sm:text-lg">
-            Luxury cars, easy pickup, and the freedom to explore Sri Lanka your way.
+            Cars, vans, and premium vehicles—with easy pickup and the freedom to explore Sri Lanka your way.
           </p>
         </div>
       </div>
@@ -70,10 +70,10 @@ export function HeroSection({ settings }: { settings: SiteSettings }) {
       {/* Booking card */}
       <div className="relative z-10 mx-auto -mt-44 max-w-6xl px-4 pb-6 sm:px-6">
         <form
-          onSubmit={searchCars}
+          onSubmit={searchVehicles}
           className="border-t-4 border-gold bg-charcoal-800 p-5 shadow-2xl shadow-black/60 sm:p-7"
         >
-          <h2 className="font-display text-xl font-bold text-cream sm:text-2xl">Find your car</h2>
+          <h2 className="font-display text-xl font-bold text-cream sm:text-2xl">Find your vehicle</h2>
 
           {/* Rental type tabs */}
           <div className="mt-4 grid w-full grid-cols-3 gap-2 md:w-fit" role="group" aria-label="Rental type">
@@ -108,7 +108,7 @@ export function HeroSection({ settings }: { settings: SiteSettings }) {
               type="submit"
               className="bg-gold px-8 py-4 text-sm font-black uppercase tracking-[0.1em] text-charcoal transition-colors hover:bg-gold-light"
             >
-              Search cars
+              Search vehicles
             </button>
           </div>
 
