@@ -47,7 +47,7 @@ export function Navbar({ settings }: { settings: SiteSettings }) {
                     RR
                   </span>
                   <span className="flex min-w-0 flex-col leading-tight">
-                    <span className="truncate font-display text-base font-black uppercase tracking-tight text-cream sm:text-xl">{BUSINESS_NAME}</span>
+                    <span className="truncate font-display text-lg font-black uppercase tracking-tight text-cream sm:text-xl">{BUSINESS_NAME.split(" ")[0]}</span>
                     <span className="text-[10px] uppercase tracking-[0.2em] text-gold">Vehicle Rentals</span>
                   </span>
                 </>
