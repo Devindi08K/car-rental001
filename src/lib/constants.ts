@@ -1,4 +1,4 @@
-export const BUSINESS_NAME = "Royal Route";
+export const BUSINESS_NAME = "Royal Route Lanka";
 
 export const MAX_VEHICLE_PHOTOS = 5;
 export const MAX_UPLOAD_BYTES = 5 * 1024 * 1024;
@@ -13,8 +13,8 @@ export const NAV_LINKS = [
 ] as const;
 
 export const DEFAULT_SETTINGS = {
-  phone: "070 646 5477",
-  whatsappNumber: "0770341970",
+  phone: "0770341970",
+  whatsappNumber: "070 646 5477",
   email: "enquiries@example.com",
   address: "Colombo, Sri Lanka",
   openingHours: "Open daily, 7:00 AM – 10:00 PM",

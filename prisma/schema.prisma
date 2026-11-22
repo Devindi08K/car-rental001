@@ -90,6 +90,16 @@ model Enquiry {
   @@index([status, createdAt])
 }
 
+model CustomerReview {
+  id        String   @id @default(cuid())
+  name      String
+  review    String
+  rating    Int
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+}
+
 model SiteSetting {
   key   String @id
   value String

@@ -23,7 +23,7 @@ export function Footer({ settings }: { settings: SiteSettings }) {
                 />
               ) : (
                 <>
-                  <span className="font-display text-3xl font-black uppercase tracking-tight text-cream block">Royal Route</span>
+                  <span className="font-display text-3xl font-black uppercase tracking-tight text-cream block">{BUSINESS_NAME}</span>
                   <span className="text-[10px] text-gold tracking-[0.2em] uppercase">Vehicle Rentals</span>
                 </>
               )}

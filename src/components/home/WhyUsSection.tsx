@@ -1,3 +1,5 @@
+import { BUSINESS_NAME } from "@/lib/constants";
+
 const reasons = [
   {
     num: "01",
@@ -28,7 +30,7 @@ export function WhyUsSection() {
         <div className="text-center mb-14">
           <p className="text-gold text-sm font-medium tracking-widest uppercase mb-3">Why Us</p>
           <h2 id="why-heading" className="font-display text-4xl md:text-5xl font-bold text-cream">
-            The Royal Route Difference
+            The {BUSINESS_NAME} Difference
           </h2>
           <span className="block w-12 h-0.5 bg-gold mx-auto mt-4" />
         </div>

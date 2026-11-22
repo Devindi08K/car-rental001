@@ -2,6 +2,7 @@
 
 import { useActionState } from "react";
 import { loginAction } from "@/server/auth-actions";
+import { BUSINESS_NAME } from "@/lib/constants";
 
 type State = { error?: string };
 
@@ -12,7 +13,7 @@ export default function AdminLoginPage() {
     <div className="min-h-[80vh] flex items-center justify-center px-4">
       <div className="w-full max-w-sm bg-charcoal-800 border border-charcoal-700 rounded-2xl p-8">
         <div className="text-center mb-8">
-          <span className="font-display text-2xl font-bold text-gold block">Royal Route</span>
+          <span className="font-display text-2xl font-bold text-gold block">{BUSINESS_NAME}</span>
           <span className="text-xs text-muted tracking-widest uppercase">Admin Panel</span>
         </div>
         <form action={formAction} className="space-y-5">

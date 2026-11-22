@@ -20,6 +20,12 @@ async function readSettings(): Promise<SiteSettings> {
       settings[key] = previousPlaceholder ? DEFAULT_SETTINGS[key] : row.value;
     }
   }
+  const phoneDigits = settings.phone.replace(/\D/g, "");
+  const whatsappDigits = settings.whatsappNumber.replace(/\D/g, "");
+  if (phoneDigits === "0706465477" && whatsappDigits === "0770341970") {
+    settings.phone = DEFAULT_SETTINGS.phone;
+    settings.whatsappNumber = DEFAULT_SETTINGS.whatsappNumber;
+  }
   return settings;
 }
 

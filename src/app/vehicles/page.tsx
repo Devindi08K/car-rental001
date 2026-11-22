@@ -6,9 +6,10 @@ import { getSettings } from "@/lib/settings";
 import { pageMeta } from "@/lib/seo";
 import { VehicleCard } from "@/components/vehicles/VehicleCard";
 import { VehicleFilters } from "@/components/vehicles/VehicleFilters";
+import { BUSINESS_NAME } from "@/lib/constants";
 
 export const metadata: Metadata = pageMeta({
-  title: "Our Vehicles — Royal Route Sri Lanka",
+  title: `Our Vehicles — ${BUSINESS_NAME}`,
   description:
     "Browse our full fleet of cars, vans, SUVs and luxury vehicles available for self-drive or with a driver in Sri Lanka. Filter by type, seats and price.",
   path: "/vehicles",

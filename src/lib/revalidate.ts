@@ -27,3 +27,9 @@ export function revalidateGallery() {
   revalidatePath("/");
   revalidatePath("/weddings");
 }
+
+export function revalidateReviews() {
+  updateTag("reviews");
+  revalidatePath("/");
+  revalidatePath("/admin/reviews");
+}

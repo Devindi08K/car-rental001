@@ -7,7 +7,7 @@ import { EnquiryForm } from "@/components/contact/EnquiryForm";
 
 export const metadata: Metadata = pageMeta({
   title: "Contact Us",
-  description: "Get in touch with Royal Route. Phone, WhatsApp, email, or enquiry form. We reply as soon as we can.",
+  description: `Get in touch with ${BUSINESS_NAME}. Phone, WhatsApp, email, or enquiry form. We reply as soon as we can.`,
   path: "/contact",
 });
 
@@ -81,6 +81,30 @@ export default async function ContactPage() {
                 </div>
               </li>
             </ul>
+
+            {(settings.instagramUrl || settings.tiktokUrl || settings.facebookUrl) && (
+              <div className="mt-8">
+                <h2 className="font-display text-xl font-semibold text-cream mb-4">Follow us</h2>
+                <ul className="flex flex-wrap gap-3">
+                  {[
+                    { label: "Instagram", url: settings.instagramUrl },
+                    { label: "TikTok", url: settings.tiktokUrl },
+                    { label: "Facebook", url: settings.facebookUrl },
+                  ].filter((social) => social.url).map((social) => (
+                    <li key={social.label}>
+                      <a
+                        href={social.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex border border-charcoal-600 px-4 py-2 text-sm text-cream hover:border-gold hover:text-gold transition-colors"
+                      >
+                        {social.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
             {/* Map embed */}
             {settings.mapEmbedUrl && (

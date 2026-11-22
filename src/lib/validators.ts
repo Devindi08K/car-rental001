@@ -172,6 +172,12 @@ export const enquirySchema = z.object({
   turnstileToken: z.string().max(4000).optional(),
 });
 
+export const customerReviewSchema = z.object({
+  name: text(2, 80),
+  review: multiline(10, 1200),
+  rating: z.coerce.number().int().min(1).max(5),
+});
+
 export const loginSchema = z.object({
   email: z.string().trim().email().max(200).transform((value) => value.toLowerCase()),
   password: z.string().min(1).max(200),

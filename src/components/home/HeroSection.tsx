@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { whatsappLink } from "@/lib/format";
 import type { SiteSettings } from "@/lib/settings";
+import { BUSINESS_NAME } from "@/lib/constants";
 
 const RENTAL_TABS = [
   { value: "SELF_DRIVE", label: "Self-drive" },
@@ -54,7 +55,7 @@ export function HeroSection({ settings }: { settings: SiteSettings }) {
 
         <div className="relative mx-auto max-w-7xl px-4 pb-56 pt-20 sm:px-6 lg:px-8 lg:pt-28">
           <p className="mb-5 text-xs font-bold uppercase tracking-[0.28em] text-gold">
-            Royal Route · Sri Lanka
+            {BUSINESS_NAME} · Sri Lanka
           </p>
           <h1 className="font-display text-5xl font-black leading-[0.95] tracking-[-0.05em] text-cream sm:text-7xl lg:text-8xl">
             Drive

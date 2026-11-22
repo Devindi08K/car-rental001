@@ -8,8 +8,8 @@ import { PageImageManager } from "@/components/admin/PageImageManager";
 type State = { ok: boolean; error?: string } | null;
 
 const fields: { key: keyof SiteSettings; label: string; type?: string; placeholder?: string }[] = [
-  { key: "phone", label: "Call number", placeholder: "070 646 5477" },
-  { key: "whatsappNumber", label: "WhatsApp number", placeholder: "0770341970" },
+  { key: "phone", label: "Call number", placeholder: "0770341970" },
+  { key: "whatsappNumber", label: "WhatsApp number", placeholder: "070 646 5477" },
   { key: "email", label: "Email address", type: "email" },
   { key: "address", label: "Address" },
   { key: "openingHours", label: "Opening hours" },
