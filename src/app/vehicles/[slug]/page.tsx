@@ -70,7 +70,7 @@ export default async function VehicleDetailPage({ params, searchParams }: Props)
 
   return (
     <div className="min-h-screen bg-ivory text-ink">
-      <div className="border-b border-line bg-[#eae7df] py-4">
+      <div className="border-b border-line bg-beige/30 py-4">
         <div className="mx-auto max-w-[1440px] px-5 text-xs text-ink/70 sm:px-8 lg:px-12">
           <Link href="/vehicles" className="transition-colors hover:text-olive-ink">The collection</Link>
           <span className="mx-3 text-bronze">/</span>

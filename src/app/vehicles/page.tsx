@@ -50,7 +50,7 @@ export default async function VehiclesPage({
 
   return (
     <div className="min-h-screen bg-ivory text-ink">
-      <div className="bg-[#eae7df] py-16 sm:py-24">
+      <div className="bg-beige/30 py-16 sm:py-24">
         <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
           <p className="eyebrow mb-4">The collection</p>
           <h1 className="editorial-heading text-ink">A vehicle for every kind of journey.</h1>
@@ -74,7 +74,7 @@ export default async function VehiclesPage({
       {/* Filters */}
       <div className="sticky top-[76px] z-30 border-b border-line bg-ivory/95 py-5 backdrop-blur-md">
         <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
-          <Suspense fallback={<div className="h-10 animate-pulse bg-[#e8e4dc]" />}>
+          <Suspense fallback={<div className="h-10 animate-pulse bg-beige/30" />}>
             <VehicleFilters />
           </Suspense>
         </div>

@@ -16,7 +16,7 @@ export function VehicleGallery({
 
   if (images.length === 0) {
     return (
-      <div className="flex aspect-video items-center justify-center bg-[#e8e4dc] text-sm text-ink/70">
+      <div className="flex aspect-video items-center justify-center bg-beige/30 text-sm text-ink/70">
         No photos yet
       </div>
     );

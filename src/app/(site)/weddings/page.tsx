@@ -74,7 +74,7 @@ export default async function WeddingsPage() {
           </section>
         )}
 
-        <div className="bg-[#eae7df] p-8 sm:p-12">
+        <div className="bg-beige/30 p-8 sm:p-12">
           <p className="eyebrow mb-4">Let’s make it yours</p>
           <h2 className="font-display text-3xl text-ink sm:text-4xl">Make your day unforgettable.</h2>
           <p className="mb-8 mt-3 max-w-lg text-sm leading-7 text-ink/75">

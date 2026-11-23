@@ -4,29 +4,35 @@
 :root {
   --font-inter: Arial, Helvetica, sans-serif;
   --font-playfair: "Iowan Old Style", "Baskerville", "Palatino Linotype", Georgia, serif;
-  --gold:          #7b8065;
-  --gold-light:    #93977f;
-  --gold-dark:     #626750;
-  --bronze:        #b69a70;
-  --charcoal:      #080808;
+  --ivory:         #f3f0ea;
+  --white:         #ffffff;
+  --olive:         #686d55;
+  --beige:         #c9c3b6;
+  --ink:           #171918;
+  --gold:          var(--olive);
+  --gold-light:    var(--olive);
+  --gold-dark:     var(--olive);
+  --bronze:        var(--beige);
+  --charcoal:      var(--ink);
   --charcoal-800:  #111111;
   --charcoal-700:  #1b1b1b;
   --charcoal-600:  #2a2a2a;
   --charcoal-500:  #5c5c5c;
-  --text-primary:  #f4f4f0;
+  --text-primary:  var(--white);
   --text-muted:    #a2a29b;
   --radius:        0.25rem;
 }
 
 /* ── Tailwind v4 theme extension ───────────────────────────── */
 @theme inline {
-  --color-ivory:        #f5f2ec;
-  --color-paper:        #ffffff;
-  --color-ink:          #242724;
-  --color-olive:        var(--gold);
-  --color-olive-dark:   var(--gold-dark);
-  --color-olive-ink:    #626750;
-  --color-line:         #dfdbd2;
+  --color-ivory:        var(--ivory);
+  --color-paper:        var(--white);
+  --color-ink:          var(--ink);
+  --color-olive:        var(--olive);
+  --color-olive-dark:   var(--olive);
+  --color-olive-ink:    var(--olive);
+  --color-beige:        var(--beige);
+  --color-line:         var(--beige);
   --color-bronze:       var(--bronze);
   --color-gold:         var(--gold);
   --color-gold-light:   var(--gold-light);
@@ -51,8 +57,8 @@ html {
 }
 
 body {
-  background-color: #f5f2ec;
-  color: #242724;
+  background-color: var(--ivory);
+  color: var(--ink);
   font-family: var(--font-inter, Arial, Helvetica, sans-serif);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -78,8 +84,8 @@ h1, h2, h3, h4 {
 
 /* ── Scrollbar ─────────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: #e9e5dd; }
-::-webkit-scrollbar-thumb { background: #a7a69d; border-radius: 3px; }
+::-webkit-scrollbar-track { background: var(--ivory); }
+::-webkit-scrollbar-thumb { background: var(--beige); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--gold-dark); }
 
 /* ── Gold divider utility ──────────────────────────────────── */
@@ -101,14 +107,14 @@ h1, h2, h3, h4 {
 }
 
 .editorial-heading {
-  max-width: 13ch;
-  font-size: clamp(2.6rem, 6vw, 5.75rem);
-  line-height: 0.98;
+  max-width: 14ch;
+  font-size: clamp(2.6rem, 5.5vw, 5.25rem);
+  line-height: 1;
 }
 
 .image-editorial {
   overflow: hidden;
-  background: #e7e2d9;
+  background: var(--beige);
 }
 
 .image-editorial img {
@@ -136,7 +142,7 @@ h1, h2, h3, h4 {
 }
 
 .button-editorial:hover {
-  background: #505543;
+  background: var(--olive);
   transform: translateY(-2px);
 }
 

@@ -12,7 +12,7 @@ export function FeaturedVehicles({ vehicles, whatsappNumber }: Props) {
   return (
     <section className="section-pad bg-ivory" aria-labelledby="featured-heading">
       <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
-        <div className="mb-12 flex flex-col gap-6 md:mb-16 md:flex-row md:items-end md:justify-between">
+        <div className="mb-10 flex flex-col gap-6 md:mb-12 md:flex-row md:items-end md:justify-between">
           <div>
             <p className="eyebrow mb-4">A considered collection</p>
             <h2 id="featured-heading" className="editorial-heading text-ink">

@@ -74,7 +74,7 @@ export default async function ServicesPage() {
 
   return (
     <div className="min-h-screen bg-ivory text-ink">
-      <div className="bg-[#eae7df] py-16 sm:py-24">
+      <div className="bg-beige/30 py-16 sm:py-24">
         <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
           <p className="eyebrow mb-4">The experience</p>
           <h1 className="editorial-heading text-ink">A little more than the drive.</h1>

@@ -18,7 +18,7 @@ export default async function ContactPage() {
 
   return (
     <div className="min-h-screen bg-ivory text-ink">
-      <div className="bg-[#eae7df] py-16 sm:py-24">
+      <div className="bg-beige/30 py-16 sm:py-24">
         <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
           <p className="eyebrow mb-4">We’re here to help</p>
           <h1 className="editorial-heading text-ink">Let’s plan your journey.</h1>
@@ -108,7 +108,7 @@ export default async function ContactPage() {
 
             {/* Map embed */}
             {settings.mapEmbedUrl && (
-              <div className="mt-10 h-64 overflow-hidden bg-[#e8e4dc]">
+              <div className="mt-10 h-64 overflow-hidden bg-beige/30">
                 <iframe
                   src={settings.mapEmbedUrl}
                   width="100%"

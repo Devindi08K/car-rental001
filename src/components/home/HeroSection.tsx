@@ -41,30 +41,30 @@ export function HeroSection({ settings }: { settings: SiteSettings }) {
 
   return (
     <section aria-label="Hero" className="bg-ivory pb-10 sm:pb-16">
-      <div className="relative min-h-[600px] overflow-hidden bg-ink sm:min-h-[680px] lg:min-h-[760px]">
+      <div className="relative min-h-[560px] overflow-hidden bg-ink sm:min-h-[640px] lg:min-h-[700px]">
         <Image
           src={settings.heroImageUrl || "/photos/hero/hero-car.jpg"}
           alt=""
           fill
           priority
           sizes="100vw"
-          className="object-cover object-center"
+          className="object-cover object-[62%_center] lg:translate-x-[7%] lg:scale-110 lg:object-center"
         />
         <div className="absolute inset-0 bg-linear-to-r from-ink/75 via-ink/35 to-transparent" />
         <div className="absolute inset-0 bg-linear-to-t from-ink/55 via-transparent to-ink/10" />
 
-        <div className="relative mx-auto flex min-h-[600px] max-w-[1440px] flex-col justify-end px-5 pb-28 pt-24 sm:min-h-[680px] sm:px-8 sm:pb-36 lg:min-h-[760px] lg:px-12 lg:pb-40">
+        <div className="relative mx-auto flex min-h-[560px] max-w-[1440px] flex-col justify-end px-5 pb-28 pt-24 sm:min-h-[640px] sm:px-8 sm:pb-32 lg:min-h-[700px] lg:px-12 lg:pb-36">
           <div className="editorial-enter max-w-3xl text-white">
             <p className="eyebrow mb-6 text-white/80">{BUSINESS_NAME} <span className="px-2 text-bronze">/</span> Sri Lanka</p>
-            <h1 className="max-w-[12ch] font-display text-5xl leading-[0.98] tracking-[-0.055em] sm:text-7xl lg:text-[6.5rem]">
+            <h1 className="max-w-[12ch] font-display text-5xl leading-[0.98] tracking-[-0.055em] sm:text-6xl lg:text-[6rem]">
               A more beautiful way to explore.
             </h1>
-            <div className="mt-8 flex flex-col gap-6 sm:flex-row sm:items-center">
-              <p className="max-w-md text-sm leading-7 text-white/80 sm:text-base">
+            <div className="mt-7 max-w-md">
+              <p className="text-sm leading-7 text-white/80 sm:text-base">
                 Thoughtfully selected vehicles and personal service for every journey across the island.
               </p>
-              <Link href="/vehicles" className="inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.14em] text-white transition-colors hover:text-bronze">
-                Discover the fleet <span aria-hidden="true">↗</span>
+              <Link href="/vehicles" className="group mt-5 inline-flex items-center gap-3 border-b border-white/45 pb-2 text-xs font-bold uppercase tracking-[0.14em] text-white transition-colors hover:border-white hover:text-white">
+                Discover the fleet <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">↗</span>
               </Link>
             </div>
           </div>

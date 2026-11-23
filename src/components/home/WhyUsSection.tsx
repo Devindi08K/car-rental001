@@ -25,7 +25,7 @@ const reasons = [
 
 export function WhyUsSection() {
   return (
-    <section className="section-pad bg-[#eae7df]" aria-labelledby="why-heading">
+    <section className="section-pad bg-beige/30" aria-labelledby="why-heading">
       <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
         <div className="mb-12 grid gap-8 md:mb-16 md:grid-cols-[1fr_0.65fr] md:items-end">
           <div>

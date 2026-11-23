@@ -40,7 +40,7 @@ export function Navbar({ settings }: { settings: SiteSettings }) {
                 </>
               )}
             </Link>
-            <ul className="hidden items-center gap-7 xl:flex">
+            <ul className="hidden items-center gap-5 xl:flex 2xl:gap-7">
               {NAV_LINKS.map((link) => (
                 <li key={link.href}>
                   <Link
@@ -54,7 +54,7 @@ export function Navbar({ settings }: { settings: SiteSettings }) {
                 </li>
               ))}
             </ul>
-            <div className="hidden items-center gap-5 sm:flex">
+            <div className="hidden items-center gap-5 lg:flex">
               <a href={telHref(settings.phone)} className="text-xs text-ink/70 transition-colors hover:text-olive-ink">
                 {settings.phone}
               </a>
