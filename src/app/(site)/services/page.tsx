@@ -73,29 +73,34 @@ export default async function ServicesPage() {
   const wa = whatsappLink(settings.whatsappNumber);
 
   return (
-    <div className="bg-charcoal min-h-screen">
-      {/* Header */}
-      <div className="bg-gold border-b border-gold-dark py-20 text-charcoal">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-charcoal/70 text-sm font-bold tracking-widest uppercase mb-3">What We Offer</p>
-          <h1 className="font-display text-4xl md:text-6xl font-black">Our Services</h1>
-          <span className="block w-12 h-0.5 bg-charcoal mt-4" />
+    <div className="min-h-screen bg-ivory text-ink">
+      <div className="bg-[#eae7df] py-16 sm:py-24">
+        <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
+          <p className="eyebrow mb-4">The experience</p>
+          <h1 className="editorial-heading text-ink">A little more than the drive.</h1>
+          <p className="mt-5 max-w-xl text-sm leading-7 text-ink/75">
+            A thoughtful range of services to make every arrival, excursion and occasion feel effortless.
+          </p>
         </div>
       </div>
 
-      {/* Services grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((s) => (
-            <div key={s.title} className="group bg-charcoal-800 border border-charcoal-700 p-8 transition-transform hover:-translate-y-1 hover:border-gold/50">
-              <div className="text-gold mb-5">{s.icon}</div>
-              <h2 className="font-display text-2xl font-semibold text-cream mb-3" dangerouslySetInnerHTML={{ __html: s.title }} />
-              <p className="text-muted text-sm leading-relaxed">{s.description}</p>
-            </div>
+      <div className="mx-auto max-w-[1440px] px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
+        <div className="grid border-t border-line md:grid-cols-2 md:gap-x-16">
+          {services.map((service, index) => (
+            <article key={service.title} className="border-b border-line py-7 sm:py-9">
+              <div className="flex items-start gap-5">
+                <span className="pt-1 text-[10px] tracking-[0.12em] text-bronze">0{index + 1}</span>
+                <div>
+                  <div className="mb-4 text-olive-ink">{service.icon}</div>
+                  <h2 className="font-display text-2xl text-ink sm:text-3xl">{service.title.replace("&amp;", "&")}</h2>
+                  <p className="mt-3 max-w-lg text-sm leading-7 text-ink/75">{service.description}</p>
+                </div>
+              </div>
+            </article>
           ))}
         </div>
 
-        <div className="mt-16 grid grid-cols-1 gap-5 md:grid-cols-2">
+        <div className="mt-16 grid grid-cols-1 gap-4 md:grid-cols-2">
           {[
             { title: "Airport transfers", image: settings.airportImageUrl },
             { title: "Chauffeur service", image: settings.chauffeurImageUrl },
@@ -104,21 +109,22 @@ export default async function ServicesPage() {
           ].filter((card) => card.image).map((card) => (
             <div
               key={card.title}
-              className="relative min-h-72 overflow-hidden border border-charcoal-700 bg-charcoal-800 bg-cover bg-center"
-              style={{ backgroundImage: `linear-gradient(90deg, rgba(8,8,8,0.82), rgba(8,8,8,0.12)), url('${card.image}')` }}
+              className="group relative min-h-72 overflow-hidden bg-ink bg-cover bg-center sm:min-h-96"
+              style={{ backgroundImage: `linear-gradient(90deg, rgba(36,39,36,0.76), rgba(36,39,36,0.08)), url('${optimizedImage(card.image, 1400)}')` }}
             >
               <div className="absolute bottom-0 left-0 p-7">
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-gold">{BUSINESS_NAME}</p>
-                <h2 className="mt-2 text-2xl font-black text-cream">{card.title}</h2>
+                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-white/75">{BUSINESS_NAME}</p>
+                <h2 className="mt-2 font-display text-3xl text-white sm:text-4xl">{card.title}</h2>
               </div>
             </div>
           ))}
         </div>
 
         {/* Contact CTA */}
-        <div className="mt-16 text-center bg-gold p-10 text-charcoal">
-          <h2 className="font-display text-3xl font-bold mb-3">Need a custom service?</h2>
-          <p className="text-charcoal/70 mb-8 max-w-lg mx-auto">
+        <div className="mt-16 bg-olive-dark p-8 text-white sm:p-12">
+          <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.18em] text-white/70">Your journey, your way</p>
+          <h2 className="font-display text-3xl sm:text-4xl">Need something tailored?</h2>
+          <p className="mb-8 mt-3 max-w-lg text-sm leading-7 text-white/75">
             We tailor every booking to your requirements. Get in touch and we&rsquo;ll put together the perfect arrangement.
           </p>
           {wa && (
@@ -126,7 +132,7 @@ export default async function ServicesPage() {
               href={wa}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-charcoal hover:bg-charcoal-700 text-cream font-semibold px-8 py-3.5 transition-colors text-sm"
+              className="inline-flex min-h-13 items-center gap-2 bg-white px-8 py-3.5 text-xs font-bold uppercase tracking-[0.12em] text-ink transition-colors hover:bg-ivory"
             >
               Chat on WhatsApp
             </a>

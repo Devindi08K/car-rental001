@@ -3,10 +3,11 @@
 /* ── Design Tokens ─────────────────────────────────────────── */
 :root {
   --font-inter: Arial, Helvetica, sans-serif;
-  --font-playfair: Arial, Helvetica, sans-serif;
-  --gold:          #bfdc58;
-  --gold-light:    #e4efa9;
-  --gold-dark:     #91a83a;
+  --font-playfair: "Iowan Old Style", "Baskerville", "Palatino Linotype", Georgia, serif;
+  --gold:          #7b8065;
+  --gold-light:    #93977f;
+  --gold-dark:     #626750;
+  --bronze:        #b69a70;
   --charcoal:      #080808;
   --charcoal-800:  #111111;
   --charcoal-700:  #1b1b1b;
@@ -19,6 +20,14 @@
 
 /* ── Tailwind v4 theme extension ───────────────────────────── */
 @theme inline {
+  --color-ivory:        #f5f2ec;
+  --color-paper:        #ffffff;
+  --color-ink:          #242724;
+  --color-olive:        var(--gold);
+  --color-olive-dark:   var(--gold-dark);
+  --color-olive-ink:    #626750;
+  --color-line:         #dfdbd2;
+  --color-bronze:       var(--bronze);
   --color-gold:         var(--gold);
   --color-gold-light:   var(--gold-light);
   --color-gold-dark:    var(--gold-dark);
@@ -42,8 +51,8 @@ html {
 }
 
 body {
-  background-color: var(--charcoal);
-  color: var(--text-primary);
+  background-color: #f5f2ec;
+  color: #242724;
   font-family: var(--font-inter, Arial, Helvetica, sans-serif);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -51,39 +60,101 @@ body {
 
 h1, h2, h3, h4 {
   font-family: var(--font-playfair, Georgia, serif);
-  letter-spacing: -0.035em;
+  font-weight: 400;
+  letter-spacing: -0.045em;
 }
 
 /* ── Selection ─────────────────────────────────────────────── */
 ::selection {
   background-color: var(--gold);
-  color: var(--charcoal);
+  color: #ffffff;
 }
 
 /* ── Focus ring ────────────────────────────────────────────── */
 :focus-visible {
-  outline: 2px solid var(--gold);
+  outline: 2px solid var(--gold-dark);
   outline-offset: 2px;
 }
 
 /* ── Scrollbar ─────────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: var(--charcoal-800); }
-::-webkit-scrollbar-thumb { background: var(--charcoal-600); border-radius: 3px; }
+::-webkit-scrollbar-track { background: #e9e5dd; }
+::-webkit-scrollbar-thumb { background: #a7a69d; border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--gold-dark); }
 
 /* ── Gold divider utility ──────────────────────────────────── */
 .gold-divider {
   display: block;
   width: 3rem;
-  height: 2px;
+  height: 1px;
   background-color: var(--gold);
   margin: 0.75rem 0;
 }
 
-.lime-glow {
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--gold) 35%, transparent),
-    0 0 32px color-mix(in srgb, var(--gold) 12%, transparent);
+.eyebrow {
+  color: var(--gold-dark);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.editorial-heading {
+  max-width: 13ch;
+  font-size: clamp(2.6rem, 6vw, 5.75rem);
+  line-height: 0.98;
+}
+
+.image-editorial {
+  overflow: hidden;
+  background: #e7e2d9;
+}
+
+.image-editorial img {
+  transition: transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.image-editorial:hover img {
+  transform: scale(1.035);
+}
+
+.button-editorial {
+  display: inline-flex;
+  min-height: 3.25rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: 0.85rem 1.35rem;
+  background: var(--gold-dark);
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: background-color 200ms ease, color 200ms ease, transform 200ms ease;
+}
+
+.button-editorial:hover {
+  background: #505543;
+  transform: translateY(-2px);
+}
+
+@keyframes editorial-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .editorial-enter {
+    animation: editorial-enter 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
 }
 
 /* ── Section padding ───────────────────────────────────────── */
@@ -96,6 +167,17 @@ h1, h2, h3, h4 {
   .section-pad {
     padding-top: 7rem;
     padding-bottom: 7rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 

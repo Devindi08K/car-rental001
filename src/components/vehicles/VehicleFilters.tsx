@@ -38,30 +38,30 @@ export function VehicleFilters() {
 
   const val = (key: string) => params.get(key) ?? "";
 
-  const sel = "bg-charcoal-800 border border-charcoal-600 text-cream text-sm rounded px-3 py-2 w-full focus:border-gold focus:outline-none cursor-pointer";
+  const sel = "bg-paper border border-line text-ink text-sm px-3 py-2.5 w-full focus:border-olive focus:outline-none cursor-pointer";
 
   return (
-    <form className="grid grid-cols-2 md:grid-cols-4 gap-3" onSubmit={(e) => e.preventDefault()}>
+    <form className="grid grid-cols-2 gap-3 md:grid-cols-4" onSubmit={(e) => e.preventDefault()}>
       <div>
-        <label className="block text-xs text-muted mb-1">Category</label>
+        <label className="mb-1 block text-[10px] uppercase tracking-[0.12em] text-ink/70">Category</label>
         <select value={val("category")} onChange={(e) => update("category", e.target.value)} className={sel}>
           {CATEGORIES.map((c) => <option key={c} value={c}>{catLabels[c]}</option>)}
         </select>
       </div>
       <div>
-        <label className="block text-xs text-muted mb-1">Rental type</label>
+        <label className="mb-1 block text-[10px] uppercase tracking-[0.12em] text-ink/70">Rental type</label>
         <select value={val("rentalType")} onChange={(e) => update("rentalType", e.target.value)} className={sel}>
           {RENTALS.map((r) => <option key={r} value={r}>{rentalLabels[r]}</option>)}
         </select>
       </div>
       <div>
-        <label className="block text-xs text-muted mb-1">Transmission</label>
+        <label className="mb-1 block text-[10px] uppercase tracking-[0.12em] text-ink/70">Transmission</label>
         <select value={val("transmission")} onChange={(e) => update("transmission", e.target.value)} className={sel}>
           {TRANSMISSIONS.map((t) => <option key={t} value={t}>{transLabels[t]}</option>)}
         </select>
       </div>
       <div>
-        <label className="block text-xs text-muted mb-1">Seats</label>
+        <label className="mb-1 block text-[10px] uppercase tracking-[0.12em] text-ink/70">Seats</label>
         <select value={val("seats")} onChange={(e) => update("seats", e.target.value)} className={sel}>
           {SEATS.map((s) => <option key={s} value={s}>{seatsLabels[s]}</option>)}
         </select>

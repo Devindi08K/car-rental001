@@ -101,12 +101,12 @@ export function EnquiryForm({ vehicleId, vehicleName }: Props) {
     }
   }
 
-  const inp = "w-full bg-charcoal-700 border border-charcoal-600 text-cream text-sm px-4 py-3 placeholder:text-muted focus:border-gold focus:outline-none transition-colors";
+  const inp = "w-full border-b border-line bg-transparent px-1 py-3 text-sm text-ink placeholder:text-ink/60 transition-colors focus:border-olive focus:outline-none";
 
   return (
     <form ref={formRef} onSubmit={handleSubmit} className="space-y-5" noValidate>
       {vehicleName && (
-        <div className="bg-gold/10 border border-gold/30 rounded-lg px-4 py-3 text-sm text-gold">
+        <div className="border-l-2 border-olive bg-ivory px-4 py-3 text-sm text-ink">
           Enquiry about: <strong>{vehicleName}</strong>
         </div>
       )}
@@ -114,41 +114,41 @@ export function EnquiryForm({ vehicleId, vehicleName }: Props) {
       {/* Honeypot */}
       <input type="text" name="companyWebsite" className="hidden" tabIndex={-1} autoComplete="off" />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <div>
-          <label htmlFor="eq-name" className="block text-xs text-muted mb-1.5">Full Name *</label>
+          <label htmlFor="eq-name" className="mb-1.5 block text-[10px] uppercase tracking-[0.12em] text-ink/70">Full Name *</label>
           <input id="eq-name" name="name" type="text" required autoComplete="name" placeholder="Your name" className={inp} />
         </div>
         <div>
-          <label htmlFor="eq-phone" className="block text-xs text-muted mb-1.5">Phone Number *</label>
+          <label htmlFor="eq-phone" className="mb-1.5 block text-[10px] uppercase tracking-[0.12em] text-ink/70">Phone Number *</label>
           <input id="eq-phone" name="phone" type="tel" required autoComplete="tel" placeholder="+94 7X XXX XXXX" className={inp} />
         </div>
       </div>
 
       <div>
-        <label htmlFor="eq-email" className="block text-xs text-muted mb-1.5">Email (optional)</label>
+        <label htmlFor="eq-email" className="mb-1.5 block text-[10px] uppercase tracking-[0.12em] text-ink/70">Email (optional)</label>
         <input id="eq-email" name="email" type="email" autoComplete="email" placeholder="you@example.com" className={inp} />
       </div>
 
       <div>
-        <label htmlFor="eq-msg" className="block text-xs text-muted mb-1.5">Message *</label>
+        <label htmlFor="eq-msg" className="mb-1.5 block text-[10px] uppercase tracking-[0.12em] text-ink/70">Message *</label>
         <textarea
           id="eq-msg"
           name="message"
           required
           rows={5}
           placeholder="Tell us about your rental needs — dates, duration, pickup location…"
-          className={`${inp} resize-none`}
+          className={`${inp} resize-y`}
         />
       </div>
 
       {state.status === "success" && (
-        <div className="bg-green-900/40 border border-green-700/50 text-green-400 text-sm rounded-lg px-4 py-3">
+        <div role="status" className="border border-green-700/30 bg-green-50 px-4 py-3 text-sm text-green-800">
           {state.message}
         </div>
       )}
       {state.status === "error" && (
-        <div className="bg-red-900/40 border border-red-700/50 text-red-400 text-sm rounded-lg px-4 py-3">
+        <div role="alert" className="border border-red-700/30 bg-red-50 px-4 py-3 text-sm text-red-800">
           {state.message}
         </div>
       )}
@@ -158,7 +158,7 @@ export function EnquiryForm({ vehicleId, vehicleName }: Props) {
       <button
         type="submit"
         disabled={state.status === "loading" || Boolean(siteKey && !turnstileToken)}
-        className="w-full bg-gold text-charcoal font-bold py-3.5 hover:bg-gold-light transition-colors disabled:opacity-60 disabled:cursor-not-allowed text-sm uppercase tracking-[0.12em]"
+        className="button-editorial w-full disabled:cursor-not-allowed disabled:opacity-60"
       >
         {state.status === "loading" ? "Sending…" : "Send Enquiry"}
       </button>

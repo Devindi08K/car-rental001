@@ -14,24 +14,11 @@ export function Navbar({ settings }: { settings: SiteSettings }) {
   const wa = whatsappLink(settings.whatsappNumber);
 
   return (
-    <header className="sticky top-0 z-50">
-      {/* Top strip */}
-      <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1 bg-gold px-4 py-2 text-[10px] font-bold uppercase tracking-[0.12em] text-charcoal sm:text-[11px] sm:tracking-[0.18em]">
-        <a href={telHref(settings.phone)} className="transition-colors hover:text-charcoal-700">
-          Call {settings.phone}
-        </a>
-        {wa && (
-          <a href={wa} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 transition-colors hover:text-charcoal-700">
-            WhatsApp {settings.whatsappNumber}
-          </a>
-        )}
-      </div>
-      {/* Main nav */}
-      <nav className="bg-charcoal/95 backdrop-blur-sm border-b border-charcoal-700">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            {/* Logo */}
-            <Link href="/" aria-label={BUSINESS_NAME} className="flex min-w-0 items-center gap-3">
+    <header className="sticky top-0 z-50 border-b border-line/80 bg-ivory/95 backdrop-blur-md">
+      <nav aria-label="Main navigation">
+        <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
+          <div className="flex min-h-[76px] items-center justify-between gap-6">
+            <Link href="/" aria-label={BUSINESS_NAME} className="flex min-w-0 items-center gap-3 text-ink">
               {settings.logoUrl ? (
                 <Image
                   src={settings.logoUrl}
@@ -43,24 +30,23 @@ export function Navbar({ settings }: { settings: SiteSettings }) {
                 />
               ) : (
                 <>
-                  <span className="flex size-10 shrink-0 items-center justify-center border border-gold/60 font-display text-lg font-bold text-gold">
+                  <span className="flex size-10 shrink-0 items-center justify-center border border-olive/40 font-display text-lg text-olive-ink">
                     RR
                   </span>
                   <span className="flex min-w-0 flex-col leading-tight">
-                    <span className="truncate font-display text-lg font-black uppercase tracking-tight text-cream sm:text-xl">{BUSINESS_NAME.split(" ")[0]}</span>
-                    <span className="text-[10px] uppercase tracking-[0.2em] text-gold">Vehicle Rentals</span>
+                    <span className="truncate font-display text-lg tracking-tight sm:text-xl">{BUSINESS_NAME}</span>
+                    <span className="mt-1 text-[9px] uppercase tracking-[0.2em] text-ink/70">Private journeys · Sri Lanka</span>
                   </span>
                 </>
               )}
             </Link>
-            {/* Desktop links */}
-            <ul className="hidden lg:flex items-center gap-7">
+            <ul className="hidden items-center gap-7 xl:flex">
               {NAV_LINKS.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className={`text-xs font-bold uppercase tracking-[0.12em] transition-colors hover:text-gold ${
-                      pathname === link.href ? "text-gold" : "text-cream"
+                    className={`relative py-2 text-[11px] uppercase tracking-[0.12em] transition-colors hover:text-olive-ink ${
+                      pathname === link.href ? "text-olive-ink" : "text-ink/80"
                     }`}
                   >
                     {link.label}
@@ -68,43 +54,51 @@ export function Navbar({ settings }: { settings: SiteSettings }) {
                 </li>
               ))}
             </ul>
-            {/* Mobile hamburger */}
-            <Link href="/vehicles" className="hidden sm:inline-flex bg-gold px-5 py-3 text-xs font-bold uppercase tracking-[0.12em] text-charcoal hover:bg-gold-light transition-colors">
-              Book a vehicle
-            </Link>
+            <div className="hidden items-center gap-5 sm:flex">
+              <a href={telHref(settings.phone)} className="text-xs text-ink/70 transition-colors hover:text-olive-ink">
+                {settings.phone}
+              </a>
+              <Link href="/vehicles" className="button-editorial min-h-11 px-5">
+                Explore the fleet
+              </Link>
+            </div>
             <button
               onClick={() => setOpen((o) => !o)}
-              aria-label="Toggle menu"
+              aria-label={open ? "Close menu" : "Open menu"}
               aria-expanded={open}
-              className="lg:hidden p-2 text-cream hover:text-gold transition-colors"
+              aria-controls="mobile-menu"
+              className="inline-flex size-11 items-center justify-center text-ink transition-colors hover:text-olive-ink xl:hidden"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="size-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 {open ? (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
                 ) : (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 7h16M4 12h16M4 17h16" />
                 )}
               </svg>
             </button>
           </div>
         </div>
-        {/* Mobile menu */}
         {open && (
-          <div className="lg:hidden border-t border-charcoal-700 bg-charcoal-800">
-            <ul className="px-4 py-3 space-y-1">
+          <div id="mobile-menu" className="border-t border-line bg-ivory xl:hidden">
+            <ul className="mx-auto max-w-[1440px] space-y-1 px-5 py-4 sm:px-8">
               {NAV_LINKS.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
                     onClick={() => setOpen(false)}
-                    className={`block py-2.5 px-3 rounded text-xs font-bold uppercase tracking-[0.12em] transition-colors hover:bg-charcoal-700 hover:text-gold ${
-                      pathname === link.href ? "text-gold" : "text-cream"
+                    className={`block py-3 text-sm transition-colors hover:text-olive-ink ${
+                      pathname === link.href ? "text-olive-ink" : "text-ink"
                     }`}
                   >
                     {link.label}
                   </Link>
                 </li>
               ))}
+              <li className="flex gap-5 border-t border-line pt-4 text-xs text-ink/70">
+                <a href={telHref(settings.phone)}>Call {settings.phone}</a>
+                {wa && <a href={wa} target="_blank" rel="noopener noreferrer">WhatsApp</a>}
+              </li>
             </ul>
           </div>
         )}

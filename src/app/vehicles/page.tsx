@@ -49,51 +49,52 @@ export default async function VehiclesPage({
   ].filter(Boolean).join("\n");
 
   return (
-    <div className="bg-charcoal min-h-screen">
-      {/* Page header */}
-      <div className="bg-gold border-b border-gold-dark py-16 text-charcoal">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-charcoal/70 text-sm font-bold tracking-widest uppercase mb-2">Our Fleet</p>
-          <h1 className="font-display text-4xl md:text-6xl font-black tracking-tight">Our Vehicles</h1>
-          <span className="block w-12 h-0.5 bg-charcoal mt-4" />
+    <div className="min-h-screen bg-ivory text-ink">
+      <div className="bg-[#eae7df] py-16 sm:py-24">
+        <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
+          <p className="eyebrow mb-4">The collection</p>
+          <h1 className="editorial-heading text-ink">A vehicle for every kind of journey.</h1>
+          <p className="mt-5 max-w-xl text-sm leading-7 text-ink/75">
+            Browse our cars, vans and premium vehicles, thoughtfully prepared for your time in Sri Lanka.
+          </p>
         </div>
       </div>
 
       {bookingDetails && (
-        <div className="border-b border-charcoal-700 bg-charcoal-800">
-          <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-3 px-4 py-4 text-sm sm:px-6 lg:px-8">
-            <span className="font-bold uppercase tracking-[0.12em] text-gold">Your search</span>
-            <span className="text-cream">{bookingDetails}</span>
-            {rentalLabel && <span className="border border-gold/30 px-2 py-1 text-xs text-gold">{rentalLabel}</span>}
-            <Link href="/vehicles" className="ml-auto text-xs text-muted hover:text-gold">Clear search</Link>
+        <div className="border-b border-line bg-paper">
+          <div className="mx-auto flex max-w-[1440px] flex-wrap items-center gap-3 px-5 py-4 text-sm sm:px-8 lg:px-12">
+            <span className="eyebrow">Your search</span>
+            <span className="text-ink/80">{bookingDetails}</span>
+            {rentalLabel && <span className="border border-olive/30 px-2 py-1 text-xs text-olive-ink">{rentalLabel}</span>}
+            <Link href="/vehicles" className="ml-auto text-xs text-ink/70 hover:text-olive-ink">Clear search</Link>
           </div>
         </div>
       )}
 
       {/* Filters */}
-      <div className="bg-charcoal-800 border-b border-charcoal-700 py-5 sticky top-[68px] z-30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Suspense fallback={<div className="h-10 bg-charcoal-700 rounded animate-pulse" />}>
+      <div className="sticky top-[76px] z-30 border-b border-line bg-ivory/95 py-5 backdrop-blur-md">
+        <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
+          <Suspense fallback={<div className="h-10 animate-pulse bg-[#e8e4dc]" />}>
             <VehicleFilters />
           </Suspense>
         </div>
       </div>
 
       {/* Vehicle grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="mx-auto max-w-[1440px] px-5 py-12 sm:px-8 lg:px-12 lg:py-16">
         {vehicles.length === 0 ? (
           <div className="text-center py-24">
-            <p className="text-muted text-lg mb-3">No vehicles match your filters.</p>
-            <Link href="/vehicles" className="text-gold hover:underline text-sm">
+            <p className="mb-3 text-lg text-ink/75">No vehicles match your filters.</p>
+            <Link href="/vehicles" className="text-olive-ink hover:underline text-sm">
               Clear filters
             </Link>
           </div>
         ) : (
           <>
-            <p className="text-muted text-sm mb-8">
+            <p className="mb-8 text-xs uppercase tracking-[0.12em] text-ink/70">
               {vehicles.length} vehicle{vehicles.length !== 1 ? "s" : ""} found
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 gap-x-7 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
               {vehicles.map((v) => (
                 <VehicleCard key={v.id} vehicle={v} whatsappNumber={settings.whatsappNumber} bookingDetails={whatsappDetails} />
               ))}

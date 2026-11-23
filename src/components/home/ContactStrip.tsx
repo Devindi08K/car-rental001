@@ -11,12 +11,13 @@ const WA_ICON = (
 export function ContactStrip({ settings }: { settings: SiteSettings }) {
   const wa = whatsappLink(settings.whatsappNumber);
   return (
-    <section className="py-16 bg-gold/10 border-y border-gold/20" aria-label="Contact strip">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+    <section className="bg-olive-dark py-14 text-white sm:py-20" aria-label="Contact strip">
+      <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
+        <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
           <div>
-            <h2 className="font-display text-3xl font-bold text-cream mb-1">Ready to book?</h2>
-            <p className="text-muted">Get in touch — we reply as soon as we can on WhatsApp.</p>
+            <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.2em] text-white/70">A journey awaits</p>
+            <h2 className="font-display text-4xl leading-tight sm:text-5xl">Where will we take you?</h2>
+            <p className="mt-3 max-w-md text-sm leading-6 text-white/75">Get in touch — we reply as soon as we can on WhatsApp.</p>
           </div>
           <div className="flex flex-wrap gap-4">
             {wa && (
@@ -24,7 +25,7 @@ export function ContactStrip({ settings }: { settings: SiteSettings }) {
                 href={wa}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-gold hover:bg-gold-light text-charcoal font-bold px-7 py-3 transition-colors text-sm"
+                className="inline-flex min-h-13 items-center gap-2 bg-white px-7 py-3 text-xs font-bold uppercase tracking-[0.12em] text-ink transition-colors hover:bg-ivory"
               >
                 {WA_ICON}
                 WhatsApp
@@ -32,7 +33,7 @@ export function ContactStrip({ settings }: { settings: SiteSettings }) {
             )}
             <Link
               href="/contact"
-              className="border border-gold text-gold px-7 py-3 rounded hover:bg-gold hover:text-charcoal transition-colors text-sm font-semibold"
+              className="inline-flex min-h-13 items-center border border-white/60 px-7 py-3 text-xs font-bold uppercase tracking-[0.12em] text-white transition-colors hover:bg-white hover:text-ink"
             >
               Contact Form
             </Link>

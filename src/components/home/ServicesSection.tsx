@@ -45,35 +45,28 @@ const services = [
 
 export function ServicesSection() {
   return (
-    <section className="py-20 md:py-28 bg-charcoal-800" aria-labelledby="services-heading">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-14">
-          <p className="text-gold text-sm font-medium tracking-widest uppercase mb-3">What We Offer</p>
-          <h2 id="services-heading" className="font-display text-4xl md:text-5xl font-bold text-cream">
-            Our Services
-          </h2>
-          <span className="block w-12 h-0.5 bg-gold mx-auto mt-4" />
+    <section className="section-pad bg-paper" aria-labelledby="services-heading">
+      <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
+        <div className="mb-12 grid gap-8 md:mb-16 md:grid-cols-[1fr_0.7fr] md:items-end">
+          <div>
+            <p className="eyebrow mb-4">Considered service</p>
+            <h2 id="services-heading" className="editorial-heading text-ink">Every detail, made easy.</h2>
+          </div>
+          <p className="max-w-md text-sm leading-7 text-ink/75">
+            From a smooth airport arrival to a long island escape, we make the journey feel effortless.
+          </p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {services.map((s) => (
-            <Link
-              key={s.title}
-              href={s.href}
-              className="group bg-charcoal rounded-lg border border-charcoal-700 hover:border-gold/50 p-7 transition-all duration-300 flex flex-col"
-            >
-              <div className="text-gold mb-5 group-hover:scale-110 transition-transform duration-300">
-                {s.icon}
+        <div className="grid border-t border-line md:grid-cols-2 md:gap-x-14">
+          {services.map((service, index) => (
+            <Link key={service.title} href={service.href} className="group flex gap-5 border-b border-line py-6 sm:py-8">
+              <span className="pt-1 text-[10px] tracking-[0.12em] text-bronze">0{index + 1}</span>
+              <div className="flex-1">
+                <div className="flex items-center justify-between gap-4">
+                  <h3 className="font-display text-2xl text-ink transition-colors group-hover:text-olive-ink sm:text-3xl">{service.title}</h3>
+                  <span className="text-lg text-olive-ink transition-transform group-hover:translate-x-1" aria-hidden="true">↗</span>
+                </div>
+                <p className="mt-3 max-w-lg text-sm leading-6 text-ink/75">{service.description}</p>
               </div>
-              <h3 className="font-display text-xl font-semibold text-cream mb-3 group-hover:text-gold transition-colors">
-                {s.title}
-              </h3>
-              <p className="text-muted text-sm leading-relaxed flex-1">{s.description}</p>
-              <span className="mt-5 text-gold text-sm font-medium inline-flex items-center gap-1">
-                Learn more
-                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </span>
             </Link>
           ))}
         </div>

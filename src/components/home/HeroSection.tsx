@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { whatsappLink } from "@/lib/format";
@@ -13,9 +14,9 @@ const RENTAL_TABS = [
   { value: "BOTH", label: "Both options" },
 ] as const;
 
-const fieldBox = "border border-charcoal-600 bg-charcoal px-4 py-3 transition-colors focus-within:border-gold";
-const fieldLabel = "block text-[10px] font-bold uppercase tracking-[0.18em] text-muted";
-const fieldInput = "mt-1 w-full bg-transparent text-sm font-semibold text-cream outline-none [color-scheme:dark]";
+const fieldBox = "border-b border-line px-1 py-3 transition-colors focus-within:border-olive";
+const fieldLabel = "block text-[10px] font-bold uppercase tracking-[0.16em] text-ink/70";
+const fieldInput = "mt-1 w-full bg-transparent text-sm font-medium text-ink outline-none";
 
 export function HeroSection({ settings }: { settings: SiteSettings }) {
   const router = useRouter();
@@ -39,63 +40,63 @@ export function HeroSection({ settings }: { settings: SiteSettings }) {
   }
 
   return (
-    <section aria-label="Hero" className="bg-charcoal">
-      {/* Photo + headline */}
-      <div className="relative min-h-[620px] overflow-hidden bg-charcoal-700 lg:min-h-[700px]">
+    <section aria-label="Hero" className="bg-ivory pb-10 sm:pb-16">
+      <div className="relative min-h-[600px] overflow-hidden bg-ink sm:min-h-[680px] lg:min-h-[760px]">
         <Image
           src={settings.heroImageUrl || "/photos/hero/hero-car.jpg"}
           alt=""
           fill
           priority
           sizes="100vw"
-          className="object-cover"
+          className="object-cover object-center"
         />
-        <div className="absolute inset-0 bg-linear-to-r from-black/85 via-black/55 to-black/10" />
-        <div className="absolute inset-0 bg-linear-to-t from-charcoal via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-r from-ink/75 via-ink/35 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-ink/55 via-transparent to-ink/10" />
 
-        <div className="relative mx-auto max-w-7xl px-4 pb-56 pt-20 sm:px-6 lg:px-8 lg:pt-28">
-          <p className="mb-5 text-xs font-bold uppercase tracking-[0.28em] text-gold">
-            {BUSINESS_NAME} · Sri Lanka
-          </p>
-          <h1 className="font-display text-5xl font-black leading-[0.95] tracking-[-0.05em] text-cream sm:text-7xl lg:text-8xl">
-            Drive
-            <br />
-            <span className="text-gold">premium.</span>
-          </h1>
-          <p className="mt-7 max-w-md text-base leading-relaxed text-cream/80 sm:text-lg">
-            Cars, vans, and premium vehicles—with easy pickup and the freedom to explore Sri Lanka your way.
+        <div className="relative mx-auto flex min-h-[600px] max-w-[1440px] flex-col justify-end px-5 pb-28 pt-24 sm:min-h-[680px] sm:px-8 sm:pb-36 lg:min-h-[760px] lg:px-12 lg:pb-40">
+          <div className="editorial-enter max-w-3xl text-white">
+            <p className="eyebrow mb-6 text-white/80">{BUSINESS_NAME} <span className="px-2 text-bronze">/</span> Sri Lanka</p>
+            <h1 className="max-w-[12ch] font-display text-5xl leading-[0.98] tracking-[-0.055em] sm:text-7xl lg:text-[6.5rem]">
+              A more beautiful way to explore.
+            </h1>
+            <div className="mt-8 flex flex-col gap-6 sm:flex-row sm:items-center">
+              <p className="max-w-md text-sm leading-7 text-white/80 sm:text-base">
+                Thoughtfully selected vehicles and personal service for every journey across the island.
+              </p>
+              <Link href="/vehicles" className="inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.14em] text-white transition-colors hover:text-bronze">
+                Discover the fleet <span aria-hidden="true">↗</span>
+              </Link>
+            </div>
+          </div>
+          <p className="absolute bottom-7 right-5 hidden text-[10px] uppercase tracking-[0.22em] text-white/65 sm:block lg:right-12">
+            Made for the journey
           </p>
         </div>
       </div>
 
-      {/* Booking card */}
-      <div className="relative z-10 mx-auto -mt-44 max-w-6xl px-4 pb-6 sm:px-6">
+      <div className="relative z-10 mx-auto -mt-14 max-w-[1320px] px-5 sm:-mt-16 sm:px-8 lg:px-12">
         <form
           onSubmit={searchVehicles}
-          className="border-t-4 border-gold bg-charcoal-800 p-5 shadow-2xl shadow-black/60 sm:p-7"
+          className="editorial-enter grid gap-6 bg-paper p-6 shadow-[0_24px_70px_rgba(36,39,36,0.12)] sm:p-8 lg:grid-cols-[1fr_1.2fr_auto] lg:items-end lg:gap-10 lg:p-10"
         >
-          <h2 className="font-display text-xl font-bold text-cream sm:text-2xl">Find your vehicle</h2>
-
-          {/* Rental type tabs */}
-          <div className="mt-4 grid w-full grid-cols-3 gap-2 md:w-fit" role="group" aria-label="Rental type">
-            {RENTAL_TABS.map((tab) => (
-              <button
-                key={tab.value}
-                type="button"
-                aria-pressed={rentalType === tab.value}
-                onClick={() => setRentalType(tab.value)}
-                className={`whitespace-nowrap px-2 py-2 text-[10px] font-bold uppercase tracking-[0.08em] transition-colors sm:px-4 sm:text-xs ${
-                  rentalType === tab.value
-                    ? "bg-gold text-charcoal"
-                    : "border border-charcoal-600 text-cream hover:border-gold hover:text-gold"
-                }`}
-              >
-                {tab.label}
-              </button>
-            ))}
+          <div>
+            <p className="eyebrow">Plan your journey</p>
+            <h2 className="mt-2 font-display text-3xl text-ink">Find your vehicle</h2>
           </div>
-
-          <div className="mt-5 grid gap-3 md:grid-cols-[minmax(0,1fr)_auto] md:items-stretch">
+          <div className="grid gap-6 sm:grid-cols-[0.8fr_1.2fr] sm:items-end">
+            <label>
+              <span className={fieldLabel}>Rental style</span>
+              <select
+                value={rentalType}
+                onChange={(event) => {
+                  const selected = RENTAL_TABS.find((tab) => tab.value === event.target.value);
+                  if (selected) setRentalType(selected.value);
+                }}
+                className={`${fieldInput} mt-2 cursor-pointer`}
+              >
+                {RENTAL_TABS.map((tab) => <option key={tab.value} value={tab.value}>{tab.label}</option>)}
+              </select>
+            </label>
             <label className={fieldBox}>
               <span className={fieldLabel}>Pick-up location</span>
               <input
@@ -105,24 +106,17 @@ export function HeroSection({ settings }: { settings: SiteSettings }) {
                 placeholder="Colombo, Sri Lanka"
               />
             </label>
-            <button
-              type="submit"
-              className="bg-gold px-8 py-4 text-sm font-black uppercase tracking-[0.1em] text-charcoal transition-colors hover:bg-gold-light"
-            >
-              Search vehicles
-            </button>
           </div>
-
-          {wa && (
-            <a
-              href={wa}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-4 inline-block text-xs font-semibold text-gold hover:text-gold-light"
-            >
-              Prefer a quick booking? Talk to us on WhatsApp →
-            </a>
-          )}
+          <div className="flex flex-col gap-3">
+            <button type="submit" className="button-editorial w-full lg:min-w-48">
+              Search the fleet <span aria-hidden="true">↗</span>
+            </button>
+            {wa && (
+              <a href={wa} target="_blank" rel="noopener noreferrer" className="text-center text-[10px] text-ink/70 transition-colors hover:text-olive-ink">
+                Or message us on WhatsApp
+              </a>
+            )}
+          </div>
         </form>
       </div>
     </section>

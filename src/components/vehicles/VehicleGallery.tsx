@@ -16,7 +16,7 @@ export function VehicleGallery({
 
   if (images.length === 0) {
     return (
-      <div className="aspect-video bg-charcoal-700 rounded-xl flex items-center justify-center border border-charcoal-600 text-sm text-muted">
+      <div className="flex aspect-video items-center justify-center bg-[#e8e4dc] text-sm text-ink/70">
         No photos yet
       </div>
     );
@@ -26,7 +26,7 @@ export function VehicleGallery({
 
   return (
     <div>
-      <div className="relative aspect-video rounded-xl overflow-hidden mb-3 border border-charcoal-700">
+      <div className="image-editorial relative mb-3 aspect-video">
         <Image
           key={current}
           src={current}
@@ -37,7 +37,7 @@ export function VehicleGallery({
           sizes="(max-width: 1024px) 100vw, 50vw"
         />
         {rented && (
-          <span className="absolute top-4 left-4 bg-red-700 text-white text-sm font-bold px-3 py-1.5 rounded-full">
+          <span className="absolute left-4 top-4 bg-ink/85 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.12em] text-white">
             Currently Rented
           </span>
         )}
@@ -51,8 +51,8 @@ export function VehicleGallery({
               onClick={() => setActive(i)}
               aria-label={`Show photo ${i + 1}`}
               aria-current={i === active}
-              className={`relative aspect-video rounded-lg overflow-hidden border-2 transition-colors ${
-                i === active ? "border-gold" : "border-charcoal-700 hover:border-gold/50"
+              className={`image-editorial relative aspect-video border transition-colors ${
+                i === active ? "border-olive" : "border-transparent hover:border-olive/50"
               }`}
             >
               <Image src={img} alt="" fill className="object-cover" sizes="12vw" />
