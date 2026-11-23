@@ -7,6 +7,18 @@ interface FormState {
   message: string;
 }
 
+type TurnstileApi = {
+  render: (
+    el: HTMLElement,
+    o: { sitekey: string; callback: (t: string) => void; "expired-callback"?: () => void },
+  ) => string;
+  reset: (id?: string) => void;
+  remove: (id?: string) => void;
+};
+
+const getTurnstile = () =>
+  (window as typeof window & { turnstile?: TurnstileApi }).turnstile;
+
 interface Props {
   vehicleId?: string;
   vehicleName?: string;
@@ -20,18 +32,7 @@ export function EnquiryForm({ vehicleId, vehicleName }: Props) {
   const widgetId = useRef<string | null>(null);
   const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
-  type TurnstileApi = {
-    render: (
-      el: HTMLElement,
-      o: { sitekey: string; callback: (t: string) => void; "expired-callback"?: () => void },
-    ) => string;
-    reset: (id?: string) => void;
-    remove: (id?: string) => void;
-  };
-  const getTurnstile = () =>
-    (window as typeof window & { turnstile?: TurnstileApi }).turnstile;
-
-    useEffect(() => {
+  useEffect(() => {
     if (!siteKey) return;
     let cancelled = false;
 
@@ -153,7 +154,7 @@ export function EnquiryForm({ vehicleId, vehicleName }: Props) {
         </div>
       )}
 
-      {siteKey && <div data-turnstile-widget />}
+      {siteKey && <div ref={widgetRef} />}
 
       <button
         type="submit"

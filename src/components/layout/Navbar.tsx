@@ -35,7 +35,7 @@ export function Navbar({ settings }: { settings: SiteSettings }) {
                   </span>
                   <span className="flex min-w-0 flex-col leading-tight">
                     <span className="truncate font-display text-lg tracking-tight sm:text-xl">{BUSINESS_NAME}</span>
-                    <span className="mt-1 text-[9px] uppercase tracking-[0.2em] text-ink/70">Private journeys · Sri Lanka</span>
+                    <span className="mt-1 text-[9px] uppercase tracking-[0.2em] text-ink/70">Vehicle rental · Sri Lanka</span>
                   </span>
                 </>
               )}

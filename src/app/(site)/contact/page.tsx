@@ -20,10 +20,10 @@ export default async function ContactPage() {
     <div className="min-h-screen bg-ivory text-ink">
       <div className="bg-beige/30 py-16 sm:py-24">
         <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
-          <p className="eyebrow mb-4">We’re here to help</p>
-          <h1 className="editorial-heading text-ink">Let’s plan your journey.</h1>
+          <p className="eyebrow mb-4">Contact</p>
+          <h1 className="editorial-heading text-ink">Contact us</h1>
           <p className="mt-5 max-w-xl text-sm leading-7 text-ink/75">
-            Questions, plans or a special request? Our team is happy to help.
+            Call, WhatsApp or send us a message with your dates and pickup location.
           </p>
         </div>
       </div>

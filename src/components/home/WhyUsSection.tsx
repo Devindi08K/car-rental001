@@ -3,8 +3,8 @@ import { BUSINESS_NAME } from "@/lib/constants";
 const reasons = [
   {
     num: "01",
-    title: "Premium Fleet",
-    desc: "From economy to ultra-luxury — meticulously maintained and regularly serviced for your safety and comfort.",
+    title: "Serviced Vehicles",
+    desc: "Economy cars to luxury vehicles, regularly serviced.",
   },
   {
     num: "02",
@@ -13,8 +13,8 @@ const reasons = [
   },
   {
     num: "03",
-    title: "Fast Support",
-    desc: "WhatsApp and phone support during opening hours, with quick replies to every enquiry.",
+    title: "WhatsApp Support",
+    desc: "Call or message us during opening hours. We reply to every enquiry as soon as we can.",
   },
   {
     num: "04",
@@ -29,13 +29,13 @@ export function WhyUsSection() {
       <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
         <div className="mb-12 grid gap-8 md:mb-16 md:grid-cols-[1fr_0.65fr] md:items-end">
           <div>
-            <p className="eyebrow mb-4">The difference</p>
+            <p className="eyebrow mb-4">Why choose us</p>
             <h2 id="why-heading" className="editorial-heading text-ink">
-              {BUSINESS_NAME}, with you all the way.
+              Why rent with {BUSINESS_NAME}
             </h2>
           </div>
           <p className="max-w-md text-sm leading-7 text-ink/75">
-            Thoughtful details, dependable service and the freedom to discover Sri Lanka at your own pace.
+            Clear prices, serviced vehicles and quick replies on WhatsApp.
           </p>
         </div>
         <div className="grid border-t border-ink/15 sm:grid-cols-2 lg:grid-cols-4">

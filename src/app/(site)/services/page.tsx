@@ -63,7 +63,7 @@ const services = [
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
       </svg>
     ),
-    title: "Wedding &amp; Events",
+    title: "Wedding & Events",
     description: "Luxury vehicles with professional flower decoration, ribbons, and punctual chauffeurs for your special day.",
   },
 ];
@@ -76,10 +76,10 @@ export default async function ServicesPage() {
     <div className="min-h-screen bg-ivory text-ink">
       <div className="bg-beige/30 py-16 sm:py-24">
         <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
-          <p className="eyebrow mb-4">The experience</p>
-          <h1 className="editorial-heading text-ink">A little more than the drive.</h1>
+          <p className="eyebrow mb-4">Services</p>
+          <h1 className="editorial-heading text-ink">Our services</h1>
           <p className="mt-5 max-w-xl text-sm leading-7 text-ink/75">
-            A thoughtful range of services to make every arrival, excursion and occasion feel effortless.
+            Chauffeur, airport transfers, tours, corporate rentals, self-drive and wedding cars.
           </p>
         </div>
       </div>
@@ -92,7 +92,7 @@ export default async function ServicesPage() {
                 <span className="pt-1 text-[10px] tracking-[0.12em] text-bronze">0{index + 1}</span>
                 <div>
                   <div className="mb-4 text-olive-ink">{service.icon}</div>
-                  <h2 className="font-display text-2xl text-ink sm:text-3xl">{service.title.replace("&amp;", "&")}</h2>
+                  <h2 className="font-display text-2xl text-ink sm:text-3xl">{service.title}</h2>
                   <p className="mt-3 max-w-lg text-sm leading-7 text-ink/75">{service.description}</p>
                 </div>
               </div>

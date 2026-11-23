@@ -13,11 +13,11 @@ async function requireAdmin() {
 
 export async function POST(req: Request) {
   const authError = await requireAdmin();
+  if (authError) return authError;
   const contentLength = Number(req.headers.get("content-length") ?? "0");
   if (contentLength > 6 * 1024 * 1024) {
     return NextResponse.json({ error: "Request too large." }, { status: 413 });
   }
-  if (authError) return authError;
 
   try {
     const formData = await req.formData();

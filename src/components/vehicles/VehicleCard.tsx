@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { formatLkr, whatsappLink, categoryLabel, transmissionLabel } from "@/lib/format";
+import { formatLkr, whatsappLink, categoryLabel, transmissionLabel, fuelLabel, rentalLabel } from "@/lib/format";
 import type { Vehicle } from "@prisma/client";
 
 interface Props {
@@ -68,18 +68,10 @@ export function VehicleCard({ vehicle, whatsappNumber, bookingDetails }: Props) 
         </div>
 
         <div className="mb-6 grid grid-cols-2 gap-x-4 gap-y-3 border-y border-line py-4">
-          <div className="text-xs text-ink/70">
-             {vehicle.seats} seats
-          </div>
-          <div className="text-xs text-ink/70">
-             {transmissionLabel(vehicle.transmission)}
-          </div>
-          <div className="text-xs text-ink/70">
-             Air conditioned
-          </div>
-          <div className="text-xs text-ink/70">
-             Unlimited miles
-          </div>
+          <div className="text-xs text-ink/70">{vehicle.seats} seats</div>
+          <div className="text-xs text-ink/70">{transmissionLabel(vehicle.transmission)}</div>
+          <div className="text-xs text-ink/70">{fuelLabel(vehicle.fuelType)}</div>
+          <div className="text-xs text-ink/70">{rentalLabel(vehicle.rentalType)}</div>
         </div>
 
         <div className="mt-auto">

@@ -15,7 +15,7 @@ class LoginLocked extends CredentialsSignin {
   code = "locked";
 }
 
-const dummyHash = bcrypt.hashSync("mahawaththa-placeholder-password", 12);
+const dummyHash = bcrypt.hashSync("royalroute-placeholder-password", 12);
 const sessionSeconds = 60 * 60 * 2;
 const secure = process.env.NODE_ENV === "production";
 

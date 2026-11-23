@@ -28,7 +28,7 @@ const services = [
       </svg>
     ),
     title: "Airport Transfers",
-    description: "Reliable, punctual airport pickups and drop-offs. Book ahead on WhatsApp for airport pickups and drop-offs.",
+    description: "Airport pickups and drop-offs. Book ahead on WhatsApp.",
     href: "/services",
   },
   {
@@ -49,11 +49,11 @@ export function ServicesSection() {
       <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
         <div className="mb-12 grid gap-8 md:mb-16 md:grid-cols-[1fr_0.7fr] md:items-end">
           <div>
-            <p className="eyebrow mb-4">Considered service</p>
-            <h2 id="services-heading" className="editorial-heading text-ink">Every detail, made easy.</h2>
+            <p className="eyebrow mb-4">Our services</p>
+            <h2 id="services-heading" className="editorial-heading text-ink">Self-drive, chauffeur, airport and weddings.</h2>
           </div>
           <p className="max-w-md text-sm leading-7 text-ink/75">
-            From a smooth airport arrival to a long island escape, we make the journey feel effortless.
+            Choose a vehicle with or without a driver, or book a car for an airport transfer or a wedding.
           </p>
         </div>
         <div className="grid border-t border-line md:grid-cols-2 md:gap-x-14">

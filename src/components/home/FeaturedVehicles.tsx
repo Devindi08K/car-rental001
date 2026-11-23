@@ -14,9 +14,9 @@ export function FeaturedVehicles({ vehicles, whatsappNumber }: Props) {
       <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
         <div className="mb-10 flex flex-col gap-6 md:mb-12 md:flex-row md:items-end md:justify-between">
           <div>
-            <p className="eyebrow mb-4">A considered collection</p>
+            <p className="eyebrow mb-4">Featured vehicles</p>
             <h2 id="featured-heading" className="editorial-heading text-ink">
-              Journeys start with the right vehicle.
+              Popular vehicles to rent.
             </h2>
           </div>
           <Link href="/vehicles" className="inline-flex items-center gap-3 pb-2 text-xs font-bold uppercase tracking-[0.12em] text-olive-ink transition-colors hover:text-ink">

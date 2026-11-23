@@ -52,10 +52,10 @@ export default async function VehiclesPage({
     <div className="min-h-screen bg-ivory text-ink">
       <div className="bg-beige/30 py-16 sm:py-24">
         <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
-          <p className="eyebrow mb-4">The collection</p>
-          <h1 className="editorial-heading text-ink">A vehicle for every kind of journey.</h1>
+          <p className="eyebrow mb-4">Vehicles</p>
+          <h1 className="editorial-heading text-ink">Our vehicles</h1>
           <p className="mt-5 max-w-xl text-sm leading-7 text-ink/75">
-            Browse our cars, vans and premium vehicles, thoughtfully prepared for your time in Sri Lanka.
+            Cars, vans and SUVs for self-drive or with a driver. Use the filters to narrow the list.
           </p>
         </div>
       </div>

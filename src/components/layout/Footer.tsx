@@ -24,7 +24,7 @@ export function Footer({ settings }: { settings: SiteSettings }) {
               ) : (
                 <>
                   <span className="font-display text-3xl tracking-tight text-white block">{BUSINESS_NAME}</span>
-                  <span className="text-[10px] text-bronze tracking-[0.2em] uppercase">Private journeys · Sri Lanka</span>
+                  <span className="text-[10px] text-bronze tracking-[0.2em] uppercase">Vehicle rental · Sri Lanka</span>
                 </>
               )}
             </Link>

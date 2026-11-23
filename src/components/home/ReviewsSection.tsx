@@ -42,7 +42,7 @@ export function ReviewsSection({ reviews }: { reviews: Review[] }) {
                     <div className="mt-5 flex items-center justify-between gap-3">
                       <p className="text-xs font-bold uppercase tracking-[0.1em] text-ink">{item.name}</p>
                       <time className="text-xs text-ink/70" dateTime={item.createdAt.toISOString()}>
-                        {item.createdAt.toLocaleDateString("en-LK")}
+                        {item.createdAt.toLocaleDateString("en-LK", { timeZone: "Asia/Colombo" })}
                       </time>
                     </div>
                   </li>

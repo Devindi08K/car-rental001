@@ -37,16 +37,18 @@ export default async function SelfDriveRentalPage() {
       </div>
 
       <div className="mx-auto max-w-[1440px] px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
-        <div className="image-editorial relative mb-12 aspect-[16/8] sm:mb-16 sm:aspect-[16/6]">
-          <Image
-            src={settings.heroImageUrl}
-            alt="A vehicle ready for a self-drive journey in Sri Lanka"
-            fill
-            priority
-            sizes="(max-width: 768px) 100vw, 90vw"
-            className="object-cover"
-          />
-        </div>
+        {settings.selfDriveImageUrl && (
+          <div className="image-editorial relative mb-12 aspect-[16/8] sm:mb-16 sm:aspect-[16/6]">
+            <Image
+              src={settings.selfDriveImageUrl}
+              alt="A vehicle ready for a self-drive journey in Sri Lanka"
+              fill
+              priority
+              sizes="(max-width: 768px) 100vw, 90vw"
+              className="object-cover"
+            />
+          </div>
+        )}
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_0.7fr] lg:gap-20">
           <div className="space-y-12">
             <section>

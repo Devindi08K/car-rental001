@@ -65,7 +65,9 @@ export function cloudinaryPublicId(url: string) {
     let rest = parts.slice(uploadIndex + 1);
     if (rest[0] && /^v\d+$/.test(rest[0])) rest = rest.slice(1);
     const publicId = rest.join("/").replace(/\.[a-z0-9]+$/i, "");
-    return publicId.startsWith("mahawaththa/") ? publicId : null;
+    return publicId.startsWith("royalroute/") || publicId.startsWith("mahawaththa/")
+      ? publicId
+      : null;
   } catch {
     return null;
   }
@@ -95,7 +97,7 @@ export async function uploadImageBuffer(bytes: Buffer) {
   const result = await new Promise<{ secure_url?: string }>((resolve, reject) => {
     const stream = client().uploader.upload_stream(
       {
-        folder: "mahawaththa",
+        folder: "royalroute",
         public_id: randomUUID(),
         resource_type: "image",
         allowed_formats: ["jpg", "png", "webp"],

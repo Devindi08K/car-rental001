@@ -61,10 +61,10 @@ export function HeroSection({ settings }: { settings: SiteSettings }) {
             </h1>
             <div className="mt-7 max-w-md">
               <p className="text-sm leading-7 text-white/80 sm:text-base">
-                Thoughtfully selected vehicles and personal service for every journey across the island.
+                Self-drive or with a driver. Message us on WhatsApp for availability and prices.
               </p>
               <Link href="/vehicles" className="group mt-5 inline-flex items-center gap-3 border-b border-white/45 pb-2 text-xs font-bold uppercase tracking-[0.14em] text-white transition-colors hover:border-white hover:text-white">
-                Discover the fleet <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">↗</span>
+                See our vehicles <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">↗</span>
               </Link>
             </div>
           </div>
