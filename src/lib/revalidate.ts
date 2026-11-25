@@ -15,6 +15,7 @@ export function revalidateVehicles(slugs: string[] = []) {
 export function revalidateSettings() {
   updateTag("settings");
   revalidatePath("/", "layout");
+  revalidatePath("/tours");
 }
 
 export function revalidateContent() {

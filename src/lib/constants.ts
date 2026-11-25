@@ -6,6 +6,7 @@ export const MAX_UPLOAD_BYTES = 5 * 1024 * 1024;
 export const NAV_LINKS = [
   { href: "/", label: "Home" },
   { href: "/vehicles", label: "Our Vehicles" },
+  { href: "/tours", label: "Tours" },
   { href: "/self-drive-rental", label: "Self-Drive Rental" },
   { href: "/services", label: "Our Services" },
   { href: "/weddings", label: "Wedding & Events" },

@@ -43,26 +43,26 @@ export function VehicleFilters() {
   return (
     <form className="grid grid-cols-2 gap-3 md:grid-cols-4" onSubmit={(e) => e.preventDefault()}>
       <div>
-        <label className="mb-1 block text-[10px] uppercase tracking-[0.12em] text-ink/70">Category</label>
-        <select value={val("category")} onChange={(e) => update("category", e.target.value)} className={sel}>
+        <label htmlFor="vehicle-category" className="mb-1 block text-[10px] uppercase tracking-[0.12em] text-ink/70">Category</label>
+        <select id="vehicle-category" value={val("category")} onChange={(e) => update("category", e.target.value)} className={sel}>
           {CATEGORIES.map((c) => <option key={c} value={c}>{catLabels[c]}</option>)}
         </select>
       </div>
       <div>
-        <label className="mb-1 block text-[10px] uppercase tracking-[0.12em] text-ink/70">Rental type</label>
-        <select value={val("rentalType")} onChange={(e) => update("rentalType", e.target.value)} className={sel}>
+        <label htmlFor="vehicle-rental-type" className="mb-1 block text-[10px] uppercase tracking-[0.12em] text-ink/70">Rental type</label>
+        <select id="vehicle-rental-type" value={val("rentalType")} onChange={(e) => update("rentalType", e.target.value)} className={sel}>
           {RENTALS.map((r) => <option key={r} value={r}>{rentalLabels[r]}</option>)}
         </select>
       </div>
       <div>
-        <label className="mb-1 block text-[10px] uppercase tracking-[0.12em] text-ink/70">Transmission</label>
-        <select value={val("transmission")} onChange={(e) => update("transmission", e.target.value)} className={sel}>
+        <label htmlFor="vehicle-transmission" className="mb-1 block text-[10px] uppercase tracking-[0.12em] text-ink/70">Transmission</label>
+        <select id="vehicle-transmission" value={val("transmission")} onChange={(e) => update("transmission", e.target.value)} className={sel}>
           {TRANSMISSIONS.map((t) => <option key={t} value={t}>{transLabels[t]}</option>)}
         </select>
       </div>
       <div>
-        <label className="mb-1 block text-[10px] uppercase tracking-[0.12em] text-ink/70">Seats</label>
-        <select value={val("seats")} onChange={(e) => update("seats", e.target.value)} className={sel}>
+        <label htmlFor="vehicle-seats" className="mb-1 block text-[10px] uppercase tracking-[0.12em] text-ink/70">Seats</label>
+        <select id="vehicle-seats" value={val("seats")} onChange={(e) => update("seats", e.target.value)} className={sel}>
           {SEATS.map((s) => <option key={s} value={s}>{seatsLabels[s]}</option>)}
         </select>
       </div>

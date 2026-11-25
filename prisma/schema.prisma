@@ -119,6 +119,23 @@ model PageContent {
   updatedAt      DateTime @updatedAt
 }
 
+model TourPackage {
+  key          String   @id
+  title        String
+  eyebrow      String
+  intro        String
+  duration     String
+  destinations String
+  highlights   Json
+  heroImageUrl String
+  gallery      Json
+  itinerary    Json
+  inclusions   Json
+  exclusions   Json
+  vehicles     Json
+  updatedAt    DateTime @updatedAt
+}
+
 model GalleryImage {
   id        String         @id @default(cuid())
   url       String

@@ -9,6 +9,7 @@ import { BUSINESS_NAME } from "@/lib/constants";
 const links = [
   { href: "/admin", label: "Dashboard", exact: true },
   { href: "/admin/vehicles", label: "Vehicles" },
+  { href: "/admin/tours", label: "Tours" },
   { href: "/admin/enquiries", label: "Enquiries" },
   { href: "/admin/gallery", label: "Gallery" },
   { href: "/admin/reviews", label: "Reviews" },

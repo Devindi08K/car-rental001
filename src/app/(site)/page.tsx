@@ -12,6 +12,8 @@ import { ContactStrip } from "@/components/home/ContactStrip";
 import { PromotionCards } from "@/components/home/PromotionCards";
 import { ReviewsSection } from "@/components/home/ReviewsSection";
 import { getReviews } from "@/lib/reviews";
+import { FeaturedTour } from "@/components/home/FeaturedTour";
+import { getTourPackage } from "@/lib/tours";
 
 export const metadata: Metadata = pageMeta({
   title: "Premium Vehicle Rentals Sri Lanka",
@@ -21,16 +23,18 @@ export const metadata: Metadata = pageMeta({
 });
 
 export default async function HomePage() {
-  const [settings, featured, weddingGallery, reviews] = await Promise.all([
+  const [settings, featured, weddingGallery, reviews, tour] = await Promise.all([
     getSettings(),
     getFeaturedVehicles(),
     getGallery("WEDDING"),
     getReviews(),
+    getTourPackage(),
   ]);
 
   return (
     <>
       <HeroSection settings={settings} />
+      <FeaturedTour settings={settings} tour={tour} />
       <FeaturedVehicles vehicles={featured} whatsappNumber={settings.whatsappNumber} />
       <ServicesSection />
       <WeddingHighlight images={weddingGallery.slice(0, 4)} settings={settings} />
