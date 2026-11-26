@@ -37,6 +37,7 @@ export function SettingsForm({ settings }: { settings: SiteSettings }) {
             id={`sf-${f.key}`}
             name={f.key}
             type={f.type ?? "text"}
+            required={["phone", "whatsappNumber", "email", "address", "openingHours"].includes(f.key)}
             defaultValue={settings[f.key]}
             placeholder={f.placeholder}
             className="w-full bg-charcoal-700 border border-charcoal-600 text-cream text-sm rounded-lg px-3 py-2.5 focus:border-gold focus:outline-none"

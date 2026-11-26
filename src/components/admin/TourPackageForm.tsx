@@ -69,10 +69,10 @@ export function TourPackageForm({ tour }: { tour: TourPackage }) {
       {state?.ok && <div className="rounded-lg border border-green-700/50 bg-green-900/40 px-4 py-3 text-sm text-green-400">Tour package saved.</div>}
 
       <section className="grid gap-4 sm:grid-cols-2">
-        <div><label className={lbl} htmlFor="tour-title">Tour title</label><input id="tour-title" name="title" required defaultValue={tour.title} className={inp} /></div>
-        <div><label className={lbl} htmlFor="tour-eyebrow">Eyebrow</label><input id="tour-eyebrow" name="eyebrow" required defaultValue={tour.eyebrow} className={inp} /></div>
-        <div><label className={lbl} htmlFor="tour-duration">Duration</label><input id="tour-duration" name="duration" required defaultValue={tour.duration} className={inp} /></div>
-        <div><label className={lbl} htmlFor="tour-destinations">Destinations</label><input id="tour-destinations" name="destinations" required defaultValue={tour.destinations} className={inp} /></div>
+        <div><label className={lbl} htmlFor="tour-title">Tour title</label><input id="tour-title" name="title" required minLength={3} defaultValue={tour.title} className={inp} /></div>
+        <div><label className={lbl} htmlFor="tour-eyebrow">Eyebrow</label><input id="tour-eyebrow" name="eyebrow" required minLength={3} defaultValue={tour.eyebrow} className={inp} /></div>
+        <div><label className={lbl} htmlFor="tour-duration">Duration</label><input id="tour-duration" name="duration" required minLength={3} defaultValue={tour.duration} className={inp} /></div>
+        <div><label className={lbl} htmlFor="tour-destinations">Destinations</label><input id="tour-destinations" name="destinations" required minLength={3} defaultValue={tour.destinations} className={inp} /></div>
         <div className="sm:col-span-2"><label className={lbl} htmlFor="tour-intro">Introduction</label><textarea id="tour-intro" name="intro" rows={4} required defaultValue={tour.intro} className={`${inp} resize-y`} /></div>
       </section>
 

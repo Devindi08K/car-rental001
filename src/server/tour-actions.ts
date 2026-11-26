@@ -19,18 +19,28 @@ function parseJson<T>(value: FormDataEntryValue | null, fallback: T): T {
 export async function saveTourPackage(_state: TourFormState, formData: FormData): Promise<TourFormState> {
   await requireAdmin();
   try {
-    const highlights = parseJson<string[]>(formData.get("highlights"), []);
-    const gallery = parseJson<string[]>(formData.get("gallery"), []);
+    const highlights = parseJson<unknown[]>(formData.get("highlights"), []).filter(
+      (item): item is string => typeof item === "string" && item.trim().length > 0,
+    ).map((item) => sanitizeText(item));
+    const gallery = parseJson<unknown[]>(formData.get("gallery"), []).filter(
+      (item): item is string => typeof item === "string" && item.trim().startsWith("https://"),
+    ).map((item) => item.trim());
     const itinerary = parseJson<unknown[]>(formData.get("itinerary"), []) as Prisma.InputJsonValue;
-    const inclusions = parseJson<string[]>(formData.get("inclusions"), []);
-    const exclusions = parseJson<string[]>(formData.get("exclusions"), []);
+    const inclusions = parseJson<unknown[]>(formData.get("inclusions"), []).filter(
+      (item): item is string => typeof item === "string" && item.trim().length > 0,
+    ).map((item) => sanitizeText(item));
+    const exclusions = parseJson<unknown[]>(formData.get("exclusions"), []).filter(
+      (item): item is string => typeof item === "string" && item.trim().length > 0,
+    ).map((item) => sanitizeText(item));
     const vehicles = parseJson<unknown[]>(formData.get("vehicles"), []) as Prisma.InputJsonValue;
 
     const title = sanitizeText(String(formData.get("title") ?? ""));
     const eyebrow = sanitizeText(String(formData.get("eyebrow") ?? ""));
     const intro = sanitizeMultiline(String(formData.get("intro") ?? ""));
-    if (title.length < 3 || eyebrow.length < 3 || intro.length < 10) {
-      return { error: "Complete the title, eyebrow and introduction." };
+    const duration = sanitizeText(String(formData.get("duration") ?? ""));
+    const destinations = sanitizeText(String(formData.get("destinations") ?? ""));
+    if (title.length < 3 || eyebrow.length < 3 || intro.length < 10 || duration.length < 3 || destinations.length < 3) {
+      return { error: "Complete the tour title, eyebrow, duration, destinations and introduction." };
     }
 
     await prisma.tourPackage.upsert({
@@ -40,8 +50,8 @@ export async function saveTourPackage(_state: TourFormState, formData: FormData)
         title,
         eyebrow,
         intro,
-        duration: sanitizeText(String(formData.get("duration") ?? "")),
-        destinations: sanitizeText(String(formData.get("destinations") ?? "")),
+        duration,
+        destinations,
         highlights,
         heroImageUrl: String(formData.get("heroImageUrl") ?? "").trim(),
         gallery,
@@ -54,8 +64,8 @@ export async function saveTourPackage(_state: TourFormState, formData: FormData)
         title,
         eyebrow,
         intro,
-        duration: sanitizeText(String(formData.get("duration") ?? "")),
-        destinations: sanitizeText(String(formData.get("destinations") ?? "")),
+        duration,
+        destinations,
         highlights,
         heroImageUrl: String(formData.get("heroImageUrl") ?? "").trim(),
         gallery,

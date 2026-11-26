@@ -20,8 +20,8 @@ export default async function AdminEnquiriesPage() {
       {enquiries.length === 0 ? (
         <p className="text-muted py-16 text-center">No enquiries yet.</p>
       ) : (
-        <div className="bg-charcoal-800 border border-charcoal-700 rounded-xl overflow-hidden">
-          <table className="w-full text-sm">
+        <div className="overflow-x-auto bg-charcoal-800 border border-charcoal-700 rounded-xl">
+          <table className="w-full min-w-[640px] text-sm">
             <thead className="border-b border-charcoal-700 text-xs text-muted uppercase tracking-wide">
               <tr>
                 <th className="px-5 py-3 text-left">From</th>

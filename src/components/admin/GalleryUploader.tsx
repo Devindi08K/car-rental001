@@ -43,6 +43,7 @@ export function GalleryUploader({ initialImages }: { initialImages: GalleryImage
       window.location.reload();
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Upload failed");
+      if (successCount > 0) window.location.reload();
     } finally {
       setUploading(false);
       if (fileRef.current) fileRef.current.value = "";
