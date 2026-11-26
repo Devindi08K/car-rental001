@@ -17,8 +17,6 @@ export function VehicleForm({ vehicle }: { vehicle?: Vehicle }) {
   const [state, formAction, pending] = useActionState<FormState, FormData>(saveVehicle, undefined);
   const [images, setImages] = useState<string[]>(vehicle?.images ?? []);
   const [name, setName] = useState(vehicle?.name ?? "");
-  const [slug, setSlug] = useState(vehicle?.slug ?? "");
-  const [slugEdited, setSlugEdited] = useState(!!vehicle);
 
   const inp = "w-full bg-charcoal-700 border border-charcoal-600 text-cream text-sm rounded-lg px-3 py-2.5 focus:border-gold focus:outline-none";
   const lbl = "block text-xs text-muted mb-1.5";
@@ -26,6 +24,7 @@ export function VehicleForm({ vehicle }: { vehicle?: Vehicle }) {
   function wrappedAction(formData: FormData) {
     // vehicle-actions reads images as a single JSON string
     formData.set("images", JSON.stringify(images));
+    formData.set("slug", slugify(name));
     if (vehicle) formData.set("id", vehicle.id);
     formAction(formData);
   }
@@ -53,23 +52,10 @@ export function VehicleForm({ vehicle }: { vehicle?: Vehicle }) {
             id="vf-name"
             name="name"
             required
+            maxLength={120}
+            placeholder="Toyota Prius"
             value={name}
-            onChange={(e) => {
-              setName(e.target.value);
-              if (!slugEdited) setSlug(slugify(e.target.value));
-            }}
-            className={inp}
-          />
-        </div>
-        <div>
-          <label htmlFor="vf-slug" className={lbl}>Slug *</label>
-          <input
-            id="vf-slug"
-            name="slug"
-            required
-            value={slug}
-            onChange={(e) => { setSlug(e.target.value); setSlugEdited(true); }}
-            pattern="[a-z0-9]+(?:-[a-z0-9]+)*"
+            onChange={(e) => setName(e.target.value)}
             className={inp}
           />
         </div>

@@ -6,6 +6,7 @@ import { clientIpFromHeaders, consumeRateLimit } from "@/lib/rate-limit";
 import { customerReviewSchema } from "@/lib/validators";
 import { prisma } from "@/lib/prisma";
 import { revalidateReviews } from "@/lib/revalidate";
+import { revalidatePath } from "next/cache";
 
 export type ReviewActionState = {
   ok?: boolean;
@@ -60,4 +61,5 @@ export async function deleteReview(id: string): Promise<void> {
   }
 
   revalidateReviews();
+  revalidatePath("/admin");
 }

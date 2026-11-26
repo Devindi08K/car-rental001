@@ -44,7 +44,6 @@ export default async function AdminVehiclesPage() {
                 <tr key={v.id} className="border-b border-charcoal-700 last:border-0 hover:bg-charcoal-700/30">
                   <td className="px-5 py-3">
                     <div className="text-cream font-medium">{v.name}</div>
-                    <div className="text-muted text-xs">{v.slug}</div>
                   </td>
                   <td className="px-5 py-3 text-muted hidden md:table-cell">{categoryLabel(v.category)}</td>
                   <td className="px-5 py-3 text-muted hidden lg:table-cell">{formatLkr(v.pricePerDay)}</td>

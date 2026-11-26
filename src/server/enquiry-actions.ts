@@ -12,6 +12,8 @@ export async function updateEnquiryStatus(id: string, status: EnquiryStatus): Pr
   try {
     await prisma.enquiry.update({ where: { id }, data: { status } });
     revalidatePath("/admin/enquiries");
+    revalidatePath(`/admin/enquiries/${id}`);
+    revalidatePath("/admin");
   } catch (err) {
     console.error("[updateEnquiryStatus]", err);
   }
@@ -23,6 +25,8 @@ export async function deleteEnquiry(id: string): Promise<void> {
   try {
     await prisma.enquiry.delete({ where: { id } });
     revalidatePath("/admin/enquiries");
+    revalidatePath(`/admin/enquiries/${id}`);
+    revalidatePath("/admin");
   } catch (err) {
     console.error("[deleteEnquiry]", err);
   }

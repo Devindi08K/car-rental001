@@ -1,13 +1,13 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import type { Prisma } from "@prisma/client";
 import { destroyCloudinaryImage } from "@/lib/cloudinary";
 import { MAX_VEHICLE_PHOTOS } from "@/lib/constants";
 import { prisma } from "@/lib/prisma";
 import { revalidateVehicles } from "@/lib/revalidate";
 import { requireAdmin } from "@/lib/auth-guard";
 import { vehicleSchema } from "@/lib/validators";
+import { slugify } from "@/lib/format";
 
 export type FormState = { ok?: boolean; error?: string } | undefined;
 
@@ -42,6 +42,19 @@ async function rejectExtraImages(images: string[], existing: string[]) {
   return "A vehicle can have at most 5 photos.";
 }
 
+async function uniqueVehicleSlug(name: string, currentId?: string) {
+  const base = slugify(name) || "vehicle";
+  let candidate = base;
+  let suffix = 2;
+
+  while (true) {
+    const existing = await prisma.vehicle.findUnique({ where: { slug: candidate }, select: { id: true } });
+    if (!existing || existing.id === currentId) return candidate;
+    candidate = `${base}-${suffix}`;
+    suffix += 1;
+  }
+}
+
 export async function saveVehicle(_state: FormState, formData: FormData): Promise<FormState> {
   const admin = await requireAdmin();
   if (!admin) return { error: "Please sign in again." };
@@ -50,7 +63,8 @@ export async function saveVehicle(_state: FormState, formData: FormData): Promis
   if (!parsed.success) return { error: "Check the vehicle details and try again." };
 
   const id = String(formData.get("id") ?? "");
-  const data: Prisma.VehicleUpdateInput = parsed.data;
+  const slug = await uniqueVehicleSlug(parsed.data.name, id || undefined);
+  const data = { ...parsed.data, slug };
 
   try {
     if (id) {
@@ -61,12 +75,12 @@ export async function saveVehicle(_state: FormState, formData: FormData): Promis
       const removed = current.images.filter((url) => !parsed.data.images.includes(url));
       await prisma.vehicle.update({ where: { id }, data });
       await Promise.all(removed.map((url) => destroyCloudinaryImage(url)));
-      revalidateVehicles([current.slug, parsed.data.slug]);
+      revalidateVehicles([current.slug, slug]);
     } else {
       const extra = await rejectExtraImages(parsed.data.images, []);
       if (extra) return { error: extra };
-      await prisma.vehicle.create({ data: parsed.data });
-      revalidateVehicles([parsed.data.slug]);
+      await prisma.vehicle.create({ data });
+      revalidateVehicles([slug]);
     }
   } catch (error) {
     if (typeof error === "object" && error !== null && "code" in error && error.code === "P2002") {
