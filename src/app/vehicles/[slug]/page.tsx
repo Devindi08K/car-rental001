@@ -26,9 +26,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const vehicle = await getVehicleBySlug(slug);
   if (!vehicle) return { title: "Vehicle Not Found" };
+  const canonicalPath = `/vehicles/${slug}`;
   return {
-        title: vehicle.name,
-        description: vehicle.description.slice(0, 160),
+    title: vehicle.name,
+    description: vehicle.description.slice(0, 160),
+    alternates: { canonical: canonicalPath },
     openGraph: {
       title: vehicle.name,
       description: vehicle.description.slice(0, 160),
