@@ -24,7 +24,7 @@ export function VehicleCard({ vehicle, whatsappNumber, bookingDetails }: Props) 
             alt={vehicle.name}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            className="object-cover transition-transform duration-700 group-hover:scale-[1.035]"
+            className="object-cover transition-transform duration-700 group-hover:scale-[1.035] group-hover/fleet:scale-[1.06]"
           />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center">
@@ -87,7 +87,7 @@ export function VehicleCard({ vehicle, whatsappNumber, bookingDetails }: Props) 
               className="button-editorial group/btn relative w-full overflow-hidden"
             >
               <span className="relative z-10">Select This Vehicle</span>
-              <span aria-hidden="true">↗</span>
+              <span aria-hidden="true" className="arrow-nudge">↗</span>
             </a>
           ) : (
             <Link

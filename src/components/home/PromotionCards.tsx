@@ -31,7 +31,7 @@ export function PromotionCards({ settings }: { settings: SiteSettings }) {
               <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-white/75">{card.eyebrow}</p>
               <h3 className="mt-2 font-display text-3xl sm:text-4xl">{card.title}</h3>
               <span className="mt-5 text-xs font-bold uppercase tracking-[0.12em] text-white transition-transform group-hover:translate-x-1">
-                Discover <span aria-hidden="true">↗</span>
+                Discover <span aria-hidden="true" className="arrow-nudge">↗</span>
               </span>
             </Link>
           ))}

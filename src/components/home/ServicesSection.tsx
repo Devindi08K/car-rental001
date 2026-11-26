@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { motion, useReducedMotion } from "framer-motion";
 
 const services = [
   {
@@ -44,13 +47,14 @@ const services = [
 ];
 
 export function ServicesSection() {
+  const reduceMotion = useReducedMotion();
   return (
     <section className="section-pad bg-paper" aria-labelledby="services-heading">
       <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
         <div className="mb-12 grid gap-8 md:mb-16 md:grid-cols-[1fr_0.7fr] md:items-end">
           <div>
             <p className="eyebrow mb-4">Our services</p>
-            <h2 id="services-heading" className="editorial-heading text-ink">Self-drive, chauffeur, airport and weddings.</h2>
+            <h2 id="services-heading" className="editorial-heading text-ink">One fleet. More ways to travel.</h2>
           </div>
           <p className="max-w-md text-sm leading-7 text-ink/75">
             Choose a vehicle with or without a driver, or book a car for an airport transfer or a wedding.
@@ -58,15 +62,32 @@ export function ServicesSection() {
         </div>
         <div className="grid border-t border-line md:grid-cols-2 md:gap-x-14">
           {services.map((service, index) => (
-            <Link key={service.title} href={service.href} className="group flex gap-5 border-b border-line py-6 sm:py-8">
-              <span className="pt-1 text-[10px] tracking-[0.12em] text-bronze">0{index + 1}</span>
+            <Link key={service.title} href={service.href} className="group relative flex gap-5 py-6 sm:py-8">
+              <motion.span
+                className="pt-1 text-[10px] tracking-[0.12em] text-bronze"
+                initial={reduceMotion ? false : { opacity: 0, y: 8 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: reduceMotion ? 0 : 0.4, delay: reduceMotion ? 0 : 0.75 + index * 0.12 }}
+              >
+                0{index + 1}
+              </motion.span>
               <div className="flex-1">
                 <div className="flex items-center justify-between gap-4">
                   <h3 className="font-display text-2xl text-ink transition-colors group-hover:text-olive-ink sm:text-3xl">{service.title}</h3>
-                  <span className="text-lg text-olive-ink transition-transform group-hover:translate-x-1" aria-hidden="true">↗</span>
+                  <span className="arrow-nudge text-lg text-olive-ink" aria-hidden="true">↗</span>
                 </div>
                 <p className="mt-3 max-w-lg text-sm leading-6 text-ink/75">{service.description}</p>
               </div>
+              <motion.span
+                className="pointer-events-none absolute bottom-0 left-0 h-px w-full origin-left bg-line"
+                aria-hidden="true"
+                initial={reduceMotion ? false : { scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: reduceMotion ? 0 : 0.65, ease: [0.16, 1, 0.3, 1] }}
+                style={{ originX: 0 }}
+              />
             </Link>
           ))}
         </div>

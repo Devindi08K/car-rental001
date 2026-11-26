@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { motion, useReducedMotion } from "framer-motion";
 import { whatsappLink } from "@/lib/format";
 import type { SiteSettings } from "@/lib/settings";
 import type { GalleryImage } from "@prisma/client";
@@ -16,8 +19,19 @@ const features = [
   "Competitive rates for full-day hire",
 ];
 
+const revealVariants = {
+  hidden: { clipPath: "inset(100% 0% 0% 0%)" },
+  visible: { clipPath: "inset(0% 0% 0% 0%)" },
+};
+
+const imageScaleVariants = {
+  hidden: { scale: 1.2 },
+  visible: { scale: 1 },
+};
+
 export function WeddingHighlight({ images, settings }: Props) {
   const wa = whatsappLink(settings.whatsappNumber, "Hello! I'd like to enquire about wedding vehicle hire.");
+  const reduceMotion = useReducedMotion();
   return (
     <section className="section-pad bg-ivory" aria-labelledby="wedding-heading">
       <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
@@ -40,8 +54,8 @@ export function WeddingHighlight({ images, settings }: Props) {
               ))}
             </ul>
             <div className="flex flex-wrap items-center gap-6">
-              <Link href="/weddings" className="button-editorial">
-                View wedding gallery <span aria-hidden="true">↗</span>
+              <Link href="/weddings" className="button-editorial group">
+                View wedding gallery <span aria-hidden="true" className="arrow-nudge">↗</span>
               </Link>
               {wa && (
                 <a
@@ -58,18 +72,41 @@ export function WeddingHighlight({ images, settings }: Props) {
           <div className="order-1 grid grid-cols-2 gap-3 lg:order-2">
             {images.length > 0
               ? images.slice(0, 4).map((img, i) => (
-                  <div
+                  <motion.div
                     key={img.id}
-                    className={`image-editorial relative ${i === 0 ? "row-span-2 aspect-[3/4]" : "aspect-[4/3]"}`}
+                    className={`relative ${i === 0 ? "row-span-2 aspect-[3/4]" : "aspect-[4/3]"}`}
+                    initial={reduceMotion ? false : "hidden"}
+                    whileInView={reduceMotion ? undefined : "visible"}
+                    viewport={{ once: true, amount: 0.2 }}
                   >
-                    <Image
-                      src={img.url}
-                      alt={img.alt || "Wedding vehicle"}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 50vw, 25vw"
-                    />
-                  </div>
+                    <motion.div
+                      className="image-editorial absolute inset-0"
+                      variants={reduceMotion ? undefined : revealVariants}
+                      transition={{
+                        duration: 0.9,
+                        delay: reduceMotion ? 0 : i * 0.12,
+                        ease: [0.16, 1, 0.3, 1],
+                      }}
+                    >
+                      <motion.div
+                        className="absolute inset-0"
+                        variants={reduceMotion ? undefined : imageScaleVariants}
+                        transition={{
+                          duration: 0.9,
+                          delay: reduceMotion ? 0 : i * 0.12,
+                        ease: [0.16, 1, 0.3, 1],
+                        }}
+                      >
+                        <Image
+                          src={img.url}
+                          alt={img.alt || "Wedding vehicle"}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 768px) 50vw, 25vw"
+                        />
+                      </motion.div>
+                    </motion.div>
+                  </motion.div>
                 ))
               : [0, 1, 2].map((i) => (
                   <div
