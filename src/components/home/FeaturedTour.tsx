@@ -21,7 +21,7 @@ const imageScaleVariants = {
 export function FeaturedTour({ settings, tour }: { settings: SiteSettings; tour: TourPackage }) {
   const wa = whatsappLink(
     settings.whatsappNumber,
-    "Hello Royal Route Lanka! I’d like to enquire about the 7-day Sri Lanka tour.",
+    "Hello Mahawaththa Travels! I’d like to enquire about the 7-day Sri Lanka tour.",
   );
   const photos = [
     ...tour.gallery,

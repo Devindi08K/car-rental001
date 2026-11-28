@@ -1,4 +1,4 @@
-export const BUSINESS_NAME = "Royal Route Lanka";
+export const BUSINESS_NAME = "Mahawaththa Travels";
 
 export const MAX_VEHICLE_PHOTOS = 5;
 export const MAX_UPLOAD_BYTES = 5 * 1024 * 1024;

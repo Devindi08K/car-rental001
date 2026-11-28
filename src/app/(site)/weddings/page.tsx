@@ -56,18 +56,16 @@ export default async function WeddingsPage() {
           <section className="mb-16 sm:mb-20">
             <p className="eyebrow mb-4">The details</p>
             <h2 className="mb-8 font-display text-4xl text-ink sm:text-5xl">A glimpse of the day.</h2>
-            <div className="columns-1 gap-4 space-y-4 sm:columns-2 lg:columns-3">
-              {gallery.map((img) => (
-                <div key={img.id} className="image-editorial mb-4 break-inside-avoid">
-                  <div className="relative">
-                    <Image
-                      src={img.url}
-                      alt={img.alt || "Wedding vehicle"}
-                      width={600}
-                      height={400}
-                      className="w-full object-cover"
-                    />
-                  </div>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+              {gallery.slice(0, 3).map((img) => (
+                <div key={img.id} className="image-editorial relative aspect-[4/3]">
+                  <Image
+                    src={img.url}
+                    alt={img.alt || "Wedding vehicle"}
+                    fill
+                    sizes="(max-width: 640px) 100vw, 33vw"
+                    className="object-cover"
+                  />
                 </div>
               ))}
             </div>

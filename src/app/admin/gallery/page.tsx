@@ -10,7 +10,7 @@ export default async function AdminGalleryPage() {
   return (
     <div>
       <h1 className="font-display text-3xl font-bold text-cream mb-3">Gallery</h1>
-      <p className="text-muted text-sm mb-8">Images here appear on the Weddings page. Upload JPG, PNG, or WebP under 5 MB.</p>
+      <p className="text-muted text-sm mb-8">The first three images appear on the Weddings page and homepage. Upload JPG, PNG, or WebP under 5 MB.</p>
       <GalleryUploader initialImages={images} />
     </div>
   );

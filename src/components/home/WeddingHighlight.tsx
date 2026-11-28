@@ -71,7 +71,7 @@ export function WeddingHighlight({ images, settings }: Props) {
           </div>
           <div className="order-1 grid grid-cols-2 gap-3 lg:order-2">
             {images.length > 0
-              ? images.slice(0, 4).map((img, i) => (
+              ? images.slice(0, 3).map((img, i) => (
                   <motion.div
                     key={img.id}
                     className={`relative ${i === 0 ? "row-span-2 aspect-[3/4]" : "aspect-[4/3]"}`}

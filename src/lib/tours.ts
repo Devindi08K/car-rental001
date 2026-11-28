@@ -61,7 +61,7 @@ const FALLBACK_ITINERARY: TourDay[] = [
 
 export const TOUR_FALLBACK: TourPackage = {
   key: "royal-route",
-  title: "The Royal Route across Sri Lanka",
+  title: "The 7-Day Sri Lanka Tour",
   eyebrow: "7 days · 6 nights",
   intro: "Ancient kingdoms, misty tea hills, wildlife parks and golden beaches in one private journey.",
   duration: "7 days / 6 nights",
@@ -93,9 +93,13 @@ export async function getTourPackage(): Promise<TourPackage> {
   try {
     const row = await readTourPackage();
     if (!row) return TOUR_FALLBACK;
+    const title =
+      row.title === "The Royal Route across Sri Lanka"
+        ? TOUR_FALLBACK.title
+        : row.title;
     return {
       key: row.key,
-      title: row.title,
+      title,
       eyebrow: row.eyebrow,
       intro: row.intro,
       duration: row.duration,

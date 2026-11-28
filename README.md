@@ -1,4 +1,4 @@
-# Royal Route vehicle rental website
+# Mahawaththa Travels vehicle rental website
 
 Stack: Next.js, Prisma, Neon Postgres, Cloudinary, Auth.js.
 

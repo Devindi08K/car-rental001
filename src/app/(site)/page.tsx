@@ -37,7 +37,7 @@ export default async function HomePage() {
       <FeaturedTour settings={settings} tour={tour} />
       <FeaturedVehicles vehicles={featured} whatsappNumber={settings.whatsappNumber} />
       <ServicesSection />
-      <WeddingHighlight images={weddingGallery.slice(0, 4)} settings={settings} />
+      <WeddingHighlight images={weddingGallery.slice(0, 3)} settings={settings} />
       <PromotionCards settings={settings} />
       <WhyUsSection />
       <ReviewsSection reviews={reviews} />

@@ -6,7 +6,7 @@ import { whatsappLink } from "@/lib/format";
 import { getTourPackage } from "@/lib/tours";
 
 export const metadata: Metadata = pageMeta({
-  title: "7-Day Sri Lanka Royal Route Tour",
+  title: "7-Day Sri Lanka Tour",
   description:
     "A 7-day luxury Sri Lanka itinerary covering Negombo, Sigiriya, Kandy, Nuwara Eliya, Ella, Yala, Mirissa and Galle.",
   path: "/tours",
@@ -17,7 +17,7 @@ export default async function ToursPage() {
   const tour = await getTourPackage();
   const wa = whatsappLink(
     settings.whatsappNumber,
-    "Hello Royal Route Lanka! I’d like to enquire about the 7-Day Royal Route Sri Lanka tour.",
+    "Hello Mahawaththa Travels! I’d like to enquire about the 7-day Sri Lanka tour.",
   );
 
   return (

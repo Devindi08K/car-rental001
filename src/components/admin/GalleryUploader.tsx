@@ -5,15 +5,31 @@ import Image from "next/image";
 import { addGalleryImage, deleteGalleryImage } from "@/server/gallery-actions";
 import type { GalleryImage } from "@prisma/client";
 
+const MAX_WEDDING_GALLERY_IMAGES = 3;
+
 export function GalleryUploader({ initialImages }: { initialImages: GalleryImage[] }) {
   const [images, setImages] = useState<GalleryImage[]>(initialImages);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState("");
   const [dragging, setDragging] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
+  const weddingImages = images.filter((image) => image.section === "WEDDING");
+  const publicWeddingImageIds = new Set(
+    weddingImages.slice(0, MAX_WEDDING_GALLERY_IMAGES).map((image) => image.id),
+  );
 
   async function uploadFiles(files: File[]) {
     if (!files.length) return;
+    const available = MAX_WEDDING_GALLERY_IMAGES - weddingImages.length;
+    if (files.length > available) {
+      setError(
+        available > 0
+          ? `Select no more than ${available} image${available === 1 ? "" : "s"}. The public gallery is limited to ${MAX_WEDDING_GALLERY_IMAGES}.`
+          : `The public gallery is limited to ${MAX_WEDDING_GALLERY_IMAGES} images. Remove an existing wedding image before adding another.`,
+      );
+      return;
+    }
+
     setUploading(true);
     setError("");
     let successCount = 0;
@@ -68,14 +84,24 @@ export function GalleryUploader({ initialImages }: { initialImages: GalleryImage
   return (
     <div>
       {error && <p className="text-red-400 text-sm mb-4">{error}</p>}
+      {weddingImages.length > MAX_WEDDING_GALLERY_IMAGES && (
+        <p className="mb-4 text-sm text-muted">
+          Only the first {MAX_WEDDING_GALLERY_IMAGES} wedding images appear publicly. Remove any extra images below.
+        </p>
+      )}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 mb-4">
         {images.map((img) => (
           <div key={img.id} className="relative group aspect-video border border-charcoal-600 rounded-lg overflow-hidden bg-charcoal-700">
             <Image src={img.url} alt={img.alt} fill className="object-cover" sizes="150px" />
+            <div className="absolute left-1 top-1 rounded bg-charcoal/80 px-1.5 py-0.5 text-[9px] text-white">
+              {img.section === "WEDDING"
+                ? publicWeddingImageIds.has(img.id) ? "Shown publicly" : "Not public"
+                : img.section}
+            </div>
             <button
               type="button"
               onClick={() => handleDelete(img.id)}
-              className="absolute top-1 right-1 opacity-0 group-hover:opacity-100 transition-opacity bg-red-700 hover:bg-red-600 text-white w-6 h-6 rounded-full text-xs flex items-center justify-center"
+              className="absolute top-1 right-1 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity bg-red-700 hover:bg-red-600 text-white w-6 h-6 rounded-full text-xs flex items-center justify-center"
             >
               ✕
             </button>
@@ -84,7 +110,7 @@ export function GalleryUploader({ initialImages }: { initialImages: GalleryImage
             </div>
           </div>
         ))}
-        <div
+        {weddingImages.length < MAX_WEDDING_GALLERY_IMAGES && <div
           role="button"
           tabIndex={0}
           onDragEnter={(event) => {
@@ -130,7 +156,7 @@ export function GalleryUploader({ initialImages }: { initialImages: GalleryImage
             </>
           )}
           <input ref={fileRef} type="file" multiple accept="image/jpeg,image/png,image/webp" className="hidden" onChange={handleUpload} disabled={uploading} />
-        </div>
+        </div>}
       </div>
     </div>
   );

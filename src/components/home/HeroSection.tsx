@@ -72,7 +72,9 @@ export function HeroSection({ settings }: { settings: SiteSettings }) {
 
         <div className="relative mx-auto flex min-h-[560px] max-w-[1440px] flex-col justify-end px-5 pb-28 pt-24 sm:min-h-[640px] sm:px-8 sm:pb-32 lg:min-h-[700px] lg:px-12 lg:pb-36">
           <div className="editorial-enter max-w-3xl text-white">
-            <p className="eyebrow mb-6 text-white/80">{BUSINESS_NAME} <span className="px-2 text-bronze">/</span> Vehicle rental in Sri Lanka</p>
+            <p className="eyebrow hero-eyebrow mb-6">
+              {BUSINESS_NAME} <span className="px-2 text-bronze">/</span> Vehicle rental in Sri Lanka
+            </p>
             <h1
               aria-label="Explore Sri Lanka, your way."
               className="max-w-[12ch] font-display text-5xl leading-[0.98] tracking-[-0.055em] sm:text-6xl lg:text-[6rem]"
