@@ -3,9 +3,8 @@
 import { useState, useRef } from "react";
 import Image from "next/image";
 import { addGalleryImage, deleteGalleryImage } from "@/server/gallery-actions";
+import { MAX_WEDDING_GALLERY_IMAGES } from "@/lib/constants";
 import type { GalleryImage } from "@prisma/client";
-
-const MAX_WEDDING_GALLERY_IMAGES = 3;
 
 export function GalleryUploader({ initialImages }: { initialImages: GalleryImage[] }) {
   const [images, setImages] = useState<GalleryImage[]>(initialImages);

@@ -5,6 +5,7 @@ import { gallerySchema } from "@/lib/validators";
 import { destroyCloudinaryImage } from "@/lib/cloudinary";
 import { revalidateGallery } from "@/lib/revalidate";
 import { prisma } from "@/lib/prisma";
+import { MAX_WEDDING_GALLERY_IMAGES } from "@/lib/constants";
 
 export async function addGalleryImage(_prev: unknown, formData: FormData) {
   const admin = await requireAdmin();
@@ -21,10 +22,20 @@ export async function addGalleryImage(_prev: unknown, formData: FormData) {
     return { ok: false, error: first.message };
   }
   try {
+    if (result.data.section === "WEDDING") {
+      const count = await prisma.galleryImage.count({ where: { section: "WEDDING" } });
+      if (count >= MAX_WEDDING_GALLERY_IMAGES) {
+        return {
+          ok: false,
+          error: `The public wedding gallery is limited to ${MAX_WEDDING_GALLERY_IMAGES} images.`,
+        };
+      }
+    }
     await prisma.galleryImage.create({ data: result.data });
     revalidateGallery();
     return { ok: true };
-  } catch {
+  } catch (error) {
+    console.error("add_gallery_image_failed", error);
     return { ok: false, error: "Failed to add image." };
   }
 }

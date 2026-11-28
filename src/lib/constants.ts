@@ -1,6 +1,7 @@
 export const BUSINESS_NAME = "Mahawaththa Travels";
 
 export const MAX_VEHICLE_PHOTOS = 5;
+export const MAX_WEDDING_GALLERY_IMAGES = 3;
 export const MAX_UPLOAD_BYTES = 5 * 1024 * 1024;
 
 export const NAV_LINKS = [
